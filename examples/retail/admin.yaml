@@ -1,0 +1,5 @@
+id: demo-admin
+namespace: retail
+roles:
+- admin
+- operator

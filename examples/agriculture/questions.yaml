@@ -1,0 +1,12 @@
+- question: harvest
+  actor: admin.yaml
+  expected: {total: '2000.0'}
+- question: harvest by crop
+  actor: north.yaml
+  expected: {wheat: '1200.0'}
+- question: harvest crop=rice
+  actor: north.yaml
+  expected: {total: '0'}
+- question: profit
+  actor: admin.yaml
+  refuse: true

@@ -1,0 +1,10 @@
+OntoLayer
+Copyright 2026 OntoLayer contributors
+
+Architecture references (no upstream implementation source copied):
+- NVIDIA Auto Ontology: https://github.com/NVIDIA/auto-ontology (Apache-2.0)
+- ModernRelay Omnigraph: https://github.com/ModernRelay/omnigraph (MIT)
+- TrustGraph: https://github.com/trustgraph-ai/trustgraph (Apache-2.0)
+- Palantir ontology design guidance: https://www.palantir.com/docs/foundry/ontology/ontology-best-practices
+
+Dependencies retain their respective licenses. See uv.lock and the CI dependency SBOM.

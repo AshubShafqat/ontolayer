@@ -1,0 +1,6 @@
+attributes:
+  region: north
+id: demo-north
+namespace: agriculture
+roles:
+- regional

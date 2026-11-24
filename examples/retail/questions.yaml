@@ -1,0 +1,54 @@
+- question: revenue from 2026-10-01 to 2026-11-01
+  actor: admin.yaml
+  expected: {total: '600.0'}
+- question: revenue from 2026-10-01 to 2026-11-01
+  actor: north.yaml
+  expected: {total: '250.0'}
+- question: revenue from 2026-10-01 to 2026-11-01
+  actor: south.yaml
+  expected: {total: '350.0'}
+- question: revenue
+  actor: admin.yaml
+  expected: {total: '680.0'}
+- question: revenue
+  actor: north.yaml
+  expected: {total: '330.0'}
+- question: revenue by region
+  actor: admin.yaml
+  expected: {north: '330.0', south: '350.0'}
+- question: revenue by region
+  actor: north.yaml
+  expected: {north: '330.0'}
+- question: revenue region=south
+  actor: north.yaml
+  expected: {total: '0'}
+- question: orders
+  actor: admin.yaml
+  expected: {total: '3'}
+- question: orders from 2026-10-01 to 2026-11-01
+  actor: north.yaml
+  expected: {total: '1'}
+- question: units sold
+  actor: admin.yaml
+  expected: {total: '8'}
+- question: sales
+  actor: north.yaml
+  expected: {total: '330.0'}
+- question: profit next year
+  actor: admin.yaml
+  refuse: true
+- question: revenue last month
+  actor: admin.yaml
+  refuse: true
+- question: revenue and orders
+  actor: admin.yaml
+  refuse: true
+- question: revenue
+  actor: guest.yaml
+  refuse: true
+- question: revenue excluding refunds
+  actor: admin.yaml
+  refuse: true
+- question: revenue by email
+  actor: north.yaml
+  refuse: true

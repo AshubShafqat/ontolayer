@@ -1,0 +1,7 @@
+id,order_id,product_id,quantity,unit_price,date,status,region
+L1,O1,P1,2,100,2026-10-05,completed,north
+L2,O1,P1,1,50,2026-10-05,completed,north
+L3,O2,P2,3,100,2026-10-10,completed,south
+L4,O2,P2,1,50,2026-10-10,completed,south
+L5,O3,P1,1,999,2026-10-15,canceled,north
+L6,O4,P1,1,80,2026-11-02,completed,north

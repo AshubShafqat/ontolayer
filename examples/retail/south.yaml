@@ -1,0 +1,6 @@
+attributes:
+  region: south
+id: demo-south
+namespace: retail
+roles:
+- regional

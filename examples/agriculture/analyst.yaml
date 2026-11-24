@@ -1,0 +1,4 @@
+id: demo-analyst
+namespace: agriculture
+roles:
+- analyst

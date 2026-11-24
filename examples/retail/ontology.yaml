@@ -1,0 +1,223 @@
+namespace: retail
+version: 1.0.0
+description: Synthetic retail demonstration
+types:
+  Customer:
+    properties:
+      name:
+        type: string
+        description: Business attribute
+        required: true
+      email:
+        type: string
+        description: Business attribute
+        required: true
+        pii: true
+      region: &id001
+        type: string
+        description: Sales or operating region
+        required: true
+    description: Business Customer
+    owner: retail-team
+    status: certified
+  Order:
+    properties:
+      date:
+        type: date
+        description: Business attribute
+        required: true
+      status:
+        type: string
+        description: Business attribute
+        required: true
+      region: *id001
+    description: Business Order
+    owner: retail-team
+    status: certified
+  Product:
+    properties:
+      name:
+        type: string
+        description: Business attribute
+        required: true
+      category:
+        type: string
+        description: Business attribute
+        required: true
+      region: *id001
+    description: Business Product
+    owner: retail-team
+    status: certified
+  OrderLine:
+    properties:
+      quantity:
+        type: integer
+        description: Business attribute
+        required: true
+      unit_price:
+        type: number
+        description: Business attribute
+        required: true
+        unit: USD
+      date:
+        type: date
+        description: Business attribute
+        required: true
+      status:
+        type: string
+        description: Business attribute
+        required: true
+      region: *id001
+    description: Business OrderLine
+    owner: retail-team
+    status: certified
+links:
+  placedBy:
+    source: Order
+    target: Customer
+    description: Purchasing customer
+    cardinality: one
+  partOf:
+    source: OrderLine
+    target: Order
+    description: Containing order
+    cardinality: one
+  forProduct:
+    source: OrderLine
+    target: Product
+    description: Purchased product
+    cardinality: one
+mappings:
+  customers:
+    type: Customer
+    kind: csv
+    path: customers.csv
+    id_column: id
+    columns:
+      name: name
+      email: email
+      region: region
+  orders:
+    type: Order
+    kind: csv
+    path: orders.csv
+    id_column: id
+    columns:
+      date: date
+      status: status
+      region: region
+    links:
+      placedBy: customer_id
+  products:
+    type: Product
+    kind: csv
+    path: products.csv
+    id_column: id
+    columns:
+      name: name
+      category: category
+      region: region
+  lines:
+    type: OrderLine
+    kind: csv
+    path: lines.csv
+    id_column: id
+    columns:
+      quantity: quantity
+      unit_price: unit_price
+      date: date
+      status: status
+      region: region
+    links:
+      partOf: order_id
+      forProduct: product_id
+metrics:
+  revenue:
+    owner: finance
+    filters: &id002
+      status: completed
+    dimensions: &id003
+    - region
+    date_field: date
+    status: certified
+    description: Completed line sales, excluding tax and shipping; no refunds or discounts
+      in fixture
+    type: OrderLine
+    aggregation: sum_product
+    fields:
+    - quantity
+    - unit_price
+    unit: USD
+    grain: order line
+    synonyms:
+    - sales
+  order_count:
+    owner: finance
+    filters: *id002
+    dimensions: *id003
+    date_field: date
+    status: certified
+    description: Number of completed orders
+    type: Order
+    aggregation: count
+    unit: orders
+    grain: order
+    synonyms:
+    - orders
+    - order count
+  items_sold:
+    owner: finance
+    filters: *id002
+    dimensions: *id003
+    date_field: date
+    status: certified
+    description: Units on completed order lines
+    type: OrderLine
+    aggregation: sum
+    fields:
+    - quantity
+    unit: units
+    grain: order line
+    synonyms:
+    - units sold
+policies:
+- role: admin
+  allow_pii: true
+  types: &id004
+  - Customer
+  - Order
+  - Product
+  - OrderLine
+  metrics: &id005
+  - revenue
+  - order_count
+  - items_sold
+  properties: &id006
+    Customer:
+    - name
+    - email
+    - region
+    Order:
+    - date
+    - status
+    - region
+    Product:
+    - name
+    - category
+    - region
+    OrderLine:
+    - quantity
+    - unit_price
+    - date
+    - status
+    - region
+- role: analyst
+  types: *id004
+  metrics: *id005
+  properties: *id006
+- role: regional
+  row_attributes:
+    region: region
+  types: *id004
+  metrics: *id005
+  properties: *id006

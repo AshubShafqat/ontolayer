@@ -1,0 +1,78 @@
+namespace: agriculture
+version: 1.0.0
+description: Synthetic agriculture demonstration
+types:
+  Harvest:
+    description: A crop harvest batch
+    owner: farm-team
+    status: certified
+    properties:
+      crop:
+        type: string
+        description: Business attribute
+        required: true
+      weight:
+        type: number
+        description: Business attribute
+        required: true
+        unit: kg
+      date:
+        type: date
+        description: Business attribute
+        required: true
+      region:
+        type: string
+        description: Sales or operating region
+        required: true
+links: {}
+mappings:
+  harvests:
+    type: Harvest
+    kind: csv
+    path: harvests.csv
+    id_column: id
+    columns:
+      crop: crop
+      weight: weight
+      date: date
+      region: region
+metrics:
+  harvest_weight:
+    description: Total harvested weight
+    owner: farm-team
+    type: Harvest
+    aggregation: sum
+    fields:
+    - weight
+    dimensions:
+    - region
+    - crop
+    date_field: date
+    unit: kg
+    grain: harvest batch
+    status: certified
+    synonyms:
+    - harvest
+policies:
+- role: admin
+  allow_pii: true
+  types: &id001
+  - Harvest
+  metrics: &id002
+  - harvest_weight
+  properties: &id003
+    Harvest:
+    - crop
+    - weight
+    - date
+    - region
+- role: analyst
+  types: *id001
+  metrics: *id002
+  properties: *id003
+- role: regional
+  row_attributes:
+    region: region
+  types: *id001
+  metrics: *id002
+  properties: *id003

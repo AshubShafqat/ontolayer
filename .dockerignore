@@ -1,0 +1,9 @@
+.git
+.venv
+.uv-cache
+.ontolayer
+.env*
+dist
+tests
+reports
+__pycache__
