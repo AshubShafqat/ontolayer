@@ -1,0 +1,9 @@
+{
+  "en": {
+    "direction": "ltr",
+    "search": "Search",
+    "retry": "Retry page",
+    "loading": "Loading your permitted data…"
+  },
+  "ur": { "direction": "rtl", "available": false }
+}

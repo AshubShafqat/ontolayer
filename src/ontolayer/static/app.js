@@ -64,6 +64,11 @@ const navigation = [
   ["explorer", "Ontology explorer", "graph"],
   ["studio", "Query studio", "query"],
   ["access", "Access & lineage", "shield"],
+  ["validation", "Validation", "check"],
+  ["mcp", "MCP connect", "link"],
+  ["audit", "Audit log", "shield"],
+  ["editor", "Draft & import", "cube"],
+  ["settings", "Settings & about", "data"],
 ];
 
 async function api(path, body) {
@@ -119,7 +124,11 @@ function showError(error) {
   document.querySelectorAll(".loading").forEach((el) => el.remove());
 }
 function loading() {
-  return '<div class="loading" role="status"><span class="spinner"></span>Loading your permitted data…</div>';
+  const message =
+    typeof translate === "function"
+      ? translate("loading", "Loading your permitted data…")
+      : "Loading your permitted data…";
+  return `<div class="loading" role="status"><span class="spinner"></span>${esc(message)}</div>`;
 }
 function empty(title, description) {
   return `<div class="empty">${icon("graph")}<h3>${esc(title)}</h3><p>${esc(description)}</p></div>`;
@@ -154,6 +163,7 @@ async function connect(token, role = "custom") {
     if (epoch !== state.epoch) return;
     state.data = data;
     shell();
+    if (typeof enhance === "function") enhance();
     await renderView();
   } catch (error) {
     if (error.name !== "AbortError" && epoch === state.epoch) {
@@ -189,6 +199,9 @@ function cardHead(title, description = "", right = "") {
   return `<div class="card-head"><div><h2>${title}</h2>${description ? `<p>${description}</p>` : ""}</div>${right}</div>`;
 }
 function graph() {
+  return '<div class="graph-placeholder"><button class="btn" data-action="load-graph">Show concept map</button></div>';
+}
+function graphMarkup() {
   const nodes = state.data.concepts;
   if (!nodes.length)
     return empty(
@@ -243,6 +256,7 @@ async function renderView() {
     if (view === "explorer") await explorer(epoch);
     if (view === "studio") studio();
     if (view === "access") access();
+    if (typeof renderExtras === "function") await renderExtras(view, epoch);
     announce(`${navigation.find((n) => n[0] === view)[1]} loaded`);
   } catch (error) {
     if (epoch === state.epoch) showError(error);
@@ -389,6 +403,11 @@ function studio(metricId) {
         "",
       )}<span class="form-note">Metric + optional dates, grouping, or dimension=value.</span></div></form></div><div class="query-layout"><section class="card">${cardHead("Build a query", "Explicit definitions. Reproducible results.")}<div class="card-body">${metric ? `<form id="query-form"><div class="form-grid"><label class="full">Business metric<select name="metric_id" id="metric-select">${metrics.map((m) => `<option value="${esc(m.id)}" ${m.id === metric.id ? "selected" : ""}>${esc(pretty(m.id))} (${esc(m.unit)})</option>`).join("")}</select></label><div class="full" id="metric-description"></div><label>Start date<input type="date" name="start_date" id="start-date"></label><label>End date (exclusive)<input type="date" name="end_date" id="end-date"></label><label class="full">Group results by<select name="group_by" id="group-by"></select></label><label>Filter dimension<select name="filter_field" id="filter-field"></select></label><label>Equals<input name="filter_value" placeholder="e.g. north" maxlength="200"></label></div><div class="form-actions"><button class="btn primary" type="submit">${icon("query")} Run query</button><button class="btn" type="reset">Reset</button></div><p class="note">Blank dates include all available records. Your access scope is always applied before calculation.</p></form>` : empty("No permitted metrics", "Request access to a certified definition before running a query.")}</div></section><section class="card" id="query-result">${state.result ? resultHTML(state.result) : cardHead("Query result", "The evidence behind your answer") + empty("Ready when you are", "Run a query to see calculated values, scope, and source lineage.")}</section></div><section class="card compact">${cardHead("Session history", "Recent queries for your current identity only")}<div id="history">${historyHTML()}</div></section>`;
   if (metric) updateMetric(metric.id);
+  if (typeof advancedForm === "function")
+    $("#view").insertAdjacentHTML(
+      "beforeend",
+      `<section class="card"><details class="card-body"><summary>Advanced mode · raw semantic tool request</summary>${advancedForm()}</details></section>`,
+    );
 }
 function updateMetric(id) {
   const m = state.data.metrics.find((m) => m.id === id);
@@ -574,7 +593,24 @@ document.addEventListener("submit", async (event) => {
       if (data.get("filter_field")) {
         if (!data.get("filter_value"))
           throw new Error("Enter a value for the selected filter.");
-        args.filters = { [data.get("filter_field")]: data.get("filter_value") };
+        const metric = state.data.metrics.find((m) => m.id === args.metric_id);
+        const property = state.data.concepts.find((c) => c.id === metric.type)
+          ?.properties[data.get("filter_field")];
+        let value = data.get("filter_value");
+        if (property?.type === "integer" || property?.type === "number") {
+          value = Number(value);
+          if (
+            !Number.isFinite(value) ||
+            (property.type === "integer" && !Number.isSafeInteger(value))
+          )
+            throw new Error("Enter a valid numeric filter value.");
+        }
+        if (property?.type === "boolean") {
+          if (!["true", "false"].includes(value.toLowerCase()))
+            throw new Error("Boolean filters must be true or false.");
+          value = value.toLowerCase() === "true";
+        }
+        args.filters = { [data.get("filter_field")]: value };
       }
       const result = await tool("query_metric", args);
       if (epoch === state.epoch) saveResult(result);
