@@ -40,9 +40,10 @@ const pretty = (id) =>
     .replace(/([a-z])([A-Z])/g, "$1 $2")
     .replace(/^./, (c) => c.toUpperCase());
 const number = (value) => {
-  const n = Number(value);
-  return Number.isFinite(n)
-    ? new Intl.NumberFormat("en-US", { maximumFractionDigits: 2 }).format(n)
+  const [whole, fraction] = String(value).split(".");
+  return /^-?\d+$/.test(whole)
+    ? whole.replace(/\B(?=(\d{3})+(?!\d))/g, ",") +
+        (fraction ? `.${fraction}` : "")
     : String(value);
 };
 const state = {
@@ -73,7 +74,10 @@ async function api(path, body) {
     method: body === undefined ? "GET" : "POST",
     headers,
     body: body === undefined ? undefined : JSON.stringify(body),
-    signal: state.controller.signal,
+    signal: AbortSignal.any([
+      state.controller.signal,
+      AbortSignal.timeout(15000),
+    ]),
     cache: "no-store",
   });
   const data = await response.json().catch(() => ({}));
@@ -100,9 +104,19 @@ function showError(error) {
   const target = $("#error") || $("#login-error");
   if (target) {
     target.hidden = false;
-    target.textContent = error.message;
+    target.textContent =
+      error.name === "TimeoutError"
+        ? "The request timed out. Retry when the server is available."
+        : error.message === "Failed to fetch"
+          ? "You are offline or the server is unavailable. Check your connection and retry."
+          : error.message;
     target.setAttribute("role", "alert");
+    target.insertAdjacentHTML(
+      "beforeend",
+      ' <button class="btn" data-action="retry">Retry page</button>',
+    );
   }
+  document.querySelectorAll(".loading").forEach((el) => el.remove());
 }
 function loading() {
   return '<div class="loading" role="status"><span class="spinner"></span>Loading your permitted data…</div>';
@@ -209,6 +223,8 @@ function graph() {
 }
 async function renderView() {
   if (!state.data) return;
+  state.controller.abort();
+  state.controller = new AbortController();
   state.view = navigation.some((n) => n[0] === location.hash.slice(1))
     ? location.hash.slice(1)
     : "overview";
@@ -476,6 +492,7 @@ document.addEventListener("click", async (event) => {
   if (!el) return;
   try {
     if (el.dataset.action === "logout") logout();
+    if (el.dataset.action === "retry") await renderView();
     if (el.dataset.action === "demo-login")
       await connect("demo-north-token", "north");
     if (el.dataset.concept) {

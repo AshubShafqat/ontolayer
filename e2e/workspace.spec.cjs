@@ -89,6 +89,7 @@ test("mobile layout stays within viewport and navigation works", async ({
       () => document.documentElement.scrollWidth <= innerWidth,
     ),
   ).toBeTruthy();
+  await page.getByRole("button", { name: "Menu", exact: true }).click();
   await page.getByRole("link", { name: "Query studio" }).click();
   await expect(
     page.getByRole("heading", { name: "Ask with confidence." }),
