@@ -1,0 +1,4668 @@
+{
+  "target": "http://127.0.0.1:8000",
+  "viewports": [
+    {
+      "width": 320,
+      "screen": "overview",
+      "viewport": 320,
+      "documentWidth": 348,
+      "pageOverflow": true,
+      "smallTargets": [
+        {
+          "tag": "A",
+          "label": "OntoLayer",
+          "x": 16,
+          "y": 14,
+          "width": 288,
+          "height": 31
+        },
+        {
+          "tag": "A",
+          "label": "Overview",
+          "x": 16,
+          "y": 61,
+          "width": 78,
+          "height": 35
+        },
+        {
+          "tag": "A",
+          "label": "Ontology explorer",
+          "x": 186,
+          "y": 61,
+          "width": 118,
+          "height": 35
+        },
+        {
+          "tag": "A",
+          "label": "Query studio",
+          "x": 16,
+          "y": 100,
+          "width": 94,
+          "height": 35
+        },
+        {
+          "tag": "A",
+          "label": "Access & lineage",
+          "x": 193,
+          "y": 100,
+          "width": 111,
+          "height": 35
+        },
+        {
+          "tag": "SELECT",
+          "label": "North regionSouth regionGlobal analystAdministratorRestricted guest",
+          "x": 165,
+          "y": 156,
+          "width": 140,
+          "height": 33
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Sign out",
+          "x": 314,
+          "y": 163,
+          "width": 35,
+          "height": 35
+        },
+        {
+          "tag": "A",
+          "label": "Ask your data",
+          "x": 262,
+          "y": 236,
+          "width": 42,
+          "height": 41
+        },
+        {
+          "tag": "A",
+          "label": "Explore ontology →",
+          "x": 195,
+          "y": 1155,
+          "width": 91,
+          "height": 34
+        },
+        {
+          "tag": "A",
+          "label": "Run a query →",
+          "x": 219,
+          "y": 1630,
+          "width": 67,
+          "height": 34
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Query",
+          "x": 559,
+          "y": 1861,
+          "width": 54,
+          "height": 21
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Query",
+          "x": 559,
+          "y": 1925,
+          "width": 54,
+          "height": 21
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Query",
+          "x": 559,
+          "y": 1988,
+          "width": 54,
+          "height": 21
+        }
+      ],
+      "regions": [
+        {
+          "selector": "nav",
+          "x": 16,
+          "y": 61,
+          "width": 288,
+          "height": 74,
+          "scrollWidth": 288,
+          "clientWidth": 288,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "topbar",
+          "x": 0,
+          "y": 149,
+          "width": 320,
+          "height": 64,
+          "scrollWidth": 348,
+          "clientWidth": 320,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "breadcrumb",
+          "x": 16,
+          "y": 162,
+          "width": 88,
+          "height": 37,
+          "scrollWidth": 88,
+          "clientWidth": 88,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "top-actions",
+          "x": 120,
+          "y": 156,
+          "width": 228,
+          "height": 49,
+          "scrollWidth": 228,
+          "clientWidth": 228,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "identity-role",
+          "x": 165,
+          "y": 156,
+          "width": 140,
+          "height": 33,
+          "scrollWidth": 138,
+          "clientWidth": 138,
+          "overflowX": "clip"
+        },
+        {
+          "selector": "graph",
+          "x": 17,
+          "y": 872,
+          "width": 286,
+          "height": 270,
+          "scrollWidth": 544,
+          "clientWidth": 286,
+          "overflowX": "auto"
+        },
+        {
+          "selector": "table-wrap",
+          "x": 17,
+          "y": 1799,
+          "width": 286,
+          "height": 230,
+          "scrollWidth": 620,
+          "clientWidth": 286,
+          "overflowX": "auto"
+        }
+      ],
+      "axe": [],
+      "screenshot": "screenshots/overview-320.png",
+      "consoleErrors": []
+    },
+    {
+      "width": 320,
+      "screen": "explorer",
+      "viewport": 320,
+      "documentWidth": 638,
+      "pageOverflow": true,
+      "smallTargets": [
+        {
+          "tag": "A",
+          "label": "OntoLayer",
+          "x": 16,
+          "y": 14,
+          "width": 288,
+          "height": 31
+        },
+        {
+          "tag": "A",
+          "label": "Overview",
+          "x": 16,
+          "y": 61,
+          "width": 78,
+          "height": 35
+        },
+        {
+          "tag": "A",
+          "label": "Ontology explorer",
+          "x": 186,
+          "y": 61,
+          "width": 118,
+          "height": 35
+        },
+        {
+          "tag": "A",
+          "label": "Query studio",
+          "x": 16,
+          "y": 100,
+          "width": 94,
+          "height": 35
+        },
+        {
+          "tag": "A",
+          "label": "Access & lineage",
+          "x": 193,
+          "y": 100,
+          "width": 111,
+          "height": 35
+        },
+        {
+          "tag": "SELECT",
+          "label": "North regionSouth regionGlobal analystAdministratorRestricted guest",
+          "x": 165,
+          "y": 156,
+          "width": 140,
+          "height": 33
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Sign out",
+          "x": 314,
+          "y": 163,
+          "width": 35,
+          "height": 35
+        },
+        {
+          "tag": "INPUT",
+          "label": "Filter this page…",
+          "x": 29,
+          "y": 746,
+          "width": 260,
+          "height": 39
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Lineage →",
+          "x": 536,
+          "y": 850,
+          "width": 55,
+          "height": 19
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Previous records",
+          "x": 499,
+          "y": 894,
+          "width": 34,
+          "height": 34
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Next records",
+          "x": 586,
+          "y": 894,
+          "width": 34,
+          "height": 34
+        }
+      ],
+      "regions": [
+        {
+          "selector": "nav",
+          "x": 16,
+          "y": 61,
+          "width": 288,
+          "height": 74,
+          "scrollWidth": 288,
+          "clientWidth": 288,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "topbar",
+          "x": 0,
+          "y": 149,
+          "width": 320,
+          "height": 64,
+          "scrollWidth": 348,
+          "clientWidth": 320,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "breadcrumb",
+          "x": 16,
+          "y": 162,
+          "width": 88,
+          "height": 37,
+          "scrollWidth": 88,
+          "clientWidth": 88,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "top-actions",
+          "x": 120,
+          "y": 156,
+          "width": 228,
+          "height": 49,
+          "scrollWidth": 228,
+          "clientWidth": 228,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "identity-role",
+          "x": 165,
+          "y": 156,
+          "width": 140,
+          "height": 33,
+          "scrollWidth": 138,
+          "clientWidth": 138,
+          "overflowX": "clip"
+        },
+        {
+          "selector": "table-wrap",
+          "x": 17,
+          "y": 797,
+          "width": 620,
+          "height": 84,
+          "scrollWidth": 620,
+          "clientWidth": 620,
+          "overflowX": "auto"
+        }
+      ],
+      "axe": [],
+      "screenshot": "screenshots/explorer-320.png",
+      "consoleErrors": []
+    },
+    {
+      "width": 320,
+      "screen": "studio",
+      "viewport": 320,
+      "documentWidth": 348,
+      "pageOverflow": true,
+      "smallTargets": [
+        {
+          "tag": "A",
+          "label": "OntoLayer",
+          "x": 16,
+          "y": 14,
+          "width": 288,
+          "height": 31
+        },
+        {
+          "tag": "A",
+          "label": "Overview",
+          "x": 16,
+          "y": 61,
+          "width": 78,
+          "height": 35
+        },
+        {
+          "tag": "A",
+          "label": "Ontology explorer",
+          "x": 186,
+          "y": 61,
+          "width": 118,
+          "height": 35
+        },
+        {
+          "tag": "A",
+          "label": "Query studio",
+          "x": 16,
+          "y": 100,
+          "width": 94,
+          "height": 35
+        },
+        {
+          "tag": "A",
+          "label": "Access & lineage",
+          "x": 193,
+          "y": 100,
+          "width": 111,
+          "height": 35
+        },
+        {
+          "tag": "SELECT",
+          "label": "North regionSouth regionGlobal analystAdministratorRestricted guest",
+          "x": 165,
+          "y": 156,
+          "width": 140,
+          "height": 33
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Sign out",
+          "x": 314,
+          "y": 163,
+          "width": 35,
+          "height": 35
+        },
+        {
+          "tag": "INPUT",
+          "label": "revenue from 2026-10-01 to 2026-11-01",
+          "x": 35,
+          "y": 410,
+          "width": 173,
+          "height": 44
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Ask",
+          "x": 218,
+          "y": 410,
+          "width": 67,
+          "height": 44
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Revenue",
+          "x": 35,
+          "y": 462,
+          "width": 38,
+          "height": 20
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Order count",
+          "x": 82,
+          "y": 462,
+          "width": 54,
+          "height": 20
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Items sold",
+          "x": 144,
+          "y": 462,
+          "width": 45,
+          "height": 20
+        },
+        {
+          "tag": "SELECT",
+          "label": "Revenue (USD)Order count (orders)Items sold (units)",
+          "x": 35,
+          "y": 698,
+          "width": 280,
+          "height": 43
+        },
+        {
+          "tag": "INPUT",
+          "label": "start-date",
+          "x": 35,
+          "y": 872,
+          "width": 134,
+          "height": 43
+        },
+        {
+          "tag": "INPUT",
+          "label": "end-date",
+          "x": 181,
+          "y": 872,
+          "width": 134,
+          "height": 43
+        },
+        {
+          "tag": "SELECT",
+          "label": "No grouping — totalRegion",
+          "x": 35,
+          "y": 951,
+          "width": 280,
+          "height": 43
+        },
+        {
+          "tag": "SELECT",
+          "label": "No filterRegion",
+          "x": 35,
+          "y": 1031,
+          "width": 134,
+          "height": 43
+        },
+        {
+          "tag": "INPUT",
+          "label": "e.g. north",
+          "x": 181,
+          "y": 1031,
+          "width": 134,
+          "height": 43
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Run query",
+          "x": 35,
+          "y": 1096,
+          "width": 113,
+          "height": 41
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Reset",
+          "x": 158,
+          "y": 1096,
+          "width": 59,
+          "height": 41
+        }
+      ],
+      "regions": [
+        {
+          "selector": "nav",
+          "x": 16,
+          "y": 61,
+          "width": 288,
+          "height": 74,
+          "scrollWidth": 288,
+          "clientWidth": 288,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "topbar",
+          "x": 0,
+          "y": 149,
+          "width": 320,
+          "height": 64,
+          "scrollWidth": 348,
+          "clientWidth": 320,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "breadcrumb",
+          "x": 16,
+          "y": 162,
+          "width": 88,
+          "height": 37,
+          "scrollWidth": 88,
+          "clientWidth": 88,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "top-actions",
+          "x": 120,
+          "y": 156,
+          "width": 228,
+          "height": 49,
+          "scrollWidth": 228,
+          "clientWidth": 228,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "identity-role",
+          "x": 165,
+          "y": 156,
+          "width": 140,
+          "height": 33,
+          "scrollWidth": 138,
+          "clientWidth": 138,
+          "overflowX": "clip"
+        },
+        {
+          "selector": "question-input",
+          "x": 35,
+          "y": 410,
+          "width": 250,
+          "height": 44,
+          "scrollWidth": 250,
+          "clientWidth": 250,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "form-grid",
+          "x": 35,
+          "y": 673,
+          "width": 250,
+          "height": 400,
+          "scrollWidth": 280,
+          "clientWidth": 250,
+          "overflowX": "visible"
+        }
+      ],
+      "axe": [],
+      "screenshot": "screenshots/studio-320.png",
+      "consoleErrors": []
+    },
+    {
+      "width": 320,
+      "screen": "access",
+      "viewport": 320,
+      "documentWidth": 348,
+      "pageOverflow": true,
+      "smallTargets": [
+        {
+          "tag": "A",
+          "label": "OntoLayer",
+          "x": 16,
+          "y": 14,
+          "width": 288,
+          "height": 31
+        },
+        {
+          "tag": "A",
+          "label": "Overview",
+          "x": 16,
+          "y": 61,
+          "width": 78,
+          "height": 35
+        },
+        {
+          "tag": "A",
+          "label": "Ontology explorer",
+          "x": 186,
+          "y": 61,
+          "width": 118,
+          "height": 35
+        },
+        {
+          "tag": "A",
+          "label": "Query studio",
+          "x": 16,
+          "y": 100,
+          "width": 94,
+          "height": 35
+        },
+        {
+          "tag": "A",
+          "label": "Access & lineage",
+          "x": 193,
+          "y": 100,
+          "width": 111,
+          "height": 35
+        },
+        {
+          "tag": "SELECT",
+          "label": "North regionSouth regionGlobal analystAdministratorRestricted guest",
+          "x": 165,
+          "y": 156,
+          "width": 140,
+          "height": 33
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Sign out",
+          "x": 314,
+          "y": 163,
+          "width": 35,
+          "height": 35
+        },
+        {
+          "tag": "INPUT",
+          "label": "e.g. Customer:C1",
+          "x": 35,
+          "y": 1332,
+          "width": 120,
+          "height": 44
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Inspect record",
+          "x": 165,
+          "y": 1332,
+          "width": 120,
+          "height": 44
+        }
+      ],
+      "regions": [
+        {
+          "selector": "nav",
+          "x": 16,
+          "y": 61,
+          "width": 288,
+          "height": 74,
+          "scrollWidth": 288,
+          "clientWidth": 288,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "topbar",
+          "x": 0,
+          "y": 149,
+          "width": 320,
+          "height": 64,
+          "scrollWidth": 348,
+          "clientWidth": 320,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "breadcrumb",
+          "x": 16,
+          "y": 162,
+          "width": 88,
+          "height": 37,
+          "scrollWidth": 88,
+          "clientWidth": 88,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "top-actions",
+          "x": 120,
+          "y": 156,
+          "width": 228,
+          "height": 49,
+          "scrollWidth": 228,
+          "clientWidth": 228,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "identity-role",
+          "x": 165,
+          "y": 156,
+          "width": 140,
+          "height": 33,
+          "scrollWidth": 138,
+          "clientWidth": 138,
+          "overflowX": "clip"
+        },
+        {
+          "selector": "question-input",
+          "x": 35,
+          "y": 1332,
+          "width": 250,
+          "height": 44,
+          "scrollWidth": 250,
+          "clientWidth": 250,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "table-wrap",
+          "x": 17,
+          "y": 1515,
+          "width": 286,
+          "height": 250,
+          "scrollWidth": 620,
+          "clientWidth": 286,
+          "overflowX": "auto"
+        }
+      ],
+      "axe": [
+        {
+          "id": "scrollable-region-focusable",
+          "impact": "serious",
+          "nodes": [
+            {
+              "target": [
+                ".table-wrap"
+              ],
+              "message": "Fix any of the following:\n  Element should have focusable content\n  Element should be focusable"
+            }
+          ]
+        }
+      ],
+      "screenshot": "screenshots/access-320.png",
+      "consoleErrors": []
+    },
+    {
+      "width": 320,
+      "screen": "signin",
+      "viewport": 320,
+      "documentWidth": 320,
+      "pageOverflow": false,
+      "smallTargets": [
+        {
+          "tag": "A",
+          "label": "OntoLayer",
+          "x": 30,
+          "y": 54,
+          "width": 260,
+          "height": 31
+        },
+        {
+          "tag": "INPUT",
+          "label": "Enter your access token",
+          "x": 25,
+          "y": 602,
+          "width": 270,
+          "height": 44
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Connect to workspace",
+          "x": 25,
+          "y": 663,
+          "width": 270,
+          "height": 41
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Open retail demo",
+          "x": 25,
+          "y": 778,
+          "width": 270,
+          "height": 41
+        }
+      ],
+      "regions": [
+        {
+          "selector": "login-story",
+          "x": 0,
+          "y": 0,
+          "width": 320,
+          "height": 361,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "login-form-wrap",
+          "x": 0,
+          "y": 361,
+          "width": 320,
+          "height": 599,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowX": "visible"
+        }
+      ],
+      "axe": [],
+      "screenshot": "screenshots/signin-320.png",
+      "consoleErrors": []
+    },
+    {
+      "width": 375,
+      "screen": "overview",
+      "viewport": 375,
+      "documentWidth": 375,
+      "pageOverflow": false,
+      "smallTargets": [
+        {
+          "tag": "A",
+          "label": "OntoLayer",
+          "x": 16,
+          "y": 14,
+          "width": 343,
+          "height": 31
+        },
+        {
+          "tag": "A",
+          "label": "Overview",
+          "x": 16,
+          "y": 61,
+          "width": 78,
+          "height": 35
+        },
+        {
+          "tag": "A",
+          "label": "Ontology explorer",
+          "x": 120,
+          "y": 61,
+          "width": 118,
+          "height": 35
+        },
+        {
+          "tag": "A",
+          "label": "Query studio",
+          "x": 265,
+          "y": 61,
+          "width": 94,
+          "height": 35
+        },
+        {
+          "tag": "A",
+          "label": "Access & lineage",
+          "x": 16,
+          "y": 100,
+          "width": 111,
+          "height": 35
+        },
+        {
+          "tag": "SELECT",
+          "label": "North regionSouth regionGlobal analystAdministratorRestricted guest",
+          "x": 176,
+          "y": 156,
+          "width": 140,
+          "height": 33
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Sign out",
+          "x": 324,
+          "y": 163,
+          "width": 35,
+          "height": 35
+        },
+        {
+          "tag": "A",
+          "label": "Ask your data",
+          "x": 317,
+          "y": 236,
+          "width": 42,
+          "height": 41
+        },
+        {
+          "tag": "A",
+          "label": "Explore ontology →",
+          "x": 243,
+          "y": 1075,
+          "width": 98,
+          "height": 17
+        },
+        {
+          "tag": "A",
+          "label": "Run a query →",
+          "x": 268,
+          "y": 1533,
+          "width": 73,
+          "height": 17
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Query",
+          "x": 559,
+          "y": 1747,
+          "width": 54,
+          "height": 21
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Query",
+          "x": 559,
+          "y": 1811,
+          "width": 54,
+          "height": 21
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Query",
+          "x": 559,
+          "y": 1874,
+          "width": 54,
+          "height": 21
+        }
+      ],
+      "regions": [
+        {
+          "selector": "nav",
+          "x": 16,
+          "y": 61,
+          "width": 343,
+          "height": 74,
+          "scrollWidth": 343,
+          "clientWidth": 343,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "topbar",
+          "x": 0,
+          "y": 149,
+          "width": 375,
+          "height": 64,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "breadcrumb",
+          "x": 16,
+          "y": 162,
+          "width": 99,
+          "height": 37,
+          "scrollWidth": 99,
+          "clientWidth": 99,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "top-actions",
+          "x": 131,
+          "y": 156,
+          "width": 228,
+          "height": 49,
+          "scrollWidth": 228,
+          "clientWidth": 228,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "identity-role",
+          "x": 176,
+          "y": 156,
+          "width": 140,
+          "height": 33,
+          "scrollWidth": 138,
+          "clientWidth": 138,
+          "overflowX": "clip"
+        },
+        {
+          "selector": "graph",
+          "x": 17,
+          "y": 792,
+          "width": 341,
+          "height": 270,
+          "scrollWidth": 544,
+          "clientWidth": 341,
+          "overflowX": "auto"
+        },
+        {
+          "selector": "table-wrap",
+          "x": 17,
+          "y": 1686,
+          "width": 341,
+          "height": 230,
+          "scrollWidth": 620,
+          "clientWidth": 341,
+          "overflowX": "auto"
+        }
+      ],
+      "axe": [],
+      "screenshot": "screenshots/overview-375.png",
+      "consoleErrors": []
+    },
+    {
+      "width": 375,
+      "screen": "explorer",
+      "viewport": 375,
+      "documentWidth": 638,
+      "pageOverflow": true,
+      "smallTargets": [
+        {
+          "tag": "A",
+          "label": "OntoLayer",
+          "x": 16,
+          "y": 14,
+          "width": 343,
+          "height": 31
+        },
+        {
+          "tag": "A",
+          "label": "Overview",
+          "x": 16,
+          "y": 61,
+          "width": 78,
+          "height": 35
+        },
+        {
+          "tag": "A",
+          "label": "Ontology explorer",
+          "x": 120,
+          "y": 61,
+          "width": 118,
+          "height": 35
+        },
+        {
+          "tag": "A",
+          "label": "Query studio",
+          "x": 265,
+          "y": 61,
+          "width": 94,
+          "height": 35
+        },
+        {
+          "tag": "A",
+          "label": "Access & lineage",
+          "x": 16,
+          "y": 100,
+          "width": 111,
+          "height": 35
+        },
+        {
+          "tag": "SELECT",
+          "label": "North regionSouth regionGlobal analystAdministratorRestricted guest",
+          "x": 176,
+          "y": 156,
+          "width": 140,
+          "height": 33
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Sign out",
+          "x": 324,
+          "y": 163,
+          "width": 35,
+          "height": 35
+        },
+        {
+          "tag": "INPUT",
+          "label": "Filter this page…",
+          "x": 29,
+          "y": 746,
+          "width": 260,
+          "height": 39
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Lineage →",
+          "x": 536,
+          "y": 850,
+          "width": 55,
+          "height": 19
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Previous records",
+          "x": 499,
+          "y": 894,
+          "width": 34,
+          "height": 34
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Next records",
+          "x": 586,
+          "y": 894,
+          "width": 34,
+          "height": 34
+        }
+      ],
+      "regions": [
+        {
+          "selector": "nav",
+          "x": 16,
+          "y": 61,
+          "width": 343,
+          "height": 74,
+          "scrollWidth": 343,
+          "clientWidth": 343,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "topbar",
+          "x": 0,
+          "y": 149,
+          "width": 375,
+          "height": 64,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "breadcrumb",
+          "x": 16,
+          "y": 162,
+          "width": 99,
+          "height": 37,
+          "scrollWidth": 99,
+          "clientWidth": 99,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "top-actions",
+          "x": 131,
+          "y": 156,
+          "width": 228,
+          "height": 49,
+          "scrollWidth": 228,
+          "clientWidth": 228,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "identity-role",
+          "x": 176,
+          "y": 156,
+          "width": 140,
+          "height": 33,
+          "scrollWidth": 138,
+          "clientWidth": 138,
+          "overflowX": "clip"
+        },
+        {
+          "selector": "table-wrap",
+          "x": 17,
+          "y": 797,
+          "width": 620,
+          "height": 84,
+          "scrollWidth": 620,
+          "clientWidth": 620,
+          "overflowX": "auto"
+        }
+      ],
+      "axe": [],
+      "screenshot": "screenshots/explorer-375.png",
+      "consoleErrors": []
+    },
+    {
+      "width": 375,
+      "screen": "studio",
+      "viewport": 375,
+      "documentWidth": 375,
+      "pageOverflow": false,
+      "smallTargets": [
+        {
+          "tag": "A",
+          "label": "OntoLayer",
+          "x": 16,
+          "y": 14,
+          "width": 343,
+          "height": 31
+        },
+        {
+          "tag": "A",
+          "label": "Overview",
+          "x": 16,
+          "y": 61,
+          "width": 78,
+          "height": 35
+        },
+        {
+          "tag": "A",
+          "label": "Ontology explorer",
+          "x": 120,
+          "y": 61,
+          "width": 118,
+          "height": 35
+        },
+        {
+          "tag": "A",
+          "label": "Query studio",
+          "x": 265,
+          "y": 61,
+          "width": 94,
+          "height": 35
+        },
+        {
+          "tag": "A",
+          "label": "Access & lineage",
+          "x": 16,
+          "y": 100,
+          "width": 111,
+          "height": 35
+        },
+        {
+          "tag": "SELECT",
+          "label": "North regionSouth regionGlobal analystAdministratorRestricted guest",
+          "x": 176,
+          "y": 156,
+          "width": 140,
+          "height": 33
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Sign out",
+          "x": 324,
+          "y": 163,
+          "width": 35,
+          "height": 35
+        },
+        {
+          "tag": "INPUT",
+          "label": "revenue from 2026-10-01 to 2026-11-01",
+          "x": 35,
+          "y": 410,
+          "width": 228,
+          "height": 44
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Ask",
+          "x": 273,
+          "y": 410,
+          "width": 67,
+          "height": 44
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Revenue",
+          "x": 35,
+          "y": 462,
+          "width": 38,
+          "height": 20
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Order count",
+          "x": 82,
+          "y": 462,
+          "width": 54,
+          "height": 20
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Items sold",
+          "x": 144,
+          "y": 462,
+          "width": 45,
+          "height": 20
+        },
+        {
+          "tag": "SELECT",
+          "label": "Revenue (USD)Order count (orders)Items sold (units)",
+          "x": 35,
+          "y": 681,
+          "width": 305,
+          "height": 43
+        },
+        {
+          "tag": "INPUT",
+          "label": "start-date",
+          "x": 35,
+          "y": 855,
+          "width": 147,
+          "height": 43
+        },
+        {
+          "tag": "INPUT",
+          "label": "end-date",
+          "x": 194,
+          "y": 855,
+          "width": 147,
+          "height": 43
+        },
+        {
+          "tag": "SELECT",
+          "label": "No grouping — totalRegion",
+          "x": 35,
+          "y": 934,
+          "width": 305,
+          "height": 43
+        },
+        {
+          "tag": "SELECT",
+          "label": "No filterRegion",
+          "x": 35,
+          "y": 1014,
+          "width": 147,
+          "height": 43
+        },
+        {
+          "tag": "INPUT",
+          "label": "e.g. north",
+          "x": 194,
+          "y": 1014,
+          "width": 147,
+          "height": 43
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Run query",
+          "x": 35,
+          "y": 1079,
+          "width": 113,
+          "height": 41
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Reset",
+          "x": 158,
+          "y": 1079,
+          "width": 59,
+          "height": 41
+        }
+      ],
+      "regions": [
+        {
+          "selector": "nav",
+          "x": 16,
+          "y": 61,
+          "width": 343,
+          "height": 74,
+          "scrollWidth": 343,
+          "clientWidth": 343,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "topbar",
+          "x": 0,
+          "y": 149,
+          "width": 375,
+          "height": 64,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "breadcrumb",
+          "x": 16,
+          "y": 162,
+          "width": 99,
+          "height": 37,
+          "scrollWidth": 99,
+          "clientWidth": 99,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "top-actions",
+          "x": 131,
+          "y": 156,
+          "width": 228,
+          "height": 49,
+          "scrollWidth": 228,
+          "clientWidth": 228,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "identity-role",
+          "x": 176,
+          "y": 156,
+          "width": 140,
+          "height": 33,
+          "scrollWidth": 138,
+          "clientWidth": 138,
+          "overflowX": "clip"
+        },
+        {
+          "selector": "question-input",
+          "x": 35,
+          "y": 410,
+          "width": 305,
+          "height": 44,
+          "scrollWidth": 305,
+          "clientWidth": 305,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "form-grid",
+          "x": 35,
+          "y": 656,
+          "width": 305,
+          "height": 400,
+          "scrollWidth": 305,
+          "clientWidth": 305,
+          "overflowX": "visible"
+        }
+      ],
+      "axe": [],
+      "screenshot": "screenshots/studio-375.png",
+      "consoleErrors": []
+    },
+    {
+      "width": 375,
+      "screen": "access",
+      "viewport": 375,
+      "documentWidth": 375,
+      "pageOverflow": false,
+      "smallTargets": [
+        {
+          "tag": "A",
+          "label": "OntoLayer",
+          "x": 16,
+          "y": 14,
+          "width": 343,
+          "height": 31
+        },
+        {
+          "tag": "A",
+          "label": "Overview",
+          "x": 16,
+          "y": 61,
+          "width": 78,
+          "height": 35
+        },
+        {
+          "tag": "A",
+          "label": "Ontology explorer",
+          "x": 120,
+          "y": 61,
+          "width": 118,
+          "height": 35
+        },
+        {
+          "tag": "A",
+          "label": "Query studio",
+          "x": 265,
+          "y": 61,
+          "width": 94,
+          "height": 35
+        },
+        {
+          "tag": "A",
+          "label": "Access & lineage",
+          "x": 16,
+          "y": 100,
+          "width": 111,
+          "height": 35
+        },
+        {
+          "tag": "SELECT",
+          "label": "North regionSouth regionGlobal analystAdministratorRestricted guest",
+          "x": 176,
+          "y": 156,
+          "width": 140,
+          "height": 33
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Sign out",
+          "x": 324,
+          "y": 163,
+          "width": 35,
+          "height": 35
+        },
+        {
+          "tag": "INPUT",
+          "label": "e.g. Customer:C1",
+          "x": 35,
+          "y": 1296,
+          "width": 175,
+          "height": 44
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Inspect record",
+          "x": 220,
+          "y": 1296,
+          "width": 120,
+          "height": 44
+        }
+      ],
+      "regions": [
+        {
+          "selector": "nav",
+          "x": 16,
+          "y": 61,
+          "width": 343,
+          "height": 74,
+          "scrollWidth": 343,
+          "clientWidth": 343,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "topbar",
+          "x": 0,
+          "y": 149,
+          "width": 375,
+          "height": 64,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "breadcrumb",
+          "x": 16,
+          "y": 162,
+          "width": 99,
+          "height": 37,
+          "scrollWidth": 99,
+          "clientWidth": 99,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "top-actions",
+          "x": 131,
+          "y": 156,
+          "width": 228,
+          "height": 49,
+          "scrollWidth": 228,
+          "clientWidth": 228,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "identity-role",
+          "x": 176,
+          "y": 156,
+          "width": 140,
+          "height": 33,
+          "scrollWidth": 138,
+          "clientWidth": 138,
+          "overflowX": "clip"
+        },
+        {
+          "selector": "question-input",
+          "x": 35,
+          "y": 1296,
+          "width": 305,
+          "height": 44,
+          "scrollWidth": 305,
+          "clientWidth": 305,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "table-wrap",
+          "x": 17,
+          "y": 1462,
+          "width": 341,
+          "height": 250,
+          "scrollWidth": 620,
+          "clientWidth": 341,
+          "overflowX": "auto"
+        }
+      ],
+      "axe": [
+        {
+          "id": "scrollable-region-focusable",
+          "impact": "serious",
+          "nodes": [
+            {
+              "target": [
+                ".table-wrap"
+              ],
+              "message": "Fix any of the following:\n  Element should have focusable content\n  Element should be focusable"
+            }
+          ]
+        }
+      ],
+      "screenshot": "screenshots/access-375.png",
+      "consoleErrors": []
+    },
+    {
+      "width": 375,
+      "screen": "signin",
+      "viewport": 375,
+      "documentWidth": 375,
+      "pageOverflow": false,
+      "smallTargets": [
+        {
+          "tag": "A",
+          "label": "OntoLayer",
+          "x": 30,
+          "y": 65,
+          "width": 315,
+          "height": 31
+        },
+        {
+          "tag": "INPUT",
+          "label": "Enter your access token",
+          "x": 25,
+          "y": 591,
+          "width": 325,
+          "height": 44
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Connect to workspace",
+          "x": 25,
+          "y": 652,
+          "width": 325,
+          "height": 41
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Open retail demo",
+          "x": 25,
+          "y": 767,
+          "width": 325,
+          "height": 41
+        }
+      ],
+      "regions": [
+        {
+          "selector": "login-story",
+          "x": 0,
+          "y": 0,
+          "width": 375,
+          "height": 359,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "login-form-wrap",
+          "x": 0,
+          "y": 359,
+          "width": 375,
+          "height": 601,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowX": "visible"
+        }
+      ],
+      "axe": [],
+      "screenshot": "screenshots/signin-375.png",
+      "consoleErrors": []
+    },
+    {
+      "width": 768,
+      "screen": "overview",
+      "viewport": 768,
+      "documentWidth": 768,
+      "pageOverflow": false,
+      "smallTargets": [
+        {
+          "tag": "A",
+          "label": "OntoLayer",
+          "x": 22,
+          "y": 15,
+          "width": 724,
+          "height": 31
+        },
+        {
+          "tag": "A",
+          "label": "Overview",
+          "x": 22,
+          "y": 62,
+          "width": 105,
+          "height": 37
+        },
+        {
+          "tag": "A",
+          "label": "Ontology explorer",
+          "x": 134,
+          "y": 62,
+          "width": 154,
+          "height": 37
+        },
+        {
+          "tag": "A",
+          "label": "Query studio",
+          "x": 295,
+          "y": 62,
+          "width": 125,
+          "height": 37
+        },
+        {
+          "tag": "A",
+          "label": "Access & lineage",
+          "x": 426,
+          "y": 62,
+          "width": 145,
+          "height": 37
+        },
+        {
+          "tag": "SELECT",
+          "label": "North regionSouth regionGlobal analystAdministratorRestricted guest",
+          "x": 560,
+          "y": 121,
+          "width": 141,
+          "height": 33
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Sign out",
+          "x": 709,
+          "y": 128,
+          "width": 35,
+          "height": 35
+        },
+        {
+          "tag": "A",
+          "label": "Ask your data",
+          "x": 612,
+          "y": 229,
+          "width": 132,
+          "height": 41
+        },
+        {
+          "tag": "A",
+          "label": "Explore ontology →",
+          "x": 622,
+          "y": 871,
+          "width": 98,
+          "height": 17
+        },
+        {
+          "tag": "A",
+          "label": "Run a query →",
+          "x": 647,
+          "y": 1327,
+          "width": 73,
+          "height": 17
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Query",
+          "x": 651,
+          "y": 1535,
+          "width": 54,
+          "height": 21
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Query",
+          "x": 651,
+          "y": 1606,
+          "width": 54,
+          "height": 21
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Query",
+          "x": 651,
+          "y": 1678,
+          "width": 54,
+          "height": 21
+        }
+      ],
+      "regions": [
+        {
+          "selector": "nav",
+          "x": 22,
+          "y": 62,
+          "width": 724,
+          "height": 37,
+          "scrollWidth": 724,
+          "clientWidth": 724,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "topbar",
+          "x": 0,
+          "y": 114,
+          "width": 768,
+          "height": 64,
+          "scrollWidth": 768,
+          "clientWidth": 768,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "breadcrumb",
+          "x": 24,
+          "y": 134,
+          "width": 253,
+          "height": 24,
+          "scrollWidth": 253,
+          "clientWidth": 253,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "top-actions",
+          "x": 440,
+          "y": 121,
+          "width": 304,
+          "height": 49,
+          "scrollWidth": 304,
+          "clientWidth": 304,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "identity-role",
+          "x": 560,
+          "y": 121,
+          "width": 141,
+          "height": 33,
+          "scrollWidth": 139,
+          "clientWidth": 139,
+          "overflowX": "clip"
+        },
+        {
+          "selector": "graph",
+          "x": 25,
+          "y": 573,
+          "width": 718,
+          "height": 284,
+          "scrollWidth": 718,
+          "clientWidth": 718,
+          "overflowX": "auto"
+        },
+        {
+          "selector": "table-wrap",
+          "x": 25,
+          "y": 1469,
+          "width": 718,
+          "height": 254,
+          "scrollWidth": 718,
+          "clientWidth": 718,
+          "overflowX": "auto"
+        }
+      ],
+      "axe": [],
+      "screenshot": "screenshots/overview-768.png",
+      "consoleErrors": []
+    },
+    {
+      "width": 768,
+      "screen": "explorer",
+      "viewport": 768,
+      "documentWidth": 768,
+      "pageOverflow": false,
+      "smallTargets": [
+        {
+          "tag": "A",
+          "label": "OntoLayer",
+          "x": 22,
+          "y": 15,
+          "width": 724,
+          "height": 31
+        },
+        {
+          "tag": "A",
+          "label": "Overview",
+          "x": 22,
+          "y": 62,
+          "width": 105,
+          "height": 37
+        },
+        {
+          "tag": "A",
+          "label": "Ontology explorer",
+          "x": 134,
+          "y": 62,
+          "width": 154,
+          "height": 37
+        },
+        {
+          "tag": "A",
+          "label": "Query studio",
+          "x": 295,
+          "y": 62,
+          "width": 125,
+          "height": 37
+        },
+        {
+          "tag": "A",
+          "label": "Access & lineage",
+          "x": 426,
+          "y": 62,
+          "width": 145,
+          "height": 37
+        },
+        {
+          "tag": "SELECT",
+          "label": "North regionSouth regionGlobal analystAdministratorRestricted guest",
+          "x": 560,
+          "y": 200,
+          "width": 141,
+          "height": 33
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Sign out",
+          "x": 709,
+          "y": 206,
+          "width": 35,
+          "height": 35
+        },
+        {
+          "tag": "INPUT",
+          "label": "Filter this page…",
+          "x": 250,
+          "y": 605,
+          "width": 260,
+          "height": 39
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Lineage →",
+          "x": 746,
+          "y": 714,
+          "width": 55,
+          "height": 19
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Previous records",
+          "x": 599,
+          "y": 763,
+          "width": 34,
+          "height": 34
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Next records",
+          "x": 686,
+          "y": 763,
+          "width": 34,
+          "height": 34
+        }
+      ],
+      "regions": [
+        {
+          "selector": "nav",
+          "x": 22,
+          "y": 62,
+          "width": 724,
+          "height": 37,
+          "scrollWidth": 724,
+          "clientWidth": 724,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "topbar",
+          "x": 0,
+          "y": 192,
+          "width": 768,
+          "height": 64,
+          "scrollWidth": 768,
+          "clientWidth": 768,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "breadcrumb",
+          "x": 24,
+          "y": 212,
+          "width": 300,
+          "height": 24,
+          "scrollWidth": 300,
+          "clientWidth": 300,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "top-actions",
+          "x": 440,
+          "y": 200,
+          "width": 304,
+          "height": 49,
+          "scrollWidth": 304,
+          "clientWidth": 304,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "identity-role",
+          "x": 560,
+          "y": 200,
+          "width": 141,
+          "height": 33,
+          "scrollWidth": 139,
+          "clientWidth": 139,
+          "overflowX": "clip"
+        },
+        {
+          "selector": "table-wrap",
+          "x": 227,
+          "y": 657,
+          "width": 516,
+          "height": 92,
+          "scrollWidth": 620,
+          "clientWidth": 516,
+          "overflowX": "auto"
+        }
+      ],
+      "axe": [],
+      "screenshot": "screenshots/explorer-768.png",
+      "consoleErrors": []
+    },
+    {
+      "width": 768,
+      "screen": "studio",
+      "viewport": 768,
+      "documentWidth": 768,
+      "pageOverflow": false,
+      "smallTargets": [
+        {
+          "tag": "A",
+          "label": "OntoLayer",
+          "x": 22,
+          "y": 15,
+          "width": 724,
+          "height": 31
+        },
+        {
+          "tag": "A",
+          "label": "Overview",
+          "x": 22,
+          "y": 62,
+          "width": 105,
+          "height": 37
+        },
+        {
+          "tag": "A",
+          "label": "Ontology explorer",
+          "x": 134,
+          "y": 62,
+          "width": 154,
+          "height": 37
+        },
+        {
+          "tag": "A",
+          "label": "Query studio",
+          "x": 295,
+          "y": 62,
+          "width": 125,
+          "height": 37
+        },
+        {
+          "tag": "A",
+          "label": "Access & lineage",
+          "x": 426,
+          "y": 62,
+          "width": 145,
+          "height": 37
+        },
+        {
+          "tag": "SELECT",
+          "label": "North regionSouth regionGlobal analystAdministratorRestricted guest",
+          "x": 560,
+          "y": 121,
+          "width": 141,
+          "height": 33
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Sign out",
+          "x": 709,
+          "y": 128,
+          "width": 35,
+          "height": 35
+        },
+        {
+          "tag": "INPUT",
+          "label": "revenue from 2026-10-01 to 2026-11-01",
+          "x": 111,
+          "y": 370,
+          "width": 521,
+          "height": 44
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Ask",
+          "x": 642,
+          "y": 370,
+          "width": 77,
+          "height": 44
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Revenue",
+          "x": 111,
+          "y": 423,
+          "width": 38,
+          "height": 23
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Order count",
+          "x": 158,
+          "y": 423,
+          "width": 54,
+          "height": 23
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Items sold",
+          "x": 220,
+          "y": 423,
+          "width": 45,
+          "height": 23
+        },
+        {
+          "tag": "SELECT",
+          "label": "Revenue (USD)Order count (orders)Items sold (units)",
+          "x": 48,
+          "y": 627,
+          "width": 672,
+          "height": 43
+        },
+        {
+          "tag": "INPUT",
+          "label": "start-date",
+          "x": 48,
+          "y": 792,
+          "width": 328,
+          "height": 43
+        },
+        {
+          "tag": "INPUT",
+          "label": "end-date",
+          "x": 392,
+          "y": 792,
+          "width": 328,
+          "height": 43
+        },
+        {
+          "tag": "SELECT",
+          "label": "No grouping — totalRegion",
+          "x": 48,
+          "y": 875,
+          "width": 672,
+          "height": 43
+        },
+        {
+          "tag": "SELECT",
+          "label": "No filterRegion",
+          "x": 48,
+          "y": 959,
+          "width": 328,
+          "height": 43
+        },
+        {
+          "tag": "INPUT",
+          "label": "e.g. north",
+          "x": 392,
+          "y": 959,
+          "width": 328,
+          "height": 43
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Run query",
+          "x": 48,
+          "y": 1024,
+          "width": 113,
+          "height": 41
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Reset",
+          "x": 171,
+          "y": 1024,
+          "width": 59,
+          "height": 41
+        }
+      ],
+      "regions": [
+        {
+          "selector": "nav",
+          "x": 22,
+          "y": 62,
+          "width": 724,
+          "height": 37,
+          "scrollWidth": 724,
+          "clientWidth": 724,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "topbar",
+          "x": 0,
+          "y": 114,
+          "width": 768,
+          "height": 64,
+          "scrollWidth": 768,
+          "clientWidth": 768,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "breadcrumb",
+          "x": 24,
+          "y": 134,
+          "width": 272,
+          "height": 24,
+          "scrollWidth": 272,
+          "clientWidth": 272,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "top-actions",
+          "x": 440,
+          "y": 121,
+          "width": 304,
+          "height": 49,
+          "scrollWidth": 304,
+          "clientWidth": 304,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "identity-role",
+          "x": 560,
+          "y": 121,
+          "width": 141,
+          "height": 33,
+          "scrollWidth": 139,
+          "clientWidth": 139,
+          "overflowX": "clip"
+        },
+        {
+          "selector": "question-input",
+          "x": 111,
+          "y": 370,
+          "width": 608,
+          "height": 44,
+          "scrollWidth": 608,
+          "clientWidth": 608,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "form-grid",
+          "x": 48,
+          "y": 602,
+          "width": 672,
+          "height": 399,
+          "scrollWidth": 672,
+          "clientWidth": 672,
+          "overflowX": "visible"
+        }
+      ],
+      "axe": [],
+      "screenshot": "screenshots/studio-768.png",
+      "consoleErrors": []
+    },
+    {
+      "width": 768,
+      "screen": "access",
+      "viewport": 768,
+      "documentWidth": 768,
+      "pageOverflow": false,
+      "smallTargets": [
+        {
+          "tag": "A",
+          "label": "OntoLayer",
+          "x": 22,
+          "y": 15,
+          "width": 724,
+          "height": 31
+        },
+        {
+          "tag": "A",
+          "label": "Overview",
+          "x": 22,
+          "y": 62,
+          "width": 105,
+          "height": 37
+        },
+        {
+          "tag": "A",
+          "label": "Ontology explorer",
+          "x": 134,
+          "y": 62,
+          "width": 154,
+          "height": 37
+        },
+        {
+          "tag": "A",
+          "label": "Query studio",
+          "x": 295,
+          "y": 62,
+          "width": 125,
+          "height": 37
+        },
+        {
+          "tag": "A",
+          "label": "Access & lineage",
+          "x": 426,
+          "y": 62,
+          "width": 145,
+          "height": 37
+        },
+        {
+          "tag": "SELECT",
+          "label": "North regionSouth regionGlobal analystAdministratorRestricted guest",
+          "x": 560,
+          "y": 121,
+          "width": 141,
+          "height": 33
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Sign out",
+          "x": 709,
+          "y": 128,
+          "width": 35,
+          "height": 35
+        },
+        {
+          "tag": "INPUT",
+          "label": "e.g. Customer:C1",
+          "x": 48,
+          "y": 1221,
+          "width": 527,
+          "height": 44
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Inspect record",
+          "x": 585,
+          "y": 1221,
+          "width": 135,
+          "height": 44
+        }
+      ],
+      "regions": [
+        {
+          "selector": "nav",
+          "x": 22,
+          "y": 62,
+          "width": 724,
+          "height": 37,
+          "scrollWidth": 724,
+          "clientWidth": 724,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "topbar",
+          "x": 0,
+          "y": 114,
+          "width": 768,
+          "height": 64,
+          "scrollWidth": 768,
+          "clientWidth": 768,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "breadcrumb",
+          "x": 24,
+          "y": 134,
+          "width": 294,
+          "height": 24,
+          "scrollWidth": 294,
+          "clientWidth": 294,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "top-actions",
+          "x": 440,
+          "y": 121,
+          "width": 304,
+          "height": 49,
+          "scrollWidth": 304,
+          "clientWidth": 304,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "identity-role",
+          "x": 560,
+          "y": 121,
+          "width": 141,
+          "height": 33,
+          "scrollWidth": 139,
+          "clientWidth": 139,
+          "overflowX": "clip"
+        },
+        {
+          "selector": "question-input",
+          "x": 48,
+          "y": 1221,
+          "width": 672,
+          "height": 44,
+          "scrollWidth": 672,
+          "clientWidth": 672,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "table-wrap",
+          "x": 25,
+          "y": 1397,
+          "width": 718,
+          "height": 282,
+          "scrollWidth": 718,
+          "clientWidth": 718,
+          "overflowX": "auto"
+        }
+      ],
+      "axe": [],
+      "screenshot": "screenshots/access-768.png",
+      "consoleErrors": []
+    },
+    {
+      "width": 768,
+      "screen": "signin",
+      "viewport": 768,
+      "documentWidth": 768,
+      "pageOverflow": false,
+      "smallTargets": [
+        {
+          "tag": "A",
+          "label": "OntoLayer",
+          "x": 35,
+          "y": 303,
+          "width": 314,
+          "height": 31
+        },
+        {
+          "tag": "INPUT",
+          "label": "Enter your access token",
+          "x": 414,
+          "y": 412,
+          "width": 324,
+          "height": 44
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Connect to workspace",
+          "x": 414,
+          "y": 472,
+          "width": 324,
+          "height": 41
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Open retail demo",
+          "x": 414,
+          "y": 587,
+          "width": 324,
+          "height": 41
+        }
+      ],
+      "regions": [
+        {
+          "selector": "login-story",
+          "x": 0,
+          "y": 0,
+          "width": 384,
+          "height": 960,
+          "scrollWidth": 384,
+          "clientWidth": 384,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "login-form-wrap",
+          "x": 384,
+          "y": 0,
+          "width": 384,
+          "height": 960,
+          "scrollWidth": 384,
+          "clientWidth": 384,
+          "overflowX": "visible"
+        }
+      ],
+      "axe": [],
+      "screenshot": "screenshots/signin-768.png",
+      "consoleErrors": []
+    },
+    {
+      "width": 1024,
+      "screen": "overview",
+      "viewport": 1024,
+      "documentWidth": 1024,
+      "pageOverflow": false,
+      "smallTargets": [
+        {
+          "tag": "A",
+          "label": "OntoLayer",
+          "x": 12,
+          "y": 30,
+          "width": 176,
+          "height": 36
+        },
+        {
+          "tag": "A",
+          "label": "API docs ↗",
+          "x": 122,
+          "y": 923,
+          "width": 53,
+          "height": 17
+        },
+        {
+          "tag": "SELECT",
+          "label": "North regionSouth regionGlobal analystAdministratorRestricted guest",
+          "x": 816,
+          "y": 15,
+          "width": 141,
+          "height": 33
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Sign out",
+          "x": 965,
+          "y": 22,
+          "width": 35,
+          "height": 35
+        },
+        {
+          "tag": "A",
+          "label": "Ask your data",
+          "x": 868,
+          "y": 132,
+          "width": 132,
+          "height": 41
+        },
+        {
+          "tag": "A",
+          "label": "Explore ontology →",
+          "x": 532,
+          "y": 775,
+          "width": 98,
+          "height": 17
+        },
+        {
+          "tag": "A",
+          "label": "Run a query →",
+          "x": 903,
+          "y": 824,
+          "width": 73,
+          "height": 17
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Query",
+          "x": 898,
+          "y": 1032,
+          "width": 54,
+          "height": 21
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Query",
+          "x": 898,
+          "y": 1104,
+          "width": 54,
+          "height": 21
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Query",
+          "x": 898,
+          "y": 1175,
+          "width": 54,
+          "height": 21
+        }
+      ],
+      "regions": [
+        {
+          "selector": "nav",
+          "x": 12,
+          "y": 135,
+          "width": 176,
+          "height": 195,
+          "scrollWidth": 176,
+          "clientWidth": 176,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "topbar",
+          "x": 200,
+          "y": 0,
+          "width": 824,
+          "height": 79,
+          "scrollWidth": 824,
+          "clientWidth": 824,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "breadcrumb",
+          "x": 224,
+          "y": 27,
+          "width": 253,
+          "height": 24,
+          "scrollWidth": 253,
+          "clientWidth": 253,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "top-actions",
+          "x": 696,
+          "y": 15,
+          "width": 304,
+          "height": 49,
+          "scrollWidth": 304,
+          "clientWidth": 304,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "identity-role",
+          "x": 816,
+          "y": 15,
+          "width": 141,
+          "height": 33,
+          "scrollWidth": 139,
+          "clientWidth": 139,
+          "overflowX": "clip"
+        },
+        {
+          "selector": "graph",
+          "x": 225,
+          "y": 487,
+          "width": 428,
+          "height": 274,
+          "scrollWidth": 544,
+          "clientWidth": 428,
+          "overflowX": "auto"
+        },
+        {
+          "selector": "table-wrap",
+          "x": 225,
+          "y": 967,
+          "width": 774,
+          "height": 254,
+          "scrollWidth": 774,
+          "clientWidth": 774,
+          "overflowX": "auto"
+        }
+      ],
+      "axe": [],
+      "screenshot": "screenshots/overview-1024.png",
+      "consoleErrors": []
+    },
+    {
+      "width": 1024,
+      "screen": "explorer",
+      "viewport": 1024,
+      "documentWidth": 1024,
+      "pageOverflow": false,
+      "smallTargets": [
+        {
+          "tag": "A",
+          "label": "OntoLayer",
+          "x": 12,
+          "y": 30,
+          "width": 176,
+          "height": 36
+        },
+        {
+          "tag": "A",
+          "label": "API docs ↗",
+          "x": 122,
+          "y": 923,
+          "width": 53,
+          "height": 17
+        },
+        {
+          "tag": "SELECT",
+          "label": "North regionSouth regionGlobal analystAdministratorRestricted guest",
+          "x": 816,
+          "y": 15,
+          "width": 141,
+          "height": 33
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Sign out",
+          "x": 965,
+          "y": 22,
+          "width": 35,
+          "height": 35
+        },
+        {
+          "tag": "INPUT",
+          "label": "Filter this page…",
+          "x": 450,
+          "y": 431,
+          "width": 260,
+          "height": 39
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Lineage →",
+          "x": 946,
+          "y": 540,
+          "width": 55,
+          "height": 19
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Previous records",
+          "x": 855,
+          "y": 589,
+          "width": 34,
+          "height": 34
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Next records",
+          "x": 942,
+          "y": 589,
+          "width": 34,
+          "height": 34
+        }
+      ],
+      "regions": [
+        {
+          "selector": "nav",
+          "x": 12,
+          "y": 135,
+          "width": 176,
+          "height": 195,
+          "scrollWidth": 176,
+          "clientWidth": 176,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "topbar",
+          "x": 200,
+          "y": 0,
+          "width": 824,
+          "height": 79,
+          "scrollWidth": 824,
+          "clientWidth": 824,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "breadcrumb",
+          "x": 224,
+          "y": 27,
+          "width": 300,
+          "height": 24,
+          "scrollWidth": 300,
+          "clientWidth": 300,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "top-actions",
+          "x": 696,
+          "y": 15,
+          "width": 304,
+          "height": 49,
+          "scrollWidth": 304,
+          "clientWidth": 304,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "identity-role",
+          "x": 816,
+          "y": 15,
+          "width": 141,
+          "height": 33,
+          "scrollWidth": 139,
+          "clientWidth": 139,
+          "overflowX": "clip"
+        },
+        {
+          "selector": "table-wrap",
+          "x": 427,
+          "y": 483,
+          "width": 572,
+          "height": 92,
+          "scrollWidth": 620,
+          "clientWidth": 572,
+          "overflowX": "auto"
+        }
+      ],
+      "axe": [],
+      "screenshot": "screenshots/explorer-1024.png",
+      "consoleErrors": []
+    },
+    {
+      "width": 1024,
+      "screen": "studio",
+      "viewport": 1024,
+      "documentWidth": 1024,
+      "pageOverflow": false,
+      "smallTargets": [
+        {
+          "tag": "A",
+          "label": "OntoLayer",
+          "x": 12,
+          "y": 30,
+          "width": 176,
+          "height": 36
+        },
+        {
+          "tag": "A",
+          "label": "API docs ↗",
+          "x": 122,
+          "y": 923,
+          "width": 53,
+          "height": 17
+        },
+        {
+          "tag": "SELECT",
+          "label": "North regionSouth regionGlobal analystAdministratorRestricted guest",
+          "x": 816,
+          "y": 15,
+          "width": 141,
+          "height": 33
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Sign out",
+          "x": 965,
+          "y": 22,
+          "width": 35,
+          "height": 35
+        },
+        {
+          "tag": "INPUT",
+          "label": "revenue from 2026-10-01 to 2026-11-01",
+          "x": 311,
+          "y": 275,
+          "width": 577,
+          "height": 44
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Ask",
+          "x": 898,
+          "y": 275,
+          "width": 77,
+          "height": 44
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Revenue",
+          "x": 311,
+          "y": 328,
+          "width": 38,
+          "height": 23
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Order count",
+          "x": 358,
+          "y": 328,
+          "width": 54,
+          "height": 23
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Items sold",
+          "x": 420,
+          "y": 328,
+          "width": 45,
+          "height": 23
+        },
+        {
+          "tag": "SELECT",
+          "label": "Revenue (USD)Order count (orders)Items sold (units)",
+          "x": 248,
+          "y": 532,
+          "width": 329,
+          "height": 43
+        },
+        {
+          "tag": "INPUT",
+          "label": "start-date",
+          "x": 248,
+          "y": 713,
+          "width": 157,
+          "height": 43
+        },
+        {
+          "tag": "INPUT",
+          "label": "end-date",
+          "x": 421,
+          "y": 713,
+          "width": 157,
+          "height": 43
+        },
+        {
+          "tag": "SELECT",
+          "label": "No grouping — totalRegion",
+          "x": 248,
+          "y": 797,
+          "width": 329,
+          "height": 43
+        },
+        {
+          "tag": "SELECT",
+          "label": "No filterRegion",
+          "x": 248,
+          "y": 881,
+          "width": 157,
+          "height": 43
+        },
+        {
+          "tag": "INPUT",
+          "label": "e.g. north",
+          "x": 421,
+          "y": 881,
+          "width": 157,
+          "height": 43
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Run query",
+          "x": 248,
+          "y": 946,
+          "width": 113,
+          "height": 41
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Reset",
+          "x": 371,
+          "y": 946,
+          "width": 59,
+          "height": 41
+        }
+      ],
+      "regions": [
+        {
+          "selector": "nav",
+          "x": 12,
+          "y": 135,
+          "width": 176,
+          "height": 195,
+          "scrollWidth": 176,
+          "clientWidth": 176,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "topbar",
+          "x": 200,
+          "y": 0,
+          "width": 824,
+          "height": 79,
+          "scrollWidth": 824,
+          "clientWidth": 824,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "breadcrumb",
+          "x": 224,
+          "y": 27,
+          "width": 272,
+          "height": 24,
+          "scrollWidth": 272,
+          "clientWidth": 272,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "top-actions",
+          "x": 696,
+          "y": 15,
+          "width": 304,
+          "height": 49,
+          "scrollWidth": 304,
+          "clientWidth": 304,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "identity-role",
+          "x": 816,
+          "y": 15,
+          "width": 141,
+          "height": 33,
+          "scrollWidth": 139,
+          "clientWidth": 139,
+          "overflowX": "clip"
+        },
+        {
+          "selector": "question-input",
+          "x": 311,
+          "y": 275,
+          "width": 664,
+          "height": 44,
+          "scrollWidth": 664,
+          "clientWidth": 664,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "form-grid",
+          "x": 248,
+          "y": 507,
+          "width": 329,
+          "height": 416,
+          "scrollWidth": 329,
+          "clientWidth": 329,
+          "overflowX": "visible"
+        }
+      ],
+      "axe": [],
+      "screenshot": "screenshots/studio-1024.png",
+      "consoleErrors": []
+    },
+    {
+      "width": 1024,
+      "screen": "access",
+      "viewport": 1024,
+      "documentWidth": 1024,
+      "pageOverflow": false,
+      "smallTargets": [
+        {
+          "tag": "A",
+          "label": "OntoLayer",
+          "x": 12,
+          "y": 30,
+          "width": 176,
+          "height": 36
+        },
+        {
+          "tag": "A",
+          "label": "API docs ↗",
+          "x": 122,
+          "y": 923,
+          "width": 53,
+          "height": 17
+        },
+        {
+          "tag": "SELECT",
+          "label": "North regionSouth regionGlobal analystAdministratorRestricted guest",
+          "x": 816,
+          "y": 15,
+          "width": 141,
+          "height": 33
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Sign out",
+          "x": 965,
+          "y": 22,
+          "width": 35,
+          "height": 35
+        },
+        {
+          "tag": "INPUT",
+          "label": "e.g. Customer:C1",
+          "x": 248,
+          "y": 803,
+          "width": 583,
+          "height": 44
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Inspect record",
+          "x": 841,
+          "y": 803,
+          "width": 135,
+          "height": 44
+        }
+      ],
+      "regions": [
+        {
+          "selector": "nav",
+          "x": 12,
+          "y": 135,
+          "width": 176,
+          "height": 195,
+          "scrollWidth": 176,
+          "clientWidth": 176,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "topbar",
+          "x": 200,
+          "y": 0,
+          "width": 824,
+          "height": 79,
+          "scrollWidth": 824,
+          "clientWidth": 824,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "breadcrumb",
+          "x": 224,
+          "y": 27,
+          "width": 294,
+          "height": 24,
+          "scrollWidth": 294,
+          "clientWidth": 294,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "top-actions",
+          "x": 696,
+          "y": 15,
+          "width": 304,
+          "height": 49,
+          "scrollWidth": 304,
+          "clientWidth": 304,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "identity-role",
+          "x": 816,
+          "y": 15,
+          "width": 141,
+          "height": 33,
+          "scrollWidth": 139,
+          "clientWidth": 139,
+          "overflowX": "clip"
+        },
+        {
+          "selector": "question-input",
+          "x": 248,
+          "y": 803,
+          "width": 728,
+          "height": 44,
+          "scrollWidth": 728,
+          "clientWidth": 728,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "table-wrap",
+          "x": 225,
+          "y": 979,
+          "width": 774,
+          "height": 282,
+          "scrollWidth": 774,
+          "clientWidth": 774,
+          "overflowX": "auto"
+        }
+      ],
+      "axe": [],
+      "screenshot": "screenshots/access-1024.png",
+      "consoleErrors": []
+    },
+    {
+      "width": 1024,
+      "screen": "signin",
+      "viewport": 1024,
+      "documentWidth": 1024,
+      "pageOverflow": false,
+      "smallTargets": [
+        {
+          "tag": "A",
+          "label": "OntoLayer",
+          "x": 60,
+          "y": 273,
+          "width": 392,
+          "height": 36
+        },
+        {
+          "tag": "INPUT",
+          "label": "Enter your access token",
+          "x": 593,
+          "y": 412,
+          "width": 350,
+          "height": 44
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Connect to workspace",
+          "x": 593,
+          "y": 472,
+          "width": 350,
+          "height": 41
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Open retail demo",
+          "x": 593,
+          "y": 587,
+          "width": 350,
+          "height": 41
+        }
+      ],
+      "regions": [
+        {
+          "selector": "login-story",
+          "x": 0,
+          "y": 0,
+          "width": 512,
+          "height": 960,
+          "scrollWidth": 512,
+          "clientWidth": 512,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "login-form-wrap",
+          "x": 512,
+          "y": 0,
+          "width": 512,
+          "height": 960,
+          "scrollWidth": 512,
+          "clientWidth": 512,
+          "overflowX": "visible"
+        }
+      ],
+      "axe": [],
+      "screenshot": "screenshots/signin-1024.png",
+      "consoleErrors": []
+    },
+    {
+      "width": 1440,
+      "screen": "overview",
+      "viewport": 1440,
+      "documentWidth": 1440,
+      "pageOverflow": false,
+      "smallTargets": [
+        {
+          "tag": "A",
+          "label": "OntoLayer",
+          "x": 18,
+          "y": 30,
+          "width": 202,
+          "height": 36
+        },
+        {
+          "tag": "A",
+          "label": "API docs ↗",
+          "x": 154,
+          "y": 923,
+          "width": 53,
+          "height": 17
+        },
+        {
+          "tag": "SELECT",
+          "label": "North regionSouth regionGlobal analystAdministratorRestricted guest",
+          "x": 1210,
+          "y": 15,
+          "width": 141,
+          "height": 33
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Sign out",
+          "x": 1367,
+          "y": 22,
+          "width": 35,
+          "height": 35
+        },
+        {
+          "tag": "A",
+          "label": "Ask your data",
+          "x": 1270,
+          "y": 138,
+          "width": 132,
+          "height": 41
+        },
+        {
+          "tag": "A",
+          "label": "Explore ontology →",
+          "x": 834,
+          "y": 770,
+          "width": 98,
+          "height": 17
+        },
+        {
+          "tag": "A",
+          "label": "Run a query →",
+          "x": 1305,
+          "y": 819,
+          "width": 73,
+          "height": 17
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Query",
+          "x": 1244,
+          "y": 1027,
+          "width": 54,
+          "height": 21
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Query",
+          "x": 1244,
+          "y": 1099,
+          "width": 54,
+          "height": 21
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Query",
+          "x": 1244,
+          "y": 1170,
+          "width": 54,
+          "height": 21
+        }
+      ],
+      "regions": [
+        {
+          "selector": "nav",
+          "x": 18,
+          "y": 135,
+          "width": 202,
+          "height": 195,
+          "scrollWidth": 202,
+          "clientWidth": 202,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "topbar",
+          "x": 238,
+          "y": 0,
+          "width": 1202,
+          "height": 79,
+          "scrollWidth": 1202,
+          "clientWidth": 1202,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "breadcrumb",
+          "x": 276,
+          "y": 27,
+          "width": 253,
+          "height": 24,
+          "scrollWidth": 253,
+          "clientWidth": 253,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "top-actions",
+          "x": 1082,
+          "y": 15,
+          "width": 320,
+          "height": 49,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "identity-role",
+          "x": 1210,
+          "y": 15,
+          "width": 141,
+          "height": 33,
+          "scrollWidth": 139,
+          "clientWidth": 139,
+          "overflowX": "clip"
+        },
+        {
+          "selector": "graph",
+          "x": 277,
+          "y": 482,
+          "width": 677,
+          "height": 274,
+          "scrollWidth": 677,
+          "clientWidth": 677,
+          "overflowX": "auto"
+        },
+        {
+          "selector": "table-wrap",
+          "x": 277,
+          "y": 962,
+          "width": 1124,
+          "height": 254,
+          "scrollWidth": 1124,
+          "clientWidth": 1124,
+          "overflowX": "auto"
+        }
+      ],
+      "axe": [],
+      "screenshot": "screenshots/overview-1440.png",
+      "consoleErrors": []
+    },
+    {
+      "width": 1440,
+      "screen": "explorer",
+      "viewport": 1440,
+      "documentWidth": 1440,
+      "pageOverflow": false,
+      "smallTargets": [
+        {
+          "tag": "A",
+          "label": "OntoLayer",
+          "x": 18,
+          "y": 30,
+          "width": 202,
+          "height": 36
+        },
+        {
+          "tag": "A",
+          "label": "API docs ↗",
+          "x": 154,
+          "y": 923,
+          "width": 53,
+          "height": 17
+        },
+        {
+          "tag": "SELECT",
+          "label": "North regionSouth regionGlobal analystAdministratorRestricted guest",
+          "x": 1210,
+          "y": 15,
+          "width": 141,
+          "height": 33
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Sign out",
+          "x": 1367,
+          "y": 22,
+          "width": 35,
+          "height": 35
+        },
+        {
+          "tag": "INPUT",
+          "label": "Filter this page…",
+          "x": 542,
+          "y": 437,
+          "width": 260,
+          "height": 39
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Lineage →",
+          "x": 1247,
+          "y": 546,
+          "width": 55,
+          "height": 19
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Previous records",
+          "x": 1257,
+          "y": 595,
+          "width": 34,
+          "height": 34
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Next records",
+          "x": 1344,
+          "y": 595,
+          "width": 34,
+          "height": 34
+        }
+      ],
+      "regions": [
+        {
+          "selector": "nav",
+          "x": 18,
+          "y": 135,
+          "width": 202,
+          "height": 195,
+          "scrollWidth": 202,
+          "clientWidth": 202,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "topbar",
+          "x": 238,
+          "y": 0,
+          "width": 1202,
+          "height": 79,
+          "scrollWidth": 1202,
+          "clientWidth": 1202,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "breadcrumb",
+          "x": 276,
+          "y": 27,
+          "width": 300,
+          "height": 24,
+          "scrollWidth": 300,
+          "clientWidth": 300,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "top-actions",
+          "x": 1082,
+          "y": 15,
+          "width": 320,
+          "height": 49,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "identity-role",
+          "x": 1210,
+          "y": 15,
+          "width": 141,
+          "height": 33,
+          "scrollWidth": 139,
+          "clientWidth": 139,
+          "overflowX": "clip"
+        },
+        {
+          "selector": "table-wrap",
+          "x": 519,
+          "y": 489,
+          "width": 882,
+          "height": 92,
+          "scrollWidth": 882,
+          "clientWidth": 882,
+          "overflowX": "auto"
+        }
+      ],
+      "axe": [],
+      "screenshot": "screenshots/explorer-1440.png",
+      "consoleErrors": []
+    },
+    {
+      "width": 1440,
+      "screen": "studio",
+      "viewport": 1440,
+      "documentWidth": 1440,
+      "pageOverflow": false,
+      "smallTargets": [
+        {
+          "tag": "A",
+          "label": "OntoLayer",
+          "x": 18,
+          "y": 30,
+          "width": 202,
+          "height": 36
+        },
+        {
+          "tag": "A",
+          "label": "API docs ↗",
+          "x": 154,
+          "y": 923,
+          "width": 53,
+          "height": 17
+        },
+        {
+          "tag": "SELECT",
+          "label": "North regionSouth regionGlobal analystAdministratorRestricted guest",
+          "x": 1210,
+          "y": 15,
+          "width": 141,
+          "height": 33
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Sign out",
+          "x": 1367,
+          "y": 22,
+          "width": 35,
+          "height": 35
+        },
+        {
+          "tag": "INPUT",
+          "label": "revenue from 2026-10-01 to 2026-11-01",
+          "x": 363,
+          "y": 281,
+          "width": 927,
+          "height": 44
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Ask",
+          "x": 1300,
+          "y": 281,
+          "width": 77,
+          "height": 44
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Revenue",
+          "x": 363,
+          "y": 334,
+          "width": 38,
+          "height": 23
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Order count",
+          "x": 410,
+          "y": 334,
+          "width": 54,
+          "height": 23
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Items sold",
+          "x": 472,
+          "y": 334,
+          "width": 45,
+          "height": 23
+        },
+        {
+          "tag": "SELECT",
+          "label": "Revenue (USD)Order count (orders)Items sold (units)",
+          "x": 300,
+          "y": 538,
+          "width": 394,
+          "height": 43
+        },
+        {
+          "tag": "INPUT",
+          "label": "start-date",
+          "x": 300,
+          "y": 719,
+          "width": 189,
+          "height": 43
+        },
+        {
+          "tag": "INPUT",
+          "label": "end-date",
+          "x": 505,
+          "y": 719,
+          "width": 189,
+          "height": 43
+        },
+        {
+          "tag": "SELECT",
+          "label": "No grouping — totalRegion",
+          "x": 300,
+          "y": 803,
+          "width": 394,
+          "height": 43
+        },
+        {
+          "tag": "SELECT",
+          "label": "No filterRegion",
+          "x": 300,
+          "y": 887,
+          "width": 189,
+          "height": 43
+        },
+        {
+          "tag": "INPUT",
+          "label": "e.g. north",
+          "x": 505,
+          "y": 887,
+          "width": 189,
+          "height": 43
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Run query",
+          "x": 300,
+          "y": 952,
+          "width": 113,
+          "height": 41
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Reset",
+          "x": 423,
+          "y": 952,
+          "width": 59,
+          "height": 41
+        }
+      ],
+      "regions": [
+        {
+          "selector": "nav",
+          "x": 18,
+          "y": 135,
+          "width": 202,
+          "height": 195,
+          "scrollWidth": 202,
+          "clientWidth": 202,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "topbar",
+          "x": 238,
+          "y": 0,
+          "width": 1202,
+          "height": 79,
+          "scrollWidth": 1202,
+          "clientWidth": 1202,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "breadcrumb",
+          "x": 276,
+          "y": 27,
+          "width": 272,
+          "height": 24,
+          "scrollWidth": 272,
+          "clientWidth": 272,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "top-actions",
+          "x": 1082,
+          "y": 15,
+          "width": 320,
+          "height": 49,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "identity-role",
+          "x": 1210,
+          "y": 15,
+          "width": 141,
+          "height": 33,
+          "scrollWidth": 139,
+          "clientWidth": 139,
+          "overflowX": "clip"
+        },
+        {
+          "selector": "question-input",
+          "x": 363,
+          "y": 281,
+          "width": 1014,
+          "height": 44,
+          "scrollWidth": 1014,
+          "clientWidth": 1014,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "form-grid",
+          "x": 300,
+          "y": 513,
+          "width": 394,
+          "height": 416,
+          "scrollWidth": 394,
+          "clientWidth": 394,
+          "overflowX": "visible"
+        }
+      ],
+      "axe": [],
+      "screenshot": "screenshots/studio-1440.png",
+      "consoleErrors": []
+    },
+    {
+      "width": 1440,
+      "screen": "access",
+      "viewport": 1440,
+      "documentWidth": 1440,
+      "pageOverflow": false,
+      "smallTargets": [
+        {
+          "tag": "A",
+          "label": "OntoLayer",
+          "x": 18,
+          "y": 30,
+          "width": 202,
+          "height": 36
+        },
+        {
+          "tag": "A",
+          "label": "API docs ↗",
+          "x": 154,
+          "y": 923,
+          "width": 53,
+          "height": 17
+        },
+        {
+          "tag": "SELECT",
+          "label": "North regionSouth regionGlobal analystAdministratorRestricted guest",
+          "x": 1210,
+          "y": 15,
+          "width": 141,
+          "height": 33
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Sign out",
+          "x": 1367,
+          "y": 22,
+          "width": 35,
+          "height": 35
+        },
+        {
+          "tag": "INPUT",
+          "label": "e.g. Customer:C1",
+          "x": 300,
+          "y": 775,
+          "width": 933,
+          "height": 44
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Inspect record",
+          "x": 1243,
+          "y": 775,
+          "width": 135,
+          "height": 44
+        }
+      ],
+      "regions": [
+        {
+          "selector": "nav",
+          "x": 18,
+          "y": 135,
+          "width": 202,
+          "height": 195,
+          "scrollWidth": 202,
+          "clientWidth": 202,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "topbar",
+          "x": 238,
+          "y": 0,
+          "width": 1202,
+          "height": 79,
+          "scrollWidth": 1202,
+          "clientWidth": 1202,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "breadcrumb",
+          "x": 276,
+          "y": 27,
+          "width": 294,
+          "height": 24,
+          "scrollWidth": 294,
+          "clientWidth": 294,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "top-actions",
+          "x": 1082,
+          "y": 15,
+          "width": 320,
+          "height": 49,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "identity-role",
+          "x": 1210,
+          "y": 15,
+          "width": 141,
+          "height": 33,
+          "scrollWidth": 139,
+          "clientWidth": 139,
+          "overflowX": "clip"
+        },
+        {
+          "selector": "question-input",
+          "x": 300,
+          "y": 775,
+          "width": 1078,
+          "height": 44,
+          "scrollWidth": 1078,
+          "clientWidth": 1078,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "table-wrap",
+          "x": 277,
+          "y": 951,
+          "width": 1124,
+          "height": 282,
+          "scrollWidth": 1124,
+          "clientWidth": 1124,
+          "overflowX": "auto"
+        }
+      ],
+      "axe": [],
+      "screenshot": "screenshots/access-1440.png",
+      "consoleErrors": []
+    },
+    {
+      "width": 1440,
+      "screen": "signin",
+      "viewport": 1440,
+      "documentWidth": 1440,
+      "pageOverflow": false,
+      "smallTargets": [
+        {
+          "tag": "A",
+          "label": "OntoLayer",
+          "x": 60,
+          "y": 301,
+          "width": 600,
+          "height": 36
+        },
+        {
+          "tag": "INPUT",
+          "label": "Enter your access token",
+          "x": 905,
+          "y": 412,
+          "width": 350,
+          "height": 44
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Connect to workspace",
+          "x": 905,
+          "y": 472,
+          "width": 350,
+          "height": 41
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Open retail demo",
+          "x": 905,
+          "y": 587,
+          "width": 350,
+          "height": 41
+        }
+      ],
+      "regions": [
+        {
+          "selector": "login-story",
+          "x": 0,
+          "y": 0,
+          "width": 720,
+          "height": 960,
+          "scrollWidth": 720,
+          "clientWidth": 720,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "login-form-wrap",
+          "x": 720,
+          "y": 0,
+          "width": 720,
+          "height": 960,
+          "scrollWidth": 720,
+          "clientWidth": 720,
+          "overflowX": "visible"
+        }
+      ],
+      "axe": [],
+      "screenshot": "screenshots/signin-1440.png",
+      "consoleErrors": []
+    },
+    {
+      "width": 1920,
+      "screen": "overview",
+      "viewport": 1920,
+      "documentWidth": 1920,
+      "pageOverflow": false,
+      "smallTargets": [
+        {
+          "tag": "A",
+          "label": "OntoLayer",
+          "x": 18,
+          "y": 30,
+          "width": 202,
+          "height": 36
+        },
+        {
+          "tag": "A",
+          "label": "API docs ↗",
+          "x": 154,
+          "y": 923,
+          "width": 53,
+          "height": 17
+        },
+        {
+          "tag": "SELECT",
+          "label": "North regionSouth regionGlobal analystAdministratorRestricted guest",
+          "x": 1690,
+          "y": 15,
+          "width": 141,
+          "height": 33
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Sign out",
+          "x": 1847,
+          "y": 22,
+          "width": 35,
+          "height": 35
+        },
+        {
+          "tag": "A",
+          "label": "Ask your data",
+          "x": 1709,
+          "y": 146,
+          "width": 132,
+          "height": 41
+        },
+        {
+          "tag": "A",
+          "label": "Explore ontology →",
+          "x": 1120,
+          "y": 818,
+          "width": 98,
+          "height": 17
+        },
+        {
+          "tag": "A",
+          "label": "Run a query →",
+          "x": 1744,
+          "y": 808,
+          "width": 73,
+          "height": 17
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Query",
+          "x": 1620,
+          "y": 1026,
+          "width": 54,
+          "height": 21
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Query",
+          "x": 1620,
+          "y": 1097,
+          "width": 54,
+          "height": 21
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Query",
+          "x": 1620,
+          "y": 1169,
+          "width": 54,
+          "height": 21
+        }
+      ],
+      "regions": [
+        {
+          "selector": "nav",
+          "x": 18,
+          "y": 135,
+          "width": 202,
+          "height": 195,
+          "scrollWidth": 202,
+          "clientWidth": 202,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "topbar",
+          "x": 238,
+          "y": 0,
+          "width": 1682,
+          "height": 79,
+          "scrollWidth": 1682,
+          "clientWidth": 1682,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "breadcrumb",
+          "x": 276,
+          "y": 27,
+          "width": 253,
+          "height": 24,
+          "scrollWidth": 253,
+          "clientWidth": 253,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "top-actions",
+          "x": 1562,
+          "y": 15,
+          "width": 320,
+          "height": 49,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "identity-role",
+          "x": 1690,
+          "y": 15,
+          "width": 141,
+          "height": 33,
+          "scrollWidth": 139,
+          "clientWidth": 139,
+          "overflowX": "clip"
+        },
+        {
+          "selector": "graph",
+          "x": 318,
+          "y": 490,
+          "width": 922,
+          "height": 314,
+          "scrollWidth": 922,
+          "clientWidth": 922,
+          "overflowX": "auto"
+        },
+        {
+          "selector": "table-wrap",
+          "x": 318,
+          "y": 960,
+          "width": 1522,
+          "height": 254,
+          "scrollWidth": 1522,
+          "clientWidth": 1522,
+          "overflowX": "auto"
+        }
+      ],
+      "axe": [],
+      "screenshot": "screenshots/overview-1920.png",
+      "consoleErrors": []
+    },
+    {
+      "width": 1920,
+      "screen": "explorer",
+      "viewport": 1920,
+      "documentWidth": 1920,
+      "pageOverflow": false,
+      "smallTargets": [
+        {
+          "tag": "A",
+          "label": "OntoLayer",
+          "x": 18,
+          "y": 30,
+          "width": 202,
+          "height": 36
+        },
+        {
+          "tag": "A",
+          "label": "API docs ↗",
+          "x": 154,
+          "y": 923,
+          "width": 53,
+          "height": 17
+        },
+        {
+          "tag": "SELECT",
+          "label": "North regionSouth regionGlobal analystAdministratorRestricted guest",
+          "x": 1690,
+          "y": 15,
+          "width": 141,
+          "height": 33
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Sign out",
+          "x": 1847,
+          "y": 22,
+          "width": 35,
+          "height": 35
+        },
+        {
+          "tag": "INPUT",
+          "label": "Filter this page…",
+          "x": 583,
+          "y": 445,
+          "width": 260,
+          "height": 39
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Lineage →",
+          "x": 1607,
+          "y": 554,
+          "width": 55,
+          "height": 19
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Previous records",
+          "x": 1696,
+          "y": 603,
+          "width": 34,
+          "height": 34
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Next records",
+          "x": 1783,
+          "y": 603,
+          "width": 34,
+          "height": 34
+        }
+      ],
+      "regions": [
+        {
+          "selector": "nav",
+          "x": 18,
+          "y": 135,
+          "width": 202,
+          "height": 195,
+          "scrollWidth": 202,
+          "clientWidth": 202,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "topbar",
+          "x": 238,
+          "y": 0,
+          "width": 1682,
+          "height": 79,
+          "scrollWidth": 1682,
+          "clientWidth": 1682,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "breadcrumb",
+          "x": 276,
+          "y": 27,
+          "width": 300,
+          "height": 24,
+          "scrollWidth": 300,
+          "clientWidth": 300,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "top-actions",
+          "x": 1562,
+          "y": 15,
+          "width": 320,
+          "height": 49,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "identity-role",
+          "x": 1690,
+          "y": 15,
+          "width": 141,
+          "height": 33,
+          "scrollWidth": 139,
+          "clientWidth": 139,
+          "overflowX": "clip"
+        },
+        {
+          "selector": "table-wrap",
+          "x": 560,
+          "y": 497,
+          "width": 1280,
+          "height": 92,
+          "scrollWidth": 1280,
+          "clientWidth": 1280,
+          "overflowX": "auto"
+        }
+      ],
+      "axe": [],
+      "screenshot": "screenshots/explorer-1920.png",
+      "consoleErrors": []
+    },
+    {
+      "width": 1920,
+      "screen": "studio",
+      "viewport": 1920,
+      "documentWidth": 1920,
+      "pageOverflow": false,
+      "smallTargets": [
+        {
+          "tag": "A",
+          "label": "OntoLayer",
+          "x": 18,
+          "y": 30,
+          "width": 202,
+          "height": 36
+        },
+        {
+          "tag": "A",
+          "label": "API docs ↗",
+          "x": 154,
+          "y": 923,
+          "width": 53,
+          "height": 17
+        },
+        {
+          "tag": "SELECT",
+          "label": "North regionSouth regionGlobal analystAdministratorRestricted guest",
+          "x": 1690,
+          "y": 15,
+          "width": 141,
+          "height": 33
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Sign out",
+          "x": 1847,
+          "y": 22,
+          "width": 35,
+          "height": 35
+        },
+        {
+          "tag": "INPUT",
+          "label": "revenue from 2026-10-01 to 2026-11-01",
+          "x": 404,
+          "y": 289,
+          "width": 1325,
+          "height": 44
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Ask",
+          "x": 1739,
+          "y": 289,
+          "width": 77,
+          "height": 44
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Revenue",
+          "x": 404,
+          "y": 342,
+          "width": 38,
+          "height": 23
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Order count",
+          "x": 451,
+          "y": 342,
+          "width": 54,
+          "height": 23
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Items sold",
+          "x": 513,
+          "y": 342,
+          "width": 45,
+          "height": 23
+        },
+        {
+          "tag": "SELECT",
+          "label": "Revenue (USD)Order count (orders)Items sold (units)",
+          "x": 341,
+          "y": 546,
+          "width": 553,
+          "height": 43
+        },
+        {
+          "tag": "INPUT",
+          "label": "start-date",
+          "x": 341,
+          "y": 710,
+          "width": 268,
+          "height": 43
+        },
+        {
+          "tag": "INPUT",
+          "label": "end-date",
+          "x": 625,
+          "y": 710,
+          "width": 268,
+          "height": 43
+        },
+        {
+          "tag": "SELECT",
+          "label": "No grouping — totalRegion",
+          "x": 341,
+          "y": 794,
+          "width": 553,
+          "height": 43
+        },
+        {
+          "tag": "SELECT",
+          "label": "No filterRegion",
+          "x": 341,
+          "y": 878,
+          "width": 268,
+          "height": 43
+        },
+        {
+          "tag": "INPUT",
+          "label": "e.g. north",
+          "x": 625,
+          "y": 878,
+          "width": 268,
+          "height": 43
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Run query",
+          "x": 341,
+          "y": 943,
+          "width": 113,
+          "height": 41
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Reset",
+          "x": 464,
+          "y": 943,
+          "width": 59,
+          "height": 41
+        }
+      ],
+      "regions": [
+        {
+          "selector": "nav",
+          "x": 18,
+          "y": 135,
+          "width": 202,
+          "height": 195,
+          "scrollWidth": 202,
+          "clientWidth": 202,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "topbar",
+          "x": 238,
+          "y": 0,
+          "width": 1682,
+          "height": 79,
+          "scrollWidth": 1682,
+          "clientWidth": 1682,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "breadcrumb",
+          "x": 276,
+          "y": 27,
+          "width": 272,
+          "height": 24,
+          "scrollWidth": 272,
+          "clientWidth": 272,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "top-actions",
+          "x": 1562,
+          "y": 15,
+          "width": 320,
+          "height": 49,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "identity-role",
+          "x": 1690,
+          "y": 15,
+          "width": 141,
+          "height": 33,
+          "scrollWidth": 139,
+          "clientWidth": 139,
+          "overflowX": "clip"
+        },
+        {
+          "selector": "question-input",
+          "x": 404,
+          "y": 289,
+          "width": 1412,
+          "height": 44,
+          "scrollWidth": 1412,
+          "clientWidth": 1412,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "form-grid",
+          "x": 341,
+          "y": 521,
+          "width": 553,
+          "height": 399,
+          "scrollWidth": 553,
+          "clientWidth": 553,
+          "overflowX": "visible"
+        }
+      ],
+      "axe": [],
+      "screenshot": "screenshots/studio-1920.png",
+      "consoleErrors": []
+    },
+    {
+      "width": 1920,
+      "screen": "access",
+      "viewport": 1920,
+      "documentWidth": 1920,
+      "pageOverflow": false,
+      "smallTargets": [
+        {
+          "tag": "A",
+          "label": "OntoLayer",
+          "x": 18,
+          "y": 30,
+          "width": 202,
+          "height": 36
+        },
+        {
+          "tag": "A",
+          "label": "API docs ↗",
+          "x": 154,
+          "y": 923,
+          "width": 53,
+          "height": 17
+        },
+        {
+          "tag": "SELECT",
+          "label": "North regionSouth regionGlobal analystAdministratorRestricted guest",
+          "x": 1690,
+          "y": 15,
+          "width": 141,
+          "height": 33
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Sign out",
+          "x": 1847,
+          "y": 22,
+          "width": 35,
+          "height": 35
+        },
+        {
+          "tag": "INPUT",
+          "label": "e.g. Customer:C1",
+          "x": 341,
+          "y": 766,
+          "width": 1331,
+          "height": 44
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Inspect record",
+          "x": 1682,
+          "y": 766,
+          "width": 135,
+          "height": 44
+        }
+      ],
+      "regions": [
+        {
+          "selector": "nav",
+          "x": 18,
+          "y": 135,
+          "width": 202,
+          "height": 195,
+          "scrollWidth": 202,
+          "clientWidth": 202,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "topbar",
+          "x": 238,
+          "y": 0,
+          "width": 1682,
+          "height": 79,
+          "scrollWidth": 1682,
+          "clientWidth": 1682,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "breadcrumb",
+          "x": 276,
+          "y": 27,
+          "width": 294,
+          "height": 24,
+          "scrollWidth": 294,
+          "clientWidth": 294,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "top-actions",
+          "x": 1562,
+          "y": 15,
+          "width": 320,
+          "height": 49,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "identity-role",
+          "x": 1690,
+          "y": 15,
+          "width": 141,
+          "height": 33,
+          "scrollWidth": 139,
+          "clientWidth": 139,
+          "overflowX": "clip"
+        },
+        {
+          "selector": "question-input",
+          "x": 341,
+          "y": 766,
+          "width": 1476,
+          "height": 44,
+          "scrollWidth": 1476,
+          "clientWidth": 1476,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "table-wrap",
+          "x": 318,
+          "y": 942,
+          "width": 1522,
+          "height": 282,
+          "scrollWidth": 1522,
+          "clientWidth": 1522,
+          "overflowX": "auto"
+        }
+      ],
+      "axe": [],
+      "screenshot": "screenshots/access-1920.png",
+      "consoleErrors": []
+    },
+    {
+      "width": 1920,
+      "screen": "signin",
+      "viewport": 1920,
+      "documentWidth": 1920,
+      "pageOverflow": false,
+      "smallTargets": [
+        {
+          "tag": "A",
+          "label": "OntoLayer",
+          "x": 60,
+          "y": 301,
+          "width": 840,
+          "height": 36
+        },
+        {
+          "tag": "INPUT",
+          "label": "Enter your access token",
+          "x": 1265,
+          "y": 412,
+          "width": 350,
+          "height": 44
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Connect to workspace",
+          "x": 1265,
+          "y": 472,
+          "width": 350,
+          "height": 41
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Open retail demo",
+          "x": 1265,
+          "y": 587,
+          "width": 350,
+          "height": 41
+        }
+      ],
+      "regions": [
+        {
+          "selector": "login-story",
+          "x": 0,
+          "y": 0,
+          "width": 960,
+          "height": 960,
+          "scrollWidth": 960,
+          "clientWidth": 960,
+          "overflowX": "visible"
+        },
+        {
+          "selector": "login-form-wrap",
+          "x": 960,
+          "y": 0,
+          "width": 960,
+          "height": 960,
+          "scrollWidth": 960,
+          "clientWidth": 960,
+          "overflowX": "visible"
+        }
+      ],
+      "axe": [],
+      "screenshot": "screenshots/signin-1920.png",
+      "consoleErrors": []
+    }
+  ],
+  "flows": [
+    {
+      "name": "guided-query",
+      "result": "250USD",
+      "historyRows": 1
+    },
+    {
+      "name": "relative-date-refusal",
+      "message": "A little more context\n\nNo calculation was guessed\n\nPlease clarify your question\n\nPlease use a metric name, optional 'by dimension', 'dimension=value', and 'from YYYY-MM-DD to YYYY-MM-DD' (exclusive end). I could not safely interpret the remaining qualifiers."
+    },
+    {
+      "name": "record-lineage",
+      "text": "Record lineage\n\nCustomer:C1\n\ncertified\nSource\ncustomers.csv\nMapping\ncustomers\nOntology\n1.0.0\nSnapshot SHA-256\n6217640bffb35c32504419345d9858c4b3cc53b4b232f0cb86945cf496ee76c6\nVisible relationships\nOrder:O1\nplacedBy → Customer:C1\nOrder:O3\nplacedBy → Customer:C1\nOrder:O4\nplacedBy → Customer:C1"
+    },
+    {
+      "name": "restricted-record",
+      "text": " Not available to this caller"
+    },
+    {
+      "name": "guest-empty",
+      "text": "YOUR SEMANTIC WORKSPACE\nBusiness knowledge, connected.\n\nA shared view of your concepts, relationships, and trusted metrics.\n\nAsk your data\nBusiness concepts\n0\nDefinitions you can explore\nRelationships\n0\nConnections across concepts\nCertified metrics\n0\nReviewed business calculations\nOntology version\n1.0.0\nActive workspace definition\nYour business, mapped\n\nConcept relationships in the current ontology\n\nLive schema\nNo visible concepts\n\nYour identity has no ontology grants.\n\nConcept\nRelationship\nExplore ontology →\nAt a glance\n\nCalculated from your permitted records\n\nNo executable metrics\n\nAn administrator must grant access to certified metric definitions.\n\nActual values · No generated estimates\nRun a query →\nMetric catalog\n\nOne reviewed definition for every business question\n\n0 available\nNo metrics available\n\nYour current identity has no metric grants."
+    },
+    {
+      "name": "offline-navigation",
+      "error": "Failed to fetch",
+      "loadingStillVisible": 1
+    }
+  ],
+  "api": []
+}

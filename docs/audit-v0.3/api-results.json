@@ -1,0 +1,1157 @@
+[
+  {
+    "name": "/",
+    "url": "/",
+    "status": 200,
+    "elapsedMs": 61,
+    "result": {
+      "contentType": "text/html; charset=utf-8",
+      "bytes": 692
+    },
+    "headers": {
+      "cache-control": "no-store",
+      "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'",
+      "content-type": "text/html; charset=utf-8",
+      "x-frame-options": "DENY",
+      "x-request-id": "d106198074a04f1fbb908b9462c0697b"
+    }
+  },
+  {
+    "name": "/health",
+    "url": "/health",
+    "status": 200,
+    "elapsedMs": 5,
+    "result": {
+      "status": "ok"
+    },
+    "headers": {
+      "cache-control": "no-store",
+      "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'",
+      "content-type": "application/json",
+      "x-frame-options": "DENY",
+      "x-request-id": "b45a412068714a818178d59c8e55ee7b"
+    }
+  },
+  {
+    "name": "/v1/config",
+    "url": "/v1/config",
+    "status": 200,
+    "elapsedMs": 4,
+    "result": {
+      "demo": true,
+      "version": "0.2.0",
+      "docs": true
+    },
+    "headers": {
+      "cache-control": "no-store",
+      "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'",
+      "content-type": "application/json",
+      "x-frame-options": "DENY",
+      "x-request-id": "66f46c064554419abc95acd78b3b3f43"
+    }
+  },
+  {
+    "name": "/docs",
+    "url": "/docs",
+    "status": 200,
+    "elapsedMs": 3,
+    "result": {
+      "contentType": "text/html; charset=utf-8",
+      "bytes": 1008
+    },
+    "headers": {
+      "cache-control": "no-store",
+      "content-type": "text/html; charset=utf-8",
+      "x-frame-options": "DENY",
+      "x-request-id": "f39147a0e8c14f71869a05541b472ec6"
+    }
+  },
+  {
+    "name": "/openapi.json",
+    "url": "/openapi.json",
+    "status": 200,
+    "elapsedMs": 14,
+    "result": {
+      "routes": [
+        {
+          "path": "/v1/config",
+          "methods": [
+            "get"
+          ]
+        },
+        {
+          "path": "/v1/workspace",
+          "methods": [
+            "get"
+          ]
+        },
+        {
+          "path": "/v1/ask",
+          "methods": [
+            "post"
+          ]
+        },
+        {
+          "path": "/health",
+          "methods": [
+            "get"
+          ]
+        },
+        {
+          "path": "/v1/tools/{operation}",
+          "methods": [
+            "post"
+          ]
+        },
+        {
+          "path": "/metrics",
+          "methods": [
+            "get"
+          ]
+        }
+      ],
+      "schemas": [
+        "HTTPValidationError",
+        "QuestionRequest",
+        "ToolRequest",
+        "ValidationError"
+      ]
+    },
+    "headers": {
+      "cache-control": "no-store",
+      "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'",
+      "content-type": "application/json",
+      "x-frame-options": "DENY",
+      "x-request-id": "3bfaaae389a94fd68b08978460bb1730"
+    }
+  },
+  {
+    "name": "/redoc",
+    "url": "/redoc",
+    "status": 404,
+    "elapsedMs": 3,
+    "result": {
+      "detail": "Not Found"
+    },
+    "headers": {
+      "cache-control": "no-store",
+      "content-type": "application/json",
+      "x-frame-options": "DENY",
+      "x-request-id": "0e256c2631644974b258b17c9d4d3ba8"
+    }
+  },
+  {
+    "name": "/static/app.js",
+    "url": "/static/app.js",
+    "status": 200,
+    "elapsedMs": 6,
+    "result": {
+      "contentType": "text/javascript; charset=utf-8",
+      "bytes": 34475
+    },
+    "headers": {
+      "cache-control": "no-store",
+      "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'",
+      "content-type": "text/javascript; charset=utf-8",
+      "x-frame-options": "DENY",
+      "x-request-id": "45a8909148f649cfa8cc673d491a7af1"
+    }
+  },
+  {
+    "name": "/static/app.css",
+    "url": "/static/app.css",
+    "status": 200,
+    "elapsedMs": 6,
+    "result": {
+      "contentType": "text/css; charset=utf-8",
+      "bytes": 22254
+    },
+    "headers": {
+      "cache-control": "no-store",
+      "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'",
+      "content-type": "text/css; charset=utf-8",
+      "x-frame-options": "DENY",
+      "x-request-id": "c78c1b8113af41b3919b86f7ee13c60a"
+    }
+  },
+  {
+    "name": "/static/mark.svg",
+    "url": "/static/mark.svg",
+    "status": 200,
+    "elapsedMs": 6,
+    "result": {
+      "contentType": "image/svg+xml",
+      "bytes": 283
+    },
+    "headers": {
+      "cache-control": "no-store",
+      "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'",
+      "content-type": "image/svg+xml",
+      "x-frame-options": "DENY",
+      "x-request-id": "8ce495d3053245d6a716a3626c349ebf"
+    }
+  },
+  {
+    "name": "workspace-north",
+    "url": "/v1/workspace",
+    "status": 200,
+    "elapsedMs": 33,
+    "result": {
+      "actor": {
+        "id": "demo-north",
+        "namespace": "retail",
+        "roles": [
+          "regional"
+        ],
+        "attributes": {
+          "region": "north"
+        }
+      },
+      "namespace": "retail",
+      "version": "1.0.0",
+      "concepts": [
+        {
+          "id": "Customer",
+          "description": "Business Customer",
+          "status": "certified",
+          "synonyms": [],
+          "owner": "retail-team",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Business attribute",
+              "required": true,
+              "pii": false,
+              "unit": null
+            },
+            "region": {
+              "type": "string",
+              "description": "Sales or operating region",
+              "required": true,
+              "pii": false,
+              "unit": null
+            }
+          }
+        },
+        {
+          "id": "Order",
+          "description": "Business Order",
+          "status": "certified",
+          "synonyms": [],
+          "owner": "retail-team",
+          "properties": {
+            "date": {
+              "type": "date",
+              "description": "Business attribute",
+              "required": true,
+              "pii": false,
+              "unit": null
+            },
+            "status": {
+              "type": "string",
+              "description": "Business attribute",
+              "required": true,
+              "pii": false,
+              "unit": null
+            },
+            "region": {
+              "type": "string",
+              "description": "Sales or operating region",
+              "required": true,
+              "pii": false,
+              "unit": null
+            }
+          }
+        },
+        {
+          "id": "Product",
+          "description": "Business Product",
+          "status": "certified",
+          "synonyms": [],
+          "owner": "retail-team",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Business attribute",
+              "required": true,
+              "pii": false,
+              "unit": null
+            },
+            "category": {
+              "type": "string",
+              "description": "Business attribute",
+              "required": true,
+              "pii": false,
+              "unit": null
+            },
+            "region": {
+              "type": "string",
+              "description": "Sales or operating region",
+              "required": true,
+              "pii": false,
+              "unit": null
+            }
+          }
+        },
+        {
+          "id": "OrderLine",
+          "description": "Business OrderLine",
+          "status": "certified",
+          "synonyms": [],
+          "owner": "retail-team",
+          "properties": {
+            "quantity": {
+              "type": "integer",
+              "description": "Business attribute",
+              "required": true,
+              "pii": false,
+              "unit": null
+            },
+            "unit_price": {
+              "type": "number",
+              "description": "Business attribute",
+              "required": true,
+              "pii": false,
+              "unit": "USD"
+            },
+            "date": {
+              "type": "date",
+              "description": "Business attribute",
+              "required": true,
+              "pii": false,
+              "unit": null
+            },
+            "status": {
+              "type": "string",
+              "description": "Business attribute",
+              "required": true,
+              "pii": false,
+              "unit": null
+            },
+            "region": {
+              "type": "string",
+              "description": "Sales or operating region",
+              "required": true,
+              "pii": false,
+              "unit": null
+            }
+          }
+        }
+      ],
+      "metrics": [
+        {
+          "id": "revenue",
+          "description": "Completed line sales, excluding tax and shipping; no refunds or discounts in fixture",
+          "owner": "finance",
+          "type": "OrderLine",
+          "aggregation": "sum_product",
+          "fields": [
+            "quantity",
+            "unit_price"
+          ],
+          "filters": {
+            "status": "completed"
+          },
+          "dimensions": [
+            "region"
+          ],
+          "date_field": "date",
+          "unit": "USD",
+          "grain": "order line",
+          "synonyms": [
+            "sales"
+          ],
+          "status": "certified",
+          "ontology_version": "1.0.0"
+        },
+        {
+          "id": "order_count",
+          "description": "Number of completed orders",
+          "owner": "finance",
+          "type": "Order",
+          "aggregation": "count",
+          "fields": [],
+          "filters": {
+            "status": "completed"
+          },
+          "dimensions": [
+            "region"
+          ],
+          "date_field": "date",
+          "unit": "orders",
+          "grain": "order",
+          "synonyms": [
+            "orders",
+            "order count"
+          ],
+          "status": "certified",
+          "ontology_version": "1.0.0"
+        },
+        {
+          "id": "items_sold",
+          "description": "Units on completed order lines",
+          "owner": "finance",
+          "type": "OrderLine",
+          "aggregation": "sum",
+          "fields": [
+            "quantity"
+          ],
+          "filters": {
+            "status": "completed"
+          },
+          "dimensions": [
+            "region"
+          ],
+          "date_field": "date",
+          "unit": "units",
+          "grain": "order line",
+          "synonyms": [
+            "units sold"
+          ],
+          "status": "certified",
+          "ontology_version": "1.0.0"
+        }
+      ],
+      "links": [
+        {
+          "id": "placedBy",
+          "source": "Order",
+          "target": "Customer",
+          "description": "Purchasing customer",
+          "cardinality": "one"
+        },
+        {
+          "id": "partOf",
+          "source": "OrderLine",
+          "target": "Order",
+          "description": "Containing order",
+          "cardinality": "one"
+        },
+        {
+          "id": "forProduct",
+          "source": "OrderLine",
+          "target": "Product",
+          "description": "Purchased product",
+          "cardinality": "one"
+        }
+      ],
+      "scope": "authorized records only"
+    },
+    "headers": {
+      "cache-control": "no-store",
+      "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'",
+      "content-type": "application/json",
+      "x-frame-options": "DENY",
+      "x-request-id": "960c324fc46645d69fd7d09297f1cffa"
+    }
+  },
+  {
+    "name": "workspace-no-token",
+    "url": "/v1/workspace",
+    "status": 401,
+    "elapsedMs": 5,
+    "result": {
+      "detail": "Bearer token required"
+    },
+    "headers": {
+      "cache-control": "no-store",
+      "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'",
+      "content-type": "application/json",
+      "x-frame-options": "DENY",
+      "x-request-id": "d80b0637870d4f75b74d3361f4afc86e"
+    }
+  },
+  {
+    "name": "workspace-bad-token",
+    "url": "/v1/workspace",
+    "status": 401,
+    "elapsedMs": 12,
+    "result": {
+      "detail": "Invalid credential"
+    },
+    "headers": {
+      "cache-control": "no-store",
+      "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'",
+      "content-type": "application/json",
+      "x-frame-options": "DENY",
+      "x-request-id": "19afe954acf9458c815ae75759872721"
+    }
+  },
+  {
+    "name": "metrics-operator",
+    "url": "/metrics",
+    "status": 200,
+    "elapsedMs": 13,
+    "result": {
+      "contentType": "text/plain; version=0.0.4; charset=utf-8",
+      "bytes": 301
+    },
+    "headers": {
+      "cache-control": "no-store",
+      "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'",
+      "content-type": "text/plain; version=0.0.4; charset=utf-8",
+      "x-frame-options": "DENY",
+      "x-request-id": "c4acbfe6956b4d70bf11baff1ca7307e"
+    }
+  },
+  {
+    "name": "metrics-nonoperator",
+    "url": "/metrics",
+    "status": 403,
+    "elapsedMs": 17,
+    "result": {
+      "detail": "Operator role required"
+    },
+    "headers": {
+      "cache-control": "no-store",
+      "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'",
+      "content-type": "application/json",
+      "x-frame-options": "DENY",
+      "x-request-id": "a85bd754ce9f40459d8c391297bf3df0"
+    }
+  },
+  {
+    "name": "ask-valid",
+    "url": "/v1/ask",
+    "status": 200,
+    "elapsedMs": 44,
+    "result": {
+      "answerable": true,
+      "result": {
+        "metric": "revenue",
+        "values": {
+          "total": "250.0"
+        },
+        "unit": "USD",
+        "status": "certified",
+        "grain": "order line",
+        "scope": "authorized records only",
+        "filters": {},
+        "group_by": null,
+        "start_date": "2026-10-01",
+        "end_date_exclusive": "2026-11-01",
+        "ontology_version": "1.0.0",
+        "namespace": "retail",
+        "lineage": [
+          {
+            "source": "lines.csv",
+            "mapping": "lines",
+            "snapshot_sha256": "b8a45998aeee8620f8eb337dd913b9b574e6242e579c3f305066f1d0941a0447"
+          }
+        ],
+        "definition_sha256": "81ba8d3e0bc6aed4a20fbdc12cd3ddafa872f1e23b64faf95da76c101fedb25f"
+      },
+      "plan": {
+        "metric_id": "revenue",
+        "filters": {},
+        "group_by": null,
+        "start_date": "2026-10-01",
+        "end_date": "2026-11-01",
+        "clarification": null
+      },
+      "answer": "total: 250.0 USD"
+    },
+    "headers": {
+      "cache-control": "no-store",
+      "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'",
+      "content-type": "application/json",
+      "x-frame-options": "DENY",
+      "x-request-id": "32a5815254c74d2f8baa9e054272a4cb"
+    }
+  },
+  {
+    "name": "ask-ambiguous",
+    "url": "/v1/ask",
+    "status": 200,
+    "elapsedMs": 31,
+    "result": {
+      "answerable": false,
+      "answer": "Please use a metric name, optional 'by dimension', 'dimension=value', and 'from YYYY-MM-DD to YYYY-MM-DD' (exclusive end). I could not safely interpret the remaining qualifiers."
+    },
+    "headers": {
+      "cache-control": "no-store",
+      "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'",
+      "content-type": "application/json",
+      "x-frame-options": "DENY",
+      "x-request-id": "16a4fd4885ba41e98a49307bbf6fc712"
+    }
+  },
+  {
+    "name": "ask-empty",
+    "url": "/v1/ask",
+    "status": 422,
+    "elapsedMs": 16,
+    "result": {
+      "detail": [
+        {
+          "type": "string_too_short",
+          "loc": [
+            "body",
+            "question"
+          ],
+          "msg": "String should have at least 1 character",
+          "input": "",
+          "ctx": {
+            "min_length": 1
+          }
+        }
+      ]
+    },
+    "headers": {
+      "cache-control": "no-store",
+      "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'",
+      "content-type": "application/json",
+      "x-frame-options": "DENY",
+      "x-request-id": "278721fc93b846cba0b8e9ad8beeed73"
+    }
+  },
+  {
+    "name": "ask-malformed-json",
+    "url": "/v1/ask",
+    "status": 422,
+    "elapsedMs": 5,
+    "result": {
+      "detail": [
+        {
+          "type": "json_invalid",
+          "loc": [
+            "body",
+            1
+          ],
+          "msg": "JSON decode error",
+          "input": {},
+          "ctx": {
+            "error": "Expecting property name enclosed in double quotes"
+          }
+        }
+      ]
+    },
+    "headers": {
+      "cache-control": "no-store",
+      "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'",
+      "content-type": "application/json",
+      "x-frame-options": "DENY",
+      "x-request-id": "9f248900a20846689023108acbfed158"
+    }
+  },
+  {
+    "name": "search_terms",
+    "url": "/v1/tools/search_terms",
+    "status": 200,
+    "elapsedMs": 13,
+    "result": {
+      "items": [
+        {
+          "id": "revenue",
+          "kind": "metric",
+          "description": "Completed line sales, excluding tax and shipping; no refunds or discounts in fixture",
+          "status": "certified"
+        }
+      ],
+      "next_offset": null
+    },
+    "headers": {
+      "cache-control": "no-store",
+      "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'",
+      "content-type": "application/json",
+      "x-frame-options": "DENY",
+      "x-request-id": "b35a8ad55030466eb316a7ffdf72d27c"
+    }
+  },
+  {
+    "name": "get_concept",
+    "url": "/v1/tools/get_concept",
+    "status": 200,
+    "elapsedMs": 21,
+    "result": {
+      "id": "Customer",
+      "description": "Business Customer",
+      "status": "certified",
+      "synonyms": [],
+      "owner": "retail-team",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Business attribute",
+          "required": true,
+          "pii": false,
+          "unit": null
+        },
+        "region": {
+          "type": "string",
+          "description": "Sales or operating region",
+          "required": true,
+          "pii": false,
+          "unit": null
+        }
+      }
+    },
+    "headers": {
+      "cache-control": "no-store",
+      "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'",
+      "content-type": "application/json",
+      "x-frame-options": "DENY",
+      "x-request-id": "340df33ee5724cacbb3cc28802d34a7b"
+    }
+  },
+  {
+    "name": "list_entities",
+    "url": "/v1/tools/list_entities",
+    "status": 200,
+    "elapsedMs": 17,
+    "result": {
+      "items": [
+        {
+          "id": "Customer:C1",
+          "type": "Customer",
+          "properties": {
+            "name": "North Customer",
+            "region": "north"
+          },
+          "status": "certified"
+        }
+      ],
+      "next_offset": null
+    },
+    "headers": {
+      "cache-control": "no-store",
+      "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'",
+      "content-type": "application/json",
+      "x-frame-options": "DENY",
+      "x-request-id": "5abcebdfb8bb42f28f7ec37091598587"
+    }
+  },
+  {
+    "name": "get_relationships",
+    "url": "/v1/tools/get_relationships",
+    "status": 200,
+    "elapsedMs": 21,
+    "result": {
+      "items": [
+        {
+          "source": "Order:O1",
+          "relation": "placedBy",
+          "target": "Customer:C1"
+        },
+        {
+          "source": "OrderLine:L1",
+          "relation": "partOf",
+          "target": "Order:O1"
+        },
+        {
+          "source": "OrderLine:L2",
+          "relation": "partOf",
+          "target": "Order:O1"
+        }
+      ],
+      "next_offset": null
+    },
+    "headers": {
+      "cache-control": "no-store",
+      "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'",
+      "content-type": "application/json",
+      "x-frame-options": "DENY",
+      "x-request-id": "2fdcbd5eb29d477fa5081e7985e6d15d"
+    }
+  },
+  {
+    "name": "find_path",
+    "url": "/v1/tools/find_path",
+    "status": 200,
+    "elapsedMs": 21,
+    "result": {
+      "nodes": [
+        "Customer:C1",
+        "Order:O1",
+        "OrderLine:L1",
+        "Product:P1"
+      ],
+      "relations": [
+        "placedBy",
+        "partOf",
+        "forProduct"
+      ],
+      "direction": "undirected"
+    },
+    "headers": {
+      "cache-control": "no-store",
+      "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'",
+      "content-type": "application/json",
+      "x-frame-options": "DENY",
+      "x-request-id": "73449eb5e54f463b93b59f04442dc837"
+    }
+  },
+  {
+    "name": "get_metric",
+    "url": "/v1/tools/get_metric",
+    "status": 200,
+    "elapsedMs": 21,
+    "result": {
+      "id": "revenue",
+      "description": "Completed line sales, excluding tax and shipping; no refunds or discounts in fixture",
+      "owner": "finance",
+      "type": "OrderLine",
+      "aggregation": "sum_product",
+      "fields": [
+        "quantity",
+        "unit_price"
+      ],
+      "filters": {
+        "status": "completed"
+      },
+      "dimensions": [
+        "region"
+      ],
+      "date_field": "date",
+      "unit": "USD",
+      "grain": "order line",
+      "synonyms": [
+        "sales"
+      ],
+      "status": "certified",
+      "ontology_version": "1.0.0"
+    },
+    "headers": {
+      "cache-control": "no-store",
+      "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'",
+      "content-type": "application/json",
+      "x-frame-options": "DENY",
+      "x-request-id": "b39ddf6a77e747718403da13a8afb828"
+    }
+  },
+  {
+    "name": "query_metric",
+    "url": "/v1/tools/query_metric",
+    "status": 200,
+    "elapsedMs": 22,
+    "result": {
+      "metric": "revenue",
+      "values": {
+        "total": "250.0"
+      },
+      "unit": "USD",
+      "status": "certified",
+      "grain": "order line",
+      "scope": "authorized records only",
+      "filters": {},
+      "group_by": null,
+      "start_date": "2026-10-01",
+      "end_date_exclusive": "2026-11-01",
+      "ontology_version": "1.0.0",
+      "namespace": "retail",
+      "lineage": [
+        {
+          "source": "lines.csv",
+          "mapping": "lines",
+          "snapshot_sha256": "b8a45998aeee8620f8eb337dd913b9b574e6242e579c3f305066f1d0941a0447"
+        }
+      ],
+      "definition_sha256": "81ba8d3e0bc6aed4a20fbdc12cd3ddafa872f1e23b64faf95da76c101fedb25f"
+    },
+    "headers": {
+      "cache-control": "no-store",
+      "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'",
+      "content-type": "application/json",
+      "x-frame-options": "DENY",
+      "x-request-id": "6bb518900479405b95a4f6fcf50c9d96"
+    }
+  },
+  {
+    "name": "check_answerable",
+    "url": "/v1/tools/check_answerable",
+    "status": 200,
+    "elapsedMs": 20,
+    "result": {
+      "answerable": false,
+      "reason": "No available certified metric for this request"
+    },
+    "headers": {
+      "cache-control": "no-store",
+      "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'",
+      "content-type": "application/json",
+      "x-frame-options": "DENY",
+      "x-request-id": "80da82d52fe046b185921c47a1b29548"
+    }
+  },
+  {
+    "name": "get_lineage",
+    "url": "/v1/tools/get_lineage",
+    "status": 200,
+    "elapsedMs": 20,
+    "result": {
+      "entity": "Customer:C1",
+      "source": "customers.csv",
+      "mapping": "customers",
+      "snapshot_sha256": "6217640bffb35c32504419345d9858c4b3cc53b4b232f0cb86945cf496ee76c6",
+      "ontology_version": "1.0.0",
+      "status": "certified"
+    },
+    "headers": {
+      "cache-control": "no-store",
+      "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'",
+      "content-type": "application/json",
+      "x-frame-options": "DENY",
+      "x-request-id": "29417df30ff9475dac586d97399e0ae4"
+    }
+  },
+  {
+    "name": "explain_policy_decision",
+    "url": "/v1/tools/explain_policy_decision",
+    "status": 200,
+    "elapsedMs": 21,
+    "result": {
+      "allowed": false,
+      "reason": "Not available to this caller"
+    },
+    "headers": {
+      "cache-control": "no-store",
+      "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'",
+      "content-type": "application/json",
+      "x-frame-options": "DENY",
+      "x-request-id": "da93bcc734b34d3d97f2658f16d07bf2"
+    }
+  },
+  {
+    "name": "list_ontology_versions",
+    "url": "/v1/tools/list_ontology_versions",
+    "status": 200,
+    "elapsedMs": 20,
+    "result": {
+      "namespace": "retail",
+      "active_version": "1.0.0",
+      "versions": [
+        "1.0.0"
+      ]
+    },
+    "headers": {
+      "cache-control": "no-store",
+      "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'",
+      "content-type": "application/json",
+      "x-frame-options": "DENY",
+      "x-request-id": "84654b09556249a6a33afaaa9b429ac0"
+    }
+  },
+  {
+    "name": "hidden-lineage",
+    "url": "/v1/tools/get_lineage",
+    "status": 403,
+    "elapsedMs": 20,
+    "result": {
+      "detail": "Not available to this caller"
+    },
+    "headers": {
+      "cache-control": "no-store",
+      "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'",
+      "content-type": "application/json",
+      "x-frame-options": "DENY",
+      "x-request-id": "449af36e3b264b598163c10842c7f846"
+    }
+  },
+  {
+    "name": "missing-lineage",
+    "url": "/v1/tools/get_lineage",
+    "status": 403,
+    "elapsedMs": 15,
+    "result": {
+      "detail": "Not available to this caller"
+    },
+    "headers": {
+      "cache-control": "no-store",
+      "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'",
+      "content-type": "application/json",
+      "x-frame-options": "DENY",
+      "x-request-id": "c97d47dc12084f7789bf161c0603bc8b"
+    }
+  },
+  {
+    "name": "unknown-tool",
+    "url": "/v1/tools/unknown",
+    "status": 400,
+    "elapsedMs": 14,
+    "result": {
+      "detail": "Invalid operation or arguments"
+    },
+    "headers": {
+      "cache-control": "no-store",
+      "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'",
+      "content-type": "application/json",
+      "x-frame-options": "DENY",
+      "x-request-id": "c25965ce5dba4d97aa1985c2cc099be0"
+    }
+  },
+  {
+    "name": "invalid-argument",
+    "url": "/v1/tools/query_metric",
+    "status": 400,
+    "elapsedMs": 20,
+    "result": {
+      "detail": "Invalid operation or arguments"
+    },
+    "headers": {
+      "cache-control": "no-store",
+      "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'",
+      "content-type": "application/json",
+      "x-frame-options": "DENY",
+      "x-request-id": "d97c3a8032ee41d685ef185832ce1d74"
+    }
+  },
+  {
+    "name": "identity-injection",
+    "url": "/v1/tools/query_metric",
+    "status": 400,
+    "elapsedMs": 16,
+    "result": {
+      "detail": "Invalid operation or arguments"
+    },
+    "headers": {
+      "cache-control": "no-store",
+      "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'",
+      "content-type": "application/json",
+      "x-frame-options": "DENY",
+      "x-request-id": "9cb819b4c1ee492fbfaf994f2102f690"
+    }
+  },
+  {
+    "name": "revenue-admin",
+    "url": "/v1/tools/query_metric",
+    "status": 200,
+    "elapsedMs": 17,
+    "result": {
+      "metric": "revenue",
+      "values": {
+        "total": "600.0"
+      },
+      "unit": "USD",
+      "status": "certified",
+      "grain": "order line",
+      "scope": "authorized records only",
+      "filters": {},
+      "group_by": null,
+      "start_date": "2026-10-01",
+      "end_date_exclusive": "2026-11-01",
+      "ontology_version": "1.0.0",
+      "namespace": "retail",
+      "lineage": [
+        {
+          "source": "lines.csv",
+          "mapping": "lines",
+          "snapshot_sha256": "b8a45998aeee8620f8eb337dd913b9b574e6242e579c3f305066f1d0941a0447"
+        }
+      ],
+      "definition_sha256": "81ba8d3e0bc6aed4a20fbdc12cd3ddafa872f1e23b64faf95da76c101fedb25f"
+    },
+    "headers": {
+      "cache-control": "no-store",
+      "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'",
+      "content-type": "application/json",
+      "x-frame-options": "DENY",
+      "x-request-id": "6ec59db9fff0488a8de4f74bc00c3843"
+    }
+  },
+  {
+    "name": "revenue-north",
+    "url": "/v1/tools/query_metric",
+    "status": 200,
+    "elapsedMs": 19,
+    "result": {
+      "metric": "revenue",
+      "values": {
+        "total": "250.0"
+      },
+      "unit": "USD",
+      "status": "certified",
+      "grain": "order line",
+      "scope": "authorized records only",
+      "filters": {},
+      "group_by": null,
+      "start_date": "2026-10-01",
+      "end_date_exclusive": "2026-11-01",
+      "ontology_version": "1.0.0",
+      "namespace": "retail",
+      "lineage": [
+        {
+          "source": "lines.csv",
+          "mapping": "lines",
+          "snapshot_sha256": "b8a45998aeee8620f8eb337dd913b9b574e6242e579c3f305066f1d0941a0447"
+        }
+      ],
+      "definition_sha256": "81ba8d3e0bc6aed4a20fbdc12cd3ddafa872f1e23b64faf95da76c101fedb25f"
+    },
+    "headers": {
+      "cache-control": "no-store",
+      "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'",
+      "content-type": "application/json",
+      "x-frame-options": "DENY",
+      "x-request-id": "8f28bbc811114af29355fff35c226fd0"
+    }
+  },
+  {
+    "name": "revenue-south",
+    "url": "/v1/tools/query_metric",
+    "status": 200,
+    "elapsedMs": 20,
+    "result": {
+      "metric": "revenue",
+      "values": {
+        "total": "350.0"
+      },
+      "unit": "USD",
+      "status": "certified",
+      "grain": "order line",
+      "scope": "authorized records only",
+      "filters": {},
+      "group_by": null,
+      "start_date": "2026-10-01",
+      "end_date_exclusive": "2026-11-01",
+      "ontology_version": "1.0.0",
+      "namespace": "retail",
+      "lineage": [
+        {
+          "source": "lines.csv",
+          "mapping": "lines",
+          "snapshot_sha256": "b8a45998aeee8620f8eb337dd913b9b574e6242e579c3f305066f1d0941a0447"
+        }
+      ],
+      "definition_sha256": "81ba8d3e0bc6aed4a20fbdc12cd3ddafa872f1e23b64faf95da76c101fedb25f"
+    },
+    "headers": {
+      "cache-control": "no-store",
+      "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'",
+      "content-type": "application/json",
+      "x-frame-options": "DENY",
+      "x-request-id": "81726139557e4f70937128a77b08c876"
+    }
+  },
+  {
+    "name": "revenue-guest",
+    "url": "/v1/tools/query_metric",
+    "status": 403,
+    "elapsedMs": 17,
+    "result": {
+      "detail": "Not available to this caller"
+    },
+    "headers": {
+      "cache-control": "no-store",
+      "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'",
+      "content-type": "application/json",
+      "x-frame-options": "DENY",
+      "x-request-id": "54057d56a8df4b0b94b8635ebd8f0394"
+    }
+  },
+  {
+    "name": "cors-preflight",
+    "url": "/v1/ask",
+    "status": 405,
+    "elapsedMs": 3,
+    "result": {
+      "detail": "Method Not Allowed"
+    },
+    "headers": {
+      "cache-control": "no-store",
+      "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'",
+      "content-type": "application/json",
+      "x-frame-options": "DENY",
+      "x-request-id": "910d6b79892c4b15909d7d9e22255fcc"
+    }
+  }
+]
