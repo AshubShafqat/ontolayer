@@ -1,5 +1,7 @@
 """Default-deny authorization shared by every transport."""
 
+from decimal import Decimal
+
 from ontolayer.models import Actor, Entity, Ontology, Policy
 
 
@@ -48,6 +50,10 @@ class PolicyEngine:
         return {
             "id": entity.id,
             "type": entity.type,
-            "properties": {k: v for k, v in entity.properties.items() if k in fields},
+            "properties": {
+                k: str(v) if isinstance(v, Decimal) else v
+                for k, v in entity.properties.items()
+                if k in fields
+            },
             "status": self.ontology.types[entity.type].status,
         }

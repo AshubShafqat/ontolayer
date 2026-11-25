@@ -18,3 +18,6 @@ dist/
 *.db-shm
 *.db-wal
 audit*.jsonl
+node_modules/
+test-results/
+playwright-report/

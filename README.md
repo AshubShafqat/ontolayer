@@ -12,6 +12,12 @@ OntoLayer is an open-source reference implementation of a business semantic laye
 relationships, mappings, metrics, and policies in YAML; ingest data into a validated knowledge graph;
 and let agents retrieve definitions and execute approved calculations over MCP.
 
+**Version 0.2 includes a complete web workspace:** live overview, ontology/record explorer,
+query studio with downloadable evidence, and access/lineage inspection. All screens use the same
+authenticated, policy-filtered service as MCP.
+
+![OntoLayer workspace](docs/media/workspace.png)
+
 The core runs locally without Docker, a database server, an API key, or a model download.
 The included LangGraph agent uses a real MCP client. Optional Ollama and OpenAI-compatible
 planners add natural-language flexibility while calculations remain deterministic.
@@ -25,6 +31,16 @@ Initial dependency/interpreter downloads need internet access; the demo itself r
 git clone https://github.com/AshubShafqat/ontolayer.git
 cd ontolayer
 uv sync --locked --python 3.12
+uv run ontolayer serve --ontology examples/retail/ontology.yaml --credentials examples/retail/credentials.yaml --demo
+```
+
+Open **http://127.0.0.1:8000/**. The synthetic demo starts as a north-region user. Use the identity
+selector to compare administrator, analyst, regional and guest views. `/docs` remains a developer
+API reference, not the application. The web app has no external font/script/CDN dependency.
+
+To use the CLI and MCP reference agent instead:
+
+```sh
 uv run ontolayer validate --ontology examples/retail/ontology.yaml
 uv run ontolayer build --ontology examples/retail/ontology.yaml
 uv run ontolayer ask "revenue from 2026-10-01 to 2026-11-01" --ontology examples/retail/ontology.yaml --actor examples/retail/north.yaml
@@ -55,7 +71,8 @@ It does not modify security settings. Run it from this directory after `uv sync`
 | Examples | Retail and agriculture data, identities, policies and evaluation questions |
 | Delivery | Tests, strict typing, CI, dependency SBOM/audit, wheel build, optional Docker |
 
-This v0.1 is a complete local reference project, not an enterprise-readiness certification.
+This v0.2 is a working application with a production configuration profile, not an
+enterprise-readiness certification. See [deployment instructions and operating limits](docs/production.md).
 Remote graph backends, OIDC, HTTP MCP, document extraction, and production orchestration are not
 implemented. See [architecture and limits](docs/architecture.md).
 
@@ -98,7 +115,7 @@ the core suite does not require a live model.
 ## REST API
 
 ```sh
-uv run ontolayer serve --ontology examples/retail/ontology.yaml --credentials examples/retail/credentials.yaml
+uv run ontolayer serve --ontology examples/retail/ontology.yaml --credentials examples/retail/credentials.yaml --demo
 ```
 
 Open [interactive API docs](http://127.0.0.1:8000/docs), authorize with `demo-north-token`, and call
@@ -143,11 +160,20 @@ uv run ruff format --check src tests scripts
 uv run mypy src
 uv run pytest --cov-fail-under=85
 uv build
+npm ci
+npx playwright install chromium
+npm run test:e2e
 ```
 
-CI tests Python 3.12 and 3.13, runs real MCP evaluation, builds distributions, and creates a dependency
+CI tests Python 3.12 and 3.13, browser journeys and automated accessibility, runs real MCP evaluation,
+builds distributions, and creates a dependency
 audit/SBOM. Docker is optional: `docker compose up --build` exposes the synthetic REST demo on
 localhost port 8000. Docker and live model inference need their respective runtimes.
+
+For private data, omit `--demo`, issue random tokens and enable `--production` with explicit
+allowed hosts. Production mode disables public developer docs and refuses demo credentials.
+The server enforces strict request contracts, 64 KiB body limits, security headers and per-process
+rate limits. Use the [production deployment guide](docs/production.md) for HTTPS, backups and operations.
 
 ```text
 src/ontolayer/   models, validation, adapters, graph, policies, MCP, API, agent, CLI

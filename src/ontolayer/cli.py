@@ -106,10 +106,22 @@ def serve(
     host: str = "127.0.0.1",
     port: int = 8000,
     audit: Path = Path(".ontolayer/audit.jsonl"),
+    demo: bool = False,
+    production: bool = False,
+    allowed_host: list[str] | None = None,
 ) -> None:
-    """Run the token-authenticated REST service; /docs contains the interactive API."""
+    """Run the web application and authenticated API. --demo enables synthetic demo sign-in."""
     service = Service.from_file(ontology, AuditLog(audit))
-    uvicorn.run(create_app(service, credentials), host=host, port=port)
+    uvicorn.run(
+        create_app(
+            service, credentials, demo=demo, production=production, allowed_hosts=allowed_host
+        ),
+        host=host,
+        port=port,
+        limit_concurrency=100,
+        timeout_keep_alive=5,
+        server_header=False,
+    )
 
 
 @app.command()

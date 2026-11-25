@@ -4,7 +4,7 @@ import hashlib
 import json
 from collections import deque
 from datetime import UTC, date, datetime
-from decimal import Decimal
+from decimal import Decimal, localcontext
 from pathlib import Path
 from threading import Lock
 from typing import Any
@@ -12,6 +12,7 @@ from typing import Any
 from ontolayer.backend import GraphBackend, MemoryBackend
 from ontolayer.models import Actor, Entity, Ontology
 from ontolayer.policy import PolicyEngine
+from ontolayer.requests import validate_arguments
 from ontolayer.sources import ingest
 from ontolayer.spec import load
 
@@ -77,7 +78,8 @@ class Service:
                 raise ValueError("Unknown operation")
             if actor.namespace != self.ontology.namespace:
                 raise Denied("Not available to this caller")
-            result: dict[str, Any] = getattr(self, operation)(actor, **arguments)
+            validated = validate_arguments(operation, arguments)
+            result: dict[str, Any] = getattr(self, operation)(actor, **validated)
             self.audit.record(actor, operation, "allowed", self.ontology.version)
             return result
         except (ValueError, TypeError):
@@ -268,12 +270,14 @@ class Service:
                 continue
             rows.append(entity)
         groups: dict[str, Decimal] = {} if group_by else {"total": Decimal(0)}
-        for entity in rows:
-            key = str(entity.properties[group_by]) if group_by else "total"
-            amount = Decimal(1)
-            for field in metric.fields:
-                amount *= Decimal(str(entity.properties[field]))
-            groups[key] = groups.get(key, Decimal(0)) + amount
+        with localcontext() as context:
+            context.prec = 80
+            for entity in rows:
+                key = str(entity.properties[group_by]) if group_by else "total"
+                amount = Decimal(1)
+                for field in metric.fields:
+                    amount *= Decimal(str(entity.properties[field]))
+                groups[key] = groups.get(key, Decimal(0)) + amount
         if len(groups) > 100:
             raise ValueError("More than 100 groups; narrow the filters")
         lineage = sorted({(e.source, e.mapping, e.snapshot) for e in rows})

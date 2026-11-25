@@ -1,0 +1,46 @@
+services:
+  app:
+    build:
+      context: ..
+    command:
+      - serve
+      - --ontology
+      - /data/ontology.yaml
+      - --credentials
+      - /run/secrets/credentials.yaml
+      - --production
+      - --allowed-host
+      - ${APP_HOST:?Set APP_HOST to your real domain}
+      - --allowed-host
+      - 127.0.0.1
+      - --host
+      - 0.0.0.0
+      - --audit
+      - /state/audit.jsonl
+    restart: unless-stopped
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    tmpfs: [/tmp]
+    volumes:
+      - ${ONTOLOGY_DATA_DIR:?Set ONTOLOGY_DATA_DIR}:/data:ro
+      - ${ONTOLOGY_CREDENTIALS:?Set ONTOLOGY_CREDENTIALS}:/run/secrets/credentials.yaml:ro
+      - audit:/state
+    expose: ['8000']
+  proxy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    environment:
+      APP_HOST: ${APP_HOST}
+    ports: ['80:80', '443:443']
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - certificates:/data
+      - proxy_config:/config
+    depends_on:
+      app:
+        condition: service_healthy
+volumes:
+  audit:
+  certificates:
+  proxy_config:

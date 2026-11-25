@@ -1,11 +1,12 @@
 """The ontology document is the public, versioned contract."""
 
 import re
+from decimal import Decimal
 from typing import Literal, Self
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
-Scalar = str | int | float | bool
+Scalar = str | int | float | bool | Decimal
 Status = Literal["draft", "certified"]
 
 

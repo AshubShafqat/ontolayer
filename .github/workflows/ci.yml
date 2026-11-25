@@ -41,3 +41,46 @@ jobs:
         with:
           name: dependency-sbom
           path: sbom.json
+  browser:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: uv sync --locked
+      - run: npm ci
+      - run: npx prettier --check "src/ontolayer/static/*" "e2e/*.cjs" playwright.config.cjs
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: browser-traces
+          path: test-results/
+  container:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t ontolayer:ci .
+      - name: Verify packaged application and governed query
+        run: |
+          set -euo pipefail
+          docker run -d --name ontolayer-ci -p 127.0.0.1:8000:8000 ontolayer:ci
+          for attempt in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:8000/health; then break; fi
+            sleep 2
+          done
+          curl -fsS http://127.0.0.1:8000/ | grep 'Business knowledge workspace'
+          curl -fsS http://127.0.0.1:8000/static/app.js > /dev/null
+          curl -fsS http://127.0.0.1:8000/v1/tools/query_metric \
+            -H 'Authorization: Bearer demo-north-token' -H 'Content-Type: application/json' \
+            -d '{"arguments":{"metric_id":"revenue","start_date":"2026-10-01","end_date":"2026-11-01"}}' \
+            | jq -e '.values.total == "250.0"'
+      - name: Container logs
+        if: always()
+        run: docker logs ontolayer-ci || true

@@ -2,9 +2,9 @@
 
 import csv
 import hashlib
-import math
 import sqlite3
 from datetime import date
+from decimal import Decimal, localcontext
 from pathlib import Path
 from typing import Any
 
@@ -34,9 +34,17 @@ def convert(value: Any, kind: str) -> Scalar:
     if kind == "integer":
         return int(str(value))
     if kind == "number":
-        result = float(value)
-        if not math.isfinite(result):
+        result = Decimal(str(value))
+        if not result.is_finite():
             raise ValueError("Non-finite numbers are not supported")
+        if len(result.as_tuple().digits) > 28:
+            raise ValueError("Numeric values must have at most 28 significant digits")
+        if not -28 <= int(result.as_tuple().exponent) <= 28:
+            raise ValueError("Numeric exponents must be between -28 and 28")
+        if result.as_tuple().exponent == 0:
+            with localcontext() as context:
+                context.prec = 80
+                result = result.quantize(Decimal("0.0"))
         return result
     if kind == "boolean":
         normalized = str(value).lower()
