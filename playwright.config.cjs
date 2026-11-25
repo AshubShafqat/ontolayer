@@ -3,6 +3,7 @@ module.exports = defineConfig({
   testDir: "./e2e",
   fullyParallel: false,
   workers: 1,
+  updateSnapshots: "none",
   use: { baseURL: "http://127.0.0.1:8000", trace: "retain-on-failure" },
   reporter: [["list"]],
   webServer: process.env.ONTOLAYER_EXTERNAL_SERVER

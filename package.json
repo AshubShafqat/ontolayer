@@ -2,11 +2,13 @@
   "name": "ontolayer-web-tests",
   "private": true,
   "scripts": {
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "test:performance": "node scripts/performance.mjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.14.1",
     "@playwright/test": "1.65.1",
+    "lighthouse": "13.6.0",
     "prettier": "^3.10.1"
   }
 }

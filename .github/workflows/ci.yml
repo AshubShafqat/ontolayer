@@ -2,6 +2,12 @@ name: CI
 on:
   push:
   pull_request:
+  workflow_dispatch:
+    inputs:
+      update_snapshots:
+        description: Generate reviewed platform screenshot baselines
+        type: boolean
+        default: false
 permissions:
   contents: read
 jobs:
@@ -56,12 +62,15 @@ jobs:
       - run: npm ci
       - run: npx prettier --check "src/ontolayer/static/*" "e2e/*.cjs" playwright.config.cjs
       - run: npx playwright install --with-deps chromium
-      - run: npm run test:e2e
+      - run: npm run test:e2e -- ${{ inputs.update_snapshots && '--update-snapshots' || '' }}
+      - run: npm run test:performance
       - uses: actions/upload-artifact@v4
-        if: failure()
+        if: always()
         with:
           name: browser-traces
-          path: test-results/
+          path: |
+            test-results/
+            e2e/*-snapshots/
   container:
     runs-on: ubuntu-latest
     steps:
