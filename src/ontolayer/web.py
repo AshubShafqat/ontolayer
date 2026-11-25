@@ -1,5 +1,6 @@
 """Application-facing views built only from the caller's permitted semantic data."""
 
+from difflib import get_close_matches
 from typing import Any
 
 from ontolayer.agent import rule_plan
@@ -46,7 +47,18 @@ def answer(service: Service, actor: Actor, question: str) -> dict[str, Any]:
     definitions = workspace(service, actor)["metrics"]
     plan = rule_plan(question, definitions)
     if plan.clarification or not plan.metric_id:
-        return {"answerable": False, "answer": plan.clarification or "Choose a metric."}
+        names = [m["id"] for m in definitions]
+        alternatives = get_close_matches(question.lower(), names, n=3, cutoff=0.2) or names[:3]
+        return {
+            "answerable": False,
+            "answer": (plan.clarification or "Choose a metric.")
+            + (
+                " Available alternatives: " + ", ".join(alternatives)
+                if alternatives
+                else " No certified metric is available to your identity."
+            ),
+            "alternatives": alternatives,
+        }
     ready = service.call(actor, "check_answerable", metric_id=plan.metric_id)
     if not ready["answerable"]:
         return {"answerable": False, "answer": "No available certified metric. Please clarify."}

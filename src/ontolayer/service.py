@@ -6,7 +6,7 @@ from collections import deque
 from datetime import UTC, date, datetime
 from decimal import Decimal, localcontext
 from pathlib import Path
-from threading import Lock
+from threading import Lock, RLock
 from typing import Any
 
 from ontolayer.backend import GraphBackend, MemoryBackend
@@ -25,6 +25,7 @@ class AuditLog:
     def __init__(self, path: Path | None = None) -> None:
         self.path = path
         self.lock = Lock()
+        self.events: deque[dict[str, str]] = deque(maxlen=1000)
 
     def record(self, actor: Actor, operation: str, outcome: str, version: str) -> None:
         event = {
@@ -35,11 +36,22 @@ class AuditLog:
             "outcome": outcome,
             "ontology_version": version,
         }
-        if self.path:
-            with self.lock:
+        with self.lock:
+            self.events.append(event)
+            if self.path:
                 self.path.parent.mkdir(parents=True, exist_ok=True)
                 with self.path.open("a", encoding="utf-8") as handle:
                     handle.write(json.dumps(event) + "\n")
+
+    def recent(self, actor: Actor) -> list[dict[str, str]]:
+        """Bounded process history; operators can inspect their namespace only."""
+        with self.lock:
+            return [
+                dict(e)
+                for e in reversed(self.events)
+                if e["namespace"] == actor.namespace
+                and (e["actor"] == actor.id or "operator" in actor.roles)
+            ]
 
 
 class Service:
@@ -63,6 +75,8 @@ class Service:
         self.ontology = ontology
         self.backend = backend
         self.audit = audit or AuditLog()
+        self.lock = RLock()
+        self.source_root: Path | None = None
 
     @classmethod
     def from_file(cls, path: Path, audit: AuditLog | None = None) -> "Service":
@@ -70,9 +84,15 @@ class Service:
         backend = MemoryBackend()
         backend.apply_schema(ontology)
         ingest(ontology, path.parent, backend)
-        return cls(ontology, backend, audit)
+        result = cls(ontology, backend, audit)
+        result.source_root = path.parent.resolve()
+        return result
 
     def call(self, actor: Actor, operation: str, **arguments: Any) -> dict[str, Any]:
+        with self.lock:
+            return self._call(actor, operation, **arguments)
+
+    def _call(self, actor: Actor, operation: str, **arguments: Any) -> dict[str, Any]:
         try:
             if operation not in self.OPERATIONS:
                 raise ValueError("Unknown operation")

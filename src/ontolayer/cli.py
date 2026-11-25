@@ -109,12 +109,18 @@ def serve(
     demo: bool = False,
     production: bool = False,
     allowed_host: list[str] | None = None,
+    workspace_directory: Path = Path(".ontolayer/workspace"),
 ) -> None:
     """Run the web application and authenticated API. --demo enables synthetic demo sign-in."""
     service = Service.from_file(ontology, AuditLog(audit))
     uvicorn.run(
         create_app(
-            service, credentials, demo=demo, production=production, allowed_hosts=allowed_host
+            service,
+            credentials,
+            demo=demo,
+            production=production,
+            allowed_hosts=allowed_host,
+            workspace_directory=workspace_directory,
         ),
         host=host,
         port=port,

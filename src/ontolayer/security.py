@@ -38,6 +38,7 @@ class SecurityMiddleware:
             await self.app(scope, receive, send)
             return
         request_id = uuid4().hex
+        scope.setdefault("state", {})["request_id"] = request_id
 
         async def secure_send(message: Message) -> None:
             if message["type"] == "http.response.start":
@@ -59,7 +60,14 @@ class SecurityMiddleware:
 
         async def reject(status: int, detail: str) -> None:
             response = JSONResponse(
-                {"detail": detail, "request_id": request_id}, status_code=status
+                {
+                    "detail": detail,
+                    "request_id": request_id,
+                    "code": f"http_{status}",
+                    "message": detail,
+                    "hint": "Reduce request size or wait before retrying.",
+                },
+                status_code=status,
             )
             if status == 429:
                 response.headers["Retry-After"] = "60"

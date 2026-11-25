@@ -4,20 +4,26 @@ import hashlib
 from pathlib import Path
 from typing import Annotated, Any
 
-from fastapi import Depends, FastAPI, HTTPException
-from fastapi.responses import FileResponse, Response
+import yaml
+from fastapi import Depends, FastAPI, HTTPException, Request
+from fastapi.exceptions import RequestValidationError
+from fastapi.responses import FileResponse, JSONResponse, Response
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from fastapi.staticfiles import StaticFiles
 from prometheus_client import CollectorRegistry, Counter, generate_latest
 from pydantic import Field
+from starlette.exceptions import HTTPException as StarletteHTTPException
 from starlette.middleware.trustedhost import TrustedHostMiddleware
 
 from ontolayer import __version__
 from ontolayer.auth import authenticate, load_credentials
-from ontolayer.models import Actor, Model
+from ontolayer.models import Actor, Model, Ontology
+from ontolayer.requests import CONTRACTS
 from ontolayer.security import SecurityMiddleware
 from ontolayer.service import Denied, Service
+from ontolayer.spec import lint
 from ontolayer.web import answer, workspace
+from ontolayer.workbench import Workbench
 
 
 class ToolRequest(Model):
@@ -28,6 +34,16 @@ class QuestionRequest(Model):
     question: str = Field(min_length=1, max_length=2000)
 
 
+class DraftRequest(Model):
+    document: dict[str, Any] | str
+    revision: str = Field(min_length=64, max_length=64)
+    uploads: dict[str, str] = Field(default_factory=dict, max_length=20)
+
+
+class CertifyRequest(Model):
+    revision: str = Field(min_length=64, max_length=64)
+
+
 def create_app(
     service: Service,
     credentials_file: Path,
@@ -36,6 +52,7 @@ def create_app(
     production: bool = False,
     allowed_hosts: list[str] | None = None,
     requests_per_minute: int = 240,
+    workspace_directory: Path | None = None,
 ) -> FastAPI:
     credentials = load_credentials(credentials_file)
     if production:
@@ -51,6 +68,7 @@ def create_app(
         }
         if any(c.token_sha256 in demo_hashes for c in credentials.credentials):
             raise ValueError("Public demo credentials cannot be used in production")
+    workbench = Workbench(service, workspace_directory) if workspace_directory else None
     app = FastAPI(
         title="OntoLayer",
         version=__version__,
@@ -70,6 +88,34 @@ def create_app(
         ],
     )
     app.add_middleware(SecurityMiddleware, requests_per_minute=requests_per_minute)
+
+    @app.exception_handler(StarletteHTTPException)
+    async def http_error(request: Request, error: StarletteHTTPException) -> JSONResponse:
+        return JSONResponse(
+            {
+                "detail": error.detail,
+                "code": f"http_{error.status_code}",
+                "message": str(error.detail),
+                "hint": "Check your credential and request, then retry.",
+                "request_id": getattr(request.state, "request_id", ""),
+            },
+            status_code=error.status_code,
+            headers=error.headers,
+        )
+
+    @app.exception_handler(RequestValidationError)
+    async def validation_error(request: Request, error: RequestValidationError) -> JSONResponse:
+        return JSONResponse(
+            {
+                "detail": "Invalid request fields",
+                "code": "validation_error",
+                "message": "Invalid request fields",
+                "hint": "Use the documented field names and value types.",
+                "request_id": getattr(request.state, "request_id", ""),
+            },
+            status_code=422,
+        )
+
     assets = Path(__file__).parent / "static"
     app.mount("/static", StaticFiles(directory=assets), name="static")
     bearer = HTTPBearer(auto_error=False)
@@ -95,18 +141,94 @@ def create_app(
 
     @app.get("/v1/config", tags=["Application"])
     def config() -> dict[str, Any]:
-        return {"demo": demo, "version": __version__, "docs": not production}
+        return {
+            "demo": demo,
+            "version": __version__,
+            "docs": not production,
+            "editing": workbench is not None,
+        }
 
     @app.get("/v1/workspace", tags=["Application"])
     def workspace_view(actor: Annotated[Actor, Depends(identity)]) -> dict[str, Any]:
-        return workspace(service, actor)
+        with service.lock:
+            return workspace(service, actor)
+
+    def editor(actor: Actor) -> Workbench:
+        if "admin" not in actor.roles:
+            service.audit.record(actor, "workbench", "denied", service.ontology.version)
+            raise HTTPException(403, "Administrator role required")
+        if workbench is None:
+            raise HTTPException(503, "Workbench storage is not configured")
+        return workbench
+
+    @app.post("/v1/drafts/validate", tags=["Workbench"])
+    def validate_draft(
+        body: DraftRequest, actor: Annotated[Actor, Depends(identity)]
+    ) -> dict[str, Any]:
+        editor(actor)
+        try:
+            raw = yaml.safe_load(body.document) if isinstance(body.document, str) else body.document
+            candidate = Ontology.model_validate(raw)
+            return {
+                "valid": True,
+                "findings": lint(candidate),
+                "message": "Schema valid. Preview still verifies source mappings and graph.",
+            }
+        except (ValueError, TypeError, yaml.YAMLError):
+            return {
+                "valid": False,
+                "findings": [],
+                "message": "Invalid schema or references. Check owners, types, links and metrics.",
+            }
+
+    @app.get("/v1/ontology", tags=["Workbench"])
+    def ontology_document(actor: Annotated[Actor, Depends(identity)]) -> dict[str, Any]:
+        return editor(actor).document(actor)
+
+    @app.get("/v1/ontology/export", tags=["Workbench"])
+    def export_document(
+        actor: Annotated[Actor, Depends(identity)], format: str = "yaml"
+    ) -> Response:
+        try:
+            content = editor(actor).export(actor, format)
+        except ValueError as error:
+            raise HTTPException(400, "Choose yaml, json or turtle") from error
+        return Response(content, media_type="text/plain")
+
+    @app.post("/v1/drafts/preview", tags=["Workbench"])
+    def draft_preview(
+        body: DraftRequest, actor: Annotated[Actor, Depends(identity)]
+    ) -> dict[str, Any]:
+        manager = editor(actor)
+        try:
+            document = (
+                yaml.safe_load(body.document) if isinstance(body.document, str) else body.document
+            )
+            return manager.preview(actor, document, body.revision, body.uploads)
+        except (ValueError, TypeError, OSError, yaml.YAMLError) as error:
+            raise HTTPException(
+                400, "Draft rejected: check version, schema, mappings and CSV values"
+            ) from error
+
+    @app.post("/v1/drafts/{draft_id}/certify", tags=["Workbench"])
+    def draft_certify(
+        draft_id: str, body: CertifyRequest, actor: Annotated[Actor, Depends(identity)]
+    ) -> dict[str, Any]:
+        manager = editor(actor)
+        try:
+            return manager.certify(actor, draft_id, body.revision)
+        except (ValueError, TypeError, OSError, KeyError) as error:
+            raise HTTPException(
+                409, "Draft changed or is stale; reload and preview again"
+            ) from error
 
     @app.post("/v1/ask", tags=["Application"])
     def ask_view(
         body: QuestionRequest, actor: Annotated[Actor, Depends(identity)]
     ) -> dict[str, Any]:
         try:
-            result = answer(service, actor, body.question)
+            with service.lock:
+                result = answer(service, actor, body.question)
         except (ValueError, TypeError) as error:
             raise HTTPException(
                 400, "Choose a permitted metric and valid filters or dates."
@@ -116,6 +238,45 @@ def create_app(
     @app.get("/health", tags=["Operations"])
     def health() -> dict[str, str]:
         return {"status": "ok"}
+
+    @app.get("/v1/catalog", tags=["Application"])
+    def catalog(actor: Annotated[Actor, Depends(identity)]) -> dict[str, Any]:
+        return {
+            "transport": "stdio",
+            "tools": [
+                {"name": name, "inputSchema": model.model_json_schema()}
+                for name, model in CONTRACTS.items()
+            ],
+        }
+
+    @app.get("/v1/audit", tags=["Application"])
+    def audit_view(actor: Annotated[Actor, Depends(identity)]) -> dict[str, Any]:
+        return {
+            "items": service.audit.recent(actor),
+            "scope": "Last 1000 process events; operators see their namespace, others their own.",
+        }
+
+    @app.get("/v1/validation", tags=["Application"])
+    def validation_view(actor: Annotated[Actor, Depends(identity)]) -> dict[str, Any]:
+        visible = workspace(service, actor)
+        paths = {c["id"] for c in visible["concepts"]}
+        paths.update(f"{c['id']}.{p}" for c in visible["concepts"] for p in c["properties"])
+        findings = [
+            {
+                **f,
+                "severity": "warning",
+                "why": "Business definitions should be unambiguous and maintainable.",
+                "fix": "Review the named definition in an ontology draft.",
+            }
+            for f in lint(service.ontology)
+            if all(p in paths for p in f["path"].split(", "))
+        ]
+        return {
+            "findings": findings,
+            "scope": "Permitted definitions only",
+            "score": max(0, 100 - 5 * len(findings)),
+            "version": service.ontology.version,
+        }
 
     @app.post("/v1/tools/{operation}", tags=["Semantic tools"])
     def execute(
