@@ -155,6 +155,7 @@ function logout(message = "") {
 }
 async function connect(token, role = "custom") {
   resetIdentity();
+  if ($("#view")) $("#view").innerHTML = loading();
   state.token = token;
   state.role = role;
   const epoch = state.epoch;
@@ -208,12 +209,12 @@ function graphMarkup() {
       "No visible concepts",
       "Your identity has no ontology grants.",
     );
-  const width = 600,
+  const width = 700,
     height = Math.max(250, Math.ceil(nodes.length / 3) * 115 + 20);
   const positions = new Map(
     nodes.map((c, i) => [
       c.id,
-      { x: 25 + (i % 3) * 195, y: 25 + Math.floor(i / 3) * 115 },
+      { x: 25 + (i % 3) * 230, y: 25 + Math.floor(i / 3) * 115 },
     ]),
   );
   const edges = state.data.links
@@ -221,13 +222,19 @@ function graphMarkup() {
       const a = positions.get(link.source),
         b = positions.get(link.target);
       const x1 = a.x + 80,
-        y1 = a.y + 38,
+        y1 = a.y + 35,
         x2 = b.x + 80,
-        y2 = b.y + 38;
-      return `<path class="graph-line" d="M${x1},${y1} L${x2},${y2}"/><text class="link-text" text-anchor="middle" x="${(x1 + x2) / 2}" y="${(y1 + y2) / 2 - 7}">${esc(link.id)}</text>`;
+        y2 = b.y + 35;
+      const dx = x2 - x1,
+        dy = y2 - y1,
+        t = Math.min(
+          80 / Math.max(Math.abs(dx), 0.001),
+          35 / Math.max(Math.abs(dy), 0.001),
+        );
+      return `<path class="graph-line" marker-end="url(#graph-arrow)" d="M${x1 + dx * t},${y1 + dy * t} L${x2 - dx * t},${y2 - dy * t}"/><text class="link-text" text-anchor="middle" x="${(x1 + x2) / 2}" y="${(y1 + y2) / 2 - 7}">${esc(link.id)}</text>`;
     })
     .join("");
-  return `<div class="graph" tabindex="0" role="region" aria-label="Scrollable concept map"><svg viewBox="0 0 ${width} ${height}" role="img" aria-label="Concept map: ${esc(state.data.links.map((l) => `${l.source} ${l.id} ${l.target}`).join("; "))}">${edges}${nodes
+  return `<div class="graph" tabindex="0" role="region" aria-label="Scrollable concept map"><svg viewBox="0 0 ${width} ${height}" role="img" aria-label="Concept map: ${esc(state.data.links.map((l) => `${l.source} ${l.id} ${l.target}`).join("; "))}"><defs><marker id="graph-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#9894bb"/></marker></defs>${edges}${nodes
     .map((c) => {
       const p = positions.get(c.id);
       return `<g><rect x="${p.x}" y="${p.y}" width="160" height="70" rx="10"/><rect class="node-icon" x="${p.x + 12}" y="${p.y + 15}" width="27" height="27" rx="7"/><text x="${p.x + 20}" y="${p.y + 34}">◇</text><text x="${p.x + 48}" y="${p.y + 30}">${esc(c.id)}</text><text class="node-meta" x="${p.x + 48}" y="${p.y + 48}">${Object.keys(c.properties).length} visible properties</text></g>`;

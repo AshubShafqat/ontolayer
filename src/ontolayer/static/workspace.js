@@ -48,11 +48,13 @@ const mapObserver = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
       mapObserver.unobserve(entry.target);
+      if (!state.data || !entry.target.isConnected) return;
       entry.target.outerHTML = graphMarkup();
     }
   });
 });
 function enhance() {
+  if (!state.data) return;
   document
     .querySelectorAll(".graph-placeholder:not([data-observed])")
     .forEach((el) => {
@@ -96,6 +98,7 @@ function enhance() {
         `<label>Focus concept<select class="graph-focus"><option value="">All concepts</option>${state.data.concepts.map((c) => `<option>${esc(c.id)}</option>`).join("")}</select></label><label>Map status<select class="graph-status"><option value="">All statuses</option><option>certified</option><option>draft</option></select></label><label class="check-label"><input class="graph-neighbors" type="checkbox" checked> Expand neighbors</label>`,
       );
       region.querySelectorAll("svg > g").forEach((node, i) => {
+        node.classList.add(`node-family-${i % 4}`);
         const c = state.data.concepts[i];
         if (!c) return;
         node.setAttribute("role", "button");
@@ -337,7 +340,9 @@ function advancedForm(id = "advanced") {
     )}</select><p id="${id}-description" class="note">${toolDescriptions.search_terms}</p><label for="${id}-arguments">Arguments JSON</label><textarea id="${id}-arguments" name="arguments">${esc(JSON.stringify(toolExamples.search_terms, null, 2))}</textarea><button type="submit" class="btn primary">Test this tool</button></form><div id="${id}-result" aria-live="polite"></div>`;
 }
 async function renderExtras(view, epoch) {
+  if (epoch !== state.epoch || !state.data) return;
   if (view === "overview") {
+    $("#view .page-heading").classList.add("dashboard-heading");
     const [health, validation, audit] = await Promise.all([
       api("/health"),
       api("/v1/validation"),
@@ -357,6 +362,7 @@ async function renderExtras(view, epoch) {
           .join("") || "<p>No denials in the available process history.</p>"
       }</div></section>`,
     );
+    if (typeof dashboardVisuals === "function") await dashboardVisuals(epoch);
   }
   if (view === "explorer" && state.data.concepts.length) {
     $(".concept-menu").insertAdjacentHTML(
