@@ -168,6 +168,7 @@ policies:
   - role: analyst
     types: [Sale]
     metrics: [revenue]
+    properties: {Sale: [amount, region]} # Fields require explicit grants too.
 ```
 
 Provide `sales.csv` with `id,amount,region` headers. Owners/descriptions are required and references must resolve. Objects/metrics default to draft. Property types: string, integer, number, boolean, date. Aggregates: count, sum, sum_product. Relationships declare source/target types and optional `one` cardinality. Interfaces declare shared properties.

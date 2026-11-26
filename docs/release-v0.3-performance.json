@@ -1,0 +1,49 @@
+{
+  "scores": {
+    "performance": 99,
+    "accessibility": 100,
+    "best-practices": 100
+  },
+  "bundles": [
+    {
+      "name": "app.css",
+      "bytes": 27636,
+      "gzip": 6201
+    },
+    {
+      "name": "app.js",
+      "bytes": 37333,
+      "gzip": 11707
+    },
+    {
+      "name": "index.html",
+      "bytes": 861,
+      "gzip": 408
+    },
+    {
+      "name": "locales.json",
+      "bytes": 193,
+      "gzip": 148
+    },
+    {
+      "name": "mark.svg",
+      "bytes": 283,
+      "gzip": 215
+    },
+    {
+      "name": "polish.css",
+      "bytes": 13630,
+      "gzip": 3469
+    },
+    {
+      "name": "visuals.js",
+      "bytes": 5106,
+      "gzip": 2158
+    },
+    {
+      "name": "workspace.js",
+      "bytes": 36659,
+      "gzip": 10675
+    }
+  ]
+}

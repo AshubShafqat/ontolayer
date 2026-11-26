@@ -15,6 +15,9 @@ remain compatible. The original baseline audit is in [audit-v0.3.md](audit-v0.3.
 ## Local verification
 
 - Backend: **74 passed**, **90.06% coverage**, with an enforced 85% minimum.
+- Real MCP evaluations: **18/18 retail** and **4/4 agriculture** questions passed locally.
+- The README's complete sample validates, builds a graph and calculates 25.50 from its test row.
+- Wheel/source archives include the new UI and exclude local credentials/state, caches and environments.
 - Ruff and strict mypy: passed; 19 source modules checked.
 - Browser journeys: **18 passed**, including scoped values, identity switching, certification,
   reduced motion, dark theme, exports, offline retry and axe checks.
@@ -30,6 +33,11 @@ The [GitHub workflow](https://github.com/AshubShafqat/ontolayer/actions/workflow
 Python 3.12/3.13, dependency audit/SBOM, real MCP evaluation, distribution builds, Linux screenshots,
 Lighthouse and container startup with a governed query. Release publication is gated on successful CI.
 Docker is not installed on the development machine; Linux CI supplies the container verification.
+
+[Linux verification run](https://github.com/AshubShafqat/ontolayer/actions/runs/45765096284) passed all five
+jobs: both Python versions, browser/performance, dependencies and container. Its Lighthouse result was
+**99 / 100 / 100**; [the artifact summary](release-v0.3-performance.json) records exact asset sizes.
+Linux screenshot baselines from that run are committed alongside the Windows baselines.
 
 ## Actual previews
 
