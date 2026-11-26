@@ -1,7 +1,7 @@
 # Deploying an operated OntoLayer workspace
 
-Version 0.2 includes a real web application and stronger server boundaries. It is intended for
-a small, read-only semantic workspace. Production readiness also depends on your identity system,
+Version 0.3 includes a web application and an administrator draft/publication workbench for
+a small workspace with one application writer. Production readiness depends on your identity system,
 data quality, traffic, infrastructure, recovery procedure and security review; running demo data
 on localhost does not establish those properties.
 
@@ -20,18 +20,21 @@ uv run ontolayer issue-token --actor /private/actor.yaml --output /private/crede
 
 Distribute the printed token using an approved secret-sharing channel. Do not put the actor or
 credential file in Git. Grant the process account read-only access. Grant write access only to
-its audit directory. The production profile refuses known demo tokens, an absent audit log,
+its audit and workspace directories. The production profile refuses known demo tokens, an absent audit log,
 wildcard hosts and the demo identity switcher.
 
 ```sh
-uv run ontolayer serve --ontology /data/ontology.yaml --credentials /private/credentials.yaml --production --allowed-host ontology.example.com --audit /state/audit.jsonl
+uv run ontolayer serve --ontology /data/ontology.yaml --credentials /private/credentials.yaml --production --allowed-host ontology.example.com --audit /state/audit.jsonl --workspace-directory /state/workspace
 ```
 
-The process serves one immutable ontology snapshot and namespace. Copy the reviewed ontology
-and all mapped source files atomically into a versioned data directory, validate it before startup,
-then replace/restart the service as a unit. There are no public write or file-upload endpoints.
-Use Git review and the maintainer CLI to publish ontology changes. Keep prior data snapshots for
-rollback; Git holds definitions but is not a backup of your private source data.
+The process serves one namespace and validated snapshot. Administrators can preview JSON/YAML
+definitions and bounded CSV uploads, then explicitly certify to activate a durable release. Preview
+cannot publish, stale revisions are rejected, and arbitrary browser-selected paths cannot be read.
+Only trusted administrators should receive the admin role: raw definitions, source uploads and
+policy edits are powerful capabilities. Use one worker and one writer per workspace directory.
+Back up the entire workspace tree, initial ontology/source directory, audit and credential stores.
+Keep prior release directories for rollback. To roll back, stop the server and restore a backed-up
+active pointer and its complete release directory, then restart and verify version and query results.
 
 ## Container deployment
 
@@ -66,8 +69,9 @@ by digest for your release process and scan the built image in your infrastructu
 - Audit logs persist semantic request metadata, not sensitive result bodies. Protect, rotate,
   ship and retain them under your own policy. They are not tamper-evident. Use one worker per
   audit file, or replace this sink with a coordinated logging service before scaling workers.
-- The RDF graph is held in memory and rebuilt from durable source snapshots. There is no runtime
-  write durability or clustered graph database. Size and benchmark your real dataset before
+- The RDF graph is held in memory and rebuilt from durable source snapshots. Certified releases
+  persist; the current-process audit ring does not. There is no clustered graph database.
+  Draft/release disk retention and quotas are operator responsibilities. Benchmark real data before
   setting latency or availability targets. Paginated responses do not make ingestion streaming.
 - CSV numeric inputs use Decimal rather than binary float conversion. SQLite REAL values have
   already passed through binary floating point; store precise financial source values as TEXT.

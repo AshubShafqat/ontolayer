@@ -1,31 +1,96 @@
 # OntoLayer
 
-**Business meaning your agents can query.**
+**Define business meaning, build a governed knowledge graph, and let people and agents query it with evidence.**
 
-Ontologies as code · Knowledge graphs · Governed metrics · MCP
+![OntoLayer query workspace](docs/media/v03-studio.png)
 
-[![CI](https://github.com/AshubShafqat/ontolayer/actions/workflows/ci.yml/badge.svg)](https://github.com/AshubShafqat/ontolayer/actions/workflows/ci.yml)
-[![License: Apache-2.0](https://img.shields.io/badge/License-Apache--2.0-blue.svg)](LICENSE)
-[![Python](https://img.shields.io/badge/python-3.12%2B-blue.svg)](pyproject.toml)
+[CI](https://github.com/AshubShafqat/ontolayer/actions/workflows/ci.yml) · [Apache-2.0](LICENSE) · Python 3.12+ · Self-hosted
 
-OntoLayer is an open-source reference implementation of a business semantic layer. Define concepts,
-relationships, mappings, metrics, and policies in YAML; ingest data into a validated knowledge graph;
-and let agents retrieve definitions and execute approved calculations over MCP.
+## 1. What is OntoLayer?
 
-**Version 0.2 includes a complete web workspace:** live overview, ontology/record explorer,
-query studio with downloadable evidence, and access/lineage inspection. All screens use the same
-authenticated, policy-filtered service as MCP.
+An ontology defines business things such as Customer, Order and Product, their properties and their relationships. OntoLayer maps source data into those definitions, calculates reviewed metrics and enforces access policies before returning results.
 
-![OntoLayer workspace](docs/media/workspace.png)
+Think of it as **a shared dictionary and map of the business that humans and AI agents both read**. The dictionary defines revenue; the map connects order lines to products; policies decide which records a caller may use.
 
-The core runs locally without Docker, a database server, an API key, or a model download.
-The included LangGraph agent uses a real MCP client. Optional Ollama and OpenAI-compatible
-planners add natural-language flexibility while calculations remain deterministic.
+## 2. Problem and audience
 
-## Five-minute quickstart
+Systems often use different names and calculations for the same idea. An agent with only column names can misunderstand a metric or retrieve inappropriate data. OntoLayer supplies named definitions, bounded tools, deterministic calculations and source evidence.
 
-Requires Git and [uv](https://docs.astral.sh/uv/getting-started/installation/).
-Initial dependency/interpreter downloads need internet access; the demo itself runs offline.
+It is for developers building semantic APIs, teams evaluating governed agents and students learning ontology engineering. It is a working small-dataset application, not an enterprise certification. Read the [operating limits](docs/production.md) before deploying private data.
+
+## 3. Glossary
+
+| Term | Meaning |
+|---|---|
+| Ontology | Versioned definitions, mappings, metrics and policies |
+| Concept / object type | A kind of business thing, such as Customer |
+| Relationship / link | A named connection, such as Order placedBy Customer |
+| Metric | Reviewed calculation with grain, unit and allowed dimensions |
+| Knowledge graph | Actual records and connections populated from sources |
+| Semantic layer | Business vocabulary and governed query interface above storage |
+| Lineage | Source, mapping, version and snapshot hash behind an answer |
+| Certification | Explicit reviewer action marking definitions executable |
+| Policy | Default-deny grants for roles, records, properties, metrics and PII |
+| MCP | Model Context Protocol: agents discover and call standardized tools |
+
+## 4. What works today
+
+| Feature | Where |
+|---|---|
+| Typed YAML/JSON ontology, owners, versions, interfaces | Definition files; Draft & import |
+| CSV/read-only SQLite adapters, RDF graph, SHACL validation | CLI build; workbench CSV preview |
+| Governed count, sum and sum-product metrics | Query studio; query_metric |
+| Concept/synonym/metric search | Search button or Alt+K |
+| Searchable concepts, graph zoom/pan/focus/neighbors/status filters | Explorer |
+| Guided queries and advanced JSON tools, charts/table, CSV/JSON exports | Query studio |
+| Record inspection and source evidence | Explorer; Access & lineage |
+| Independently authenticated identity comparison | Synthetic demo only |
+| Scoped linter, audit history, tool catalog/tester | Validation; Audit; MCP connect |
+| Administrator drafts, live schema validation, graph preview, diff, certification | Draft & import |
+| Durable certified snapshots and restart recovery | --workspace-directory |
+| JSON/YAML import; YAML/JSON/OWL-Turtle schema export | Administrator workbench |
+| Light/dark/system appearance, mobile menu, shortcuts, offline retry | Workspace |
+| Eleven read-only MCP tools; LangGraph reference agent | MCP stdio; CLI ask/evaluate |
+
+Turtle export is structural schema/SHACL, not a lossless encoding of metrics and policies. Browser CSV uploads are limited to 48 KB and 1000 rows; complete requests are limited to 64 KiB. English is available; locale dictionaries and RTL direction scaffolding exist, but Urdu translation is not implemented.
+
+## 5. How it works
+
+```mermaid
+flowchart LR
+  D[Ontology YAML / JSON] --> V[Typed validation]
+  S[CSV / SQLite mappings] --> G[SHACL validated RDF graph]
+  V --> G
+  I[Trusted identity] --> P[Default-deny policy]
+  W[Web / REST / MCP] --> T[Semantic tools]
+  P --> T
+  G --> T
+  T --> R[Values + unit + scope + lineage]
+  E[Administrator draft] --> Q[Preview + diff]
+  Q --> C[Explicit certification]
+  C --> G
+```
+
+For “revenue from 2026-10-01 to 2026-11-01”: resolve a permitted definition, authenticate the caller, filter records/properties by policy, apply the certified metric and exclusive-end date interval, calculate with Decimal, then return values and provenance. Filtering occurs before data reaches a model.
+
+The browser question box uses a constrained parser, not an LLM. The optional CLI agent uses a real MCP subprocess with rules, Ollama or an OpenAI-compatible planner. Generated plans still pass strict validation.
+
+## 6. Five-minute quickstart
+
+Install Git and [uv](https://docs.astral.sh/uv/getting-started/installation/). Initial dependency downloads require internet access. Node is only needed for development/browser checks.
+
+Windows PowerShell:
+
+```powershell
+git clone https://github.com/AshubShafqat/ontolayer.git
+cd ontolayer
+uv sync --locked --python 3.12
+.\scripts\dev.ps1 -m ontolayer serve --ontology examples/retail/ontology.yaml --credentials examples/retail/credentials.yaml --demo
+```
+
+The wrapper uses installed base Python with project dependencies if Windows blocks the venv launcher. It changes no security settings.
+
+Linux/macOS shell:
 
 ```sh
 git clone https://github.com/AshubShafqat/ontolayer.git
@@ -34,163 +99,223 @@ uv sync --locked --python 3.12
 uv run ontolayer serve --ontology examples/retail/ontology.yaml --credentials examples/retail/credentials.yaml --demo
 ```
 
-Open **http://127.0.0.1:8000/**. The synthetic demo starts as a north-region user. Use the identity
-selector to compare administrator, analyst, regional and guest views. `/docs` remains a developer
-API reference, not the application. The web app has no external font/script/CDN dependency.
+Expect `Uvicorn running on http://127.0.0.1:8000`. Open **http://127.0.0.1:8000/**, not `/docs`. The demo starts as North. After signing out, `demo-north-token` opens that identity again. These public synthetic credentials are rejected in production mode.
 
-To use the CLI and MCP reference agent instead:
+In Query studio choose Revenue, start `2026-10-01`, end `2026-11-01`, then Run query. Expect **250 USD** for North, **350 USD** for South, **600 USD** for Administrator. All-date North revenue is **330 USD**. Inspect source evidence beneath the answer.
 
-```sh
-uv run ontolayer validate --ontology examples/retail/ontology.yaml
-uv run ontolayer build --ontology examples/retail/ontology.yaml
-uv run ontolayer ask "revenue from 2026-10-01 to 2026-11-01" --ontology examples/retail/ontology.yaml --actor examples/retail/north.yaml
-```
-
-Expected answer: **250 USD**, scoped to authorized north-region records, certified under ontology
-version `1.0.0`, with lineage to `lines.csv`. The JSON contains snapshot and definition hashes.
-Run the same question with `admin.yaml` for **600 USD** or `south.yaml` for **350 USD**.
-The canceled order and November sales are excluded by the definition and date interval.
-
-On Windows machines where the virtual-environment launcher is unavailable but installed Python
-works, `./scripts/dev.ps1 -m ontolayer ...` uses that interpreter with the same dependencies.
-It does not modify security settings. Run it from this directory after `uv sync`.
-
-## What works
-
-| Capability | Included |
-| --- | --- |
-| Ontology as code | Typed YAML, generated JSON Schema, references, owners, versions, certification |
-| Modeling | Objects, links, interface contracts and advisory design linter |
-| Ingestion | CSV and read-only SQLite adapters, stable identity and source snapshot hashes |
-| Graph | RDFLib backend, atomic validation, OWL/Turtle export and SHACL constraints |
-| Semantics | Search, entities, relationships, paths, definitions and bounded metric execution |
-| Governance | Default deny, role/attribute grants, PII/property filtering before model access |
-| Agent access | 11 read-only MCP tools and authenticated REST |
-| Reference agent | LangGraph over MCP; rules, Ollama or OpenAI-compatible planner |
-| Review workflow | CSV draft scaffolding, isolated proposals, explicit human certification |
-| Examples | Retail and agriculture data, identities, policies and evaluation questions |
-| Delivery | Tests, strict typing, CI, dependency SBOM/audit, wheel build, optional Docker |
-
-This v0.2 is a working application with a production configuration profile, not an
-enterprise-readiness certification. See [deployment instructions and operating limits](docs/production.md).
-Remote graph backends, OIDC, HTTP MCP, document extraction, and production orchestration are not
-implemented. See [architecture and limits](docs/architecture.md).
-
-## Try the semantic layer
+Docker:
 
 ```sh
-uv run ontolayer lint --ontology examples/retail/ontology.yaml
-uv run ontolayer export --ontology examples/retail/ontology.yaml --output ontology.ttl
-uv run ontolayer query --ontology examples/retail/ontology.yaml --actor examples/retail/admin.yaml --metric revenue --group-by region
-uv run ontolayer evaluate --ontology examples/retail/ontology.yaml --questions examples/retail/questions.yaml
-uv run ontolayer ask "harvest by crop" --ontology examples/agriculture/ontology.yaml --actor examples/agriculture/north.yaml
+docker build -t ontolayer .
+docker run --rm -p 127.0.0.1:8000:8000 ontolayer
 ```
 
-The no-key planner accepts a metric name/synonym, optional `by dimension`, `dimension=value`, and
-`from YYYY-MM-DD to YYYY-MM-DD`. End dates are exclusive. Unsupported qualifiers such as
-“last month” trigger clarification rather than guessed dates.
+Windows commands are exercised locally; Linux and Docker checks run in CI. A macOS host and public HTTPS deployment have not been independently exercised. The disposable Docker command does not retain changes after removal; operated deployments need persistent state mounts.
 
-## Connect an agent through MCP
+## 7. Application tour
 
-```sh
-uv run ontolayer mcp --ontology examples/retail/ontology.yaml --actor examples/retail/north.yaml
+| Screen and real screenshot | Goal and controls |
+|---|---|
+| [Overview](docs/media/v03-overview.png) | Counts, version, permitted totals, health, linter score, certification counts, recent queries/denials |
+| [Explorer](docs/media/v03-explorer.png) | Find/filter concepts; inspect properties/relationships; page/filter records; open lineage; focus/zoom/pan map |
+| [Query studio](docs/media/v03-studio.png) | Metric, dates, grouping and one guided filter; advanced JSON supports multiple filters; charts, result table, copy/export |
+| [Access & lineage](docs/media/v03-access.png) | Current identity; safe record inspection; independently authenticated demo comparison |
+| [Validation](docs/media/v03-validation.png) | Scoped warnings, reasons and remedies; score = 100 minus five per warning, floored at zero |
+| [MCP connect](docs/media/v03-mcp.png) | Configuration, schemas, examples and REST tester; it does not verify an external MCP client |
+| [Audit log](docs/media/v03-audit.png) | Filter user/tool/decision/timestamp; export matching events from the last 1000 process events |
+| [Draft & import](docs/media/v03-editor.png) | Administrator document editor; import definitions/CSV, preview full graph/diff, explicitly certify and activate |
+| [Settings](docs/media/v03-settings.png) | Version, environment, identity and documentation; appearance/help live in sidebar/mobile menu |
+
+Alt+K opens search; Alt+T switches theme; Ctrl/Command+Enter runs the guided query; Escape closes dialogs. Credentials, query history and permitted definitions remain in page memory. Appearance is stored per identity in this browser. Identity changes clear results and cancel pending requests. Calls time out after 15 seconds; browser cancellation does not necessarily stop server work.
+
+## 8. Define your own ontology
+
+Start with the complete [retail](examples/retail/ontology.yaml) or [agriculture](examples/agriculture/ontology.yaml) example. See the [spec reference](docs/spec.md) and [JSON Schema](spec/ontology.schema.json). This minimal complete definition illustrates the format:
+
+```yaml
+namespace: shop
+version: 1.0.0
+description: Small sales workspace
+types:
+  Sale:
+    description: One completed sale
+    owner: finance
+    status: certified
+    synonyms: [transaction]
+    properties:
+      amount: {type: number, description: Net sale amount, required: true, unit: USD}
+      region: {type: string, description: Sales region, required: true}
+links: {} # Named source/target relationships go here.
+mappings:
+  sales:
+    type: Sale
+    kind: csv
+    path: sales.csv # Relative to the ontology directory; cannot escape it.
+    id_column: id
+    columns: {amount: amount, region: region} # Business property -> source column.
+metrics:
+  revenue:
+    description: Sum of completed sale amounts
+    owner: finance
+    type: Sale
+    aggregation: sum
+    fields: [amount]
+    dimensions: [region]
+    unit: USD
+    grain: sale
+    status: certified
+policies:
+  - role: analyst
+    types: [Sale]
+    metrics: [revenue]
 ```
 
-Use `search_terms → get_metric → check_answerable → query_metric`. Discovery, entity listing,
-graph traversal, lineage, and safe policy explanations are also available. The trusted launcher
-chooses the actor; tools cannot change it. See the [MCP guide and client config](docs/mcp.md).
+Provide `sales.csv` with `id,amount,region` headers. Owners/descriptions are required and references must resolve. Objects/metrics default to draft. Property types: string, integer, number, boolean, date. Aggregates: count, sum, sum_product. Relationships declare source/target types and optional `one` cardinality. Interfaces declare shared properties.
 
-For optional local model planning, start Ollama, download a suitable model, then run:
+For UI changes, increase the version, edit, preview, review the diff and certify. Preview creates an isolated candidate; it cannot change active definitions. Certification rejects stale revisions, validates the complete graph again, saves a release and replaces the active pointer atomically. Existing mappings can read only trusted source paths; new sources require CSV uploads. Review policy changes carefully because certification can change access.
 
-```sh
-uv run ontolayer ask "Show October 2026 revenue grouped by region" --ontology examples/retail/ontology.yaml --actor examples/retail/north.yaml --provider ollama --model qwen3:8b
-```
+## 9. Connect an agent over MCP
 
-For a compatible hosted or local API, use `--provider openai-compatible`,
-`--base-url http://localhost:8001/v1` and `--model YOUR_MODEL`. Hosted providers may require
-`ONTOLAYER_LLM_API_KEY` in the environment. Only permitted definitions and the question go to the
-planner; results are rendered from governed tool output. Provider adapters have protocol-mock tests;
-the core suite does not require a live model.
-
-## REST API
-
-```sh
-uv run ontolayer serve --ontology examples/retail/ontology.yaml --credentials examples/retail/credentials.yaml --demo
-```
-
-Open [interactive API docs](http://127.0.0.1:8000/docs), authorize with `demo-north-token`, and call
-`POST /v1/tools/query_metric`:
+See [MCP setup](docs/mcp.md). MCP uses stdio, so there is no HTTP MCP URL. A trusted launcher assigns the actor; no tool accepts an actor argument.
 
 ```json
-{"arguments": {"metric_id": "revenue", "start_date": "2026-10-01", "end_date": "2026-11-01"}}
+{
+  "mcpServers": {
+    "ontolayer": {
+      "command": "uv",
+      "args": ["--directory", "/absolute/path/to/ontolayer", "run", "ontolayer", "mcp", "--ontology", "examples/retail/ontology.yaml", "--actor", "examples/retail/north.yaml"]
+    }
+  }
+}
 ```
 
-The header is `Authorization: Bearer demo-north-token`. Demo tokens are public fixtures for synthetic
-data. For real data, create private actors and random credentials with `issue-token`; serve behind TLS
-and follow [the policy guide](docs/policy.md) and [security notes](SECURITY.md).
-`/health` is public; `/metrics` requires an authenticated operator role.
+Replace the absolute path before using this entry in Claude Desktop, Cursor or a generic stdio client. Installation differs by client. This launches the named file snapshot. For a workbench release, point `--ontology` at its `ontology.yaml` and restart the MCP process. Already-running MCP processes do not follow browser publication automatically.
 
-## Define your own domain
+| Tool | Example input | Output |
+|---|---|---|
+| search_terms | `{"query":"revenue"}` | Permitted matches, next offset |
+| get_concept | `{"concept":"Customer"}` | Definition and visible properties |
+| list_entities | `{"concept":"Customer","limit":20}` | Visible records, next offset |
+| get_relationships | `{"entity_id":"Customer:C1"}` | Links with visible endpoints |
+| find_path | `{"source":"Customer:C1","target":"Order:O1"}` | Bounded visible path |
+| get_metric | `{"metric_id":"revenue"}` | Calculation definition |
+| check_answerable | `{"metric_id":"revenue"}` | Availability/certification decision |
+| query_metric | `{"metric_id":"revenue","group_by":"region"}` | Values, unit, scope and lineage |
+| get_lineage | `{"entity_id":"Customer:C1"}` | Source, mapping, snapshot, version |
+| explain_policy_decision | `{"entity_id":"Customer:C2"}` | Safe visibility decision |
+| list_ontology_versions | `{}` | Current process version |
 
-Copy an example directory and change its ontology, sources, mappings, policies and questions.
-Keep source files below the ontology's directory. The retail graph is:
+## 10. HTTP API
 
-```text
-Customer ← placedBy — Order ← partOf — OrderLine — forProduct → Product
-```
+Protected requests use `Authorization: Bearer TOKEN`. `/docs` gives exact contracts in development; production disables it and OpenAPI.
 
-Metrics specify units, grain, filters and dates. Revenue uses actual line prices, not current product
-prices. Source adapters map business properties to columns; backend adapters implement graph storage.
+| Route | Access / purpose |
+|---|---|
+| GET /, /static/*, /health, /v1/config | Public UI/assets/basic status |
+| GET /v1/workspace | Authenticated permitted definitions/identity |
+| POST /v1/ask | Authenticated constrained question planning |
+| POST /v1/tools/{operation} | Semantic operation; body `{"arguments":{...}}` |
+| GET /v1/catalog, /v1/validation, /v1/audit | Authenticated tools/scoped lint/scoped events |
+| GET /v1/ontology, /v1/ontology/export?format=yaml | Administrator definition/export; also json/turtle |
+| POST /v1/drafts/validate, /v1/drafts/preview | Administrator schema check / isolated graph preview |
+| POST /v1/drafts/{id}/certify | Administrator activation with matching revision |
+| GET /metrics | Operator Prometheus counters |
 
 ```sh
-uv run ontolayer draft-csv --source examples/retail/customers.csv --output examples/retail/draft.yaml --namespace retail --concept Customer --owner retail-team
-uv run ontolayer propose --candidate examples/retail/draft.yaml
+curl http://127.0.0.1:8000/v1/tools/query_metric -H 'Authorization: Bearer demo-north-token' -H 'Content-Type: application/json' -d '{"arguments":{"metric_id":"revenue","start_date":"2026-10-01","end_date":"2026-11-01"}}'
 ```
 
-Review the proposal, then use `certify --proposal PATH --output NEW_FILE --reviewer NAME` to create
-a new certified file. Existing active files are never overwritten. Review source paths relative to
-the final ontology location; the CLI does not copy source data. Commit reviewed changes through Git.
-Certification records review state; it does not prove source-data accuracy.
+Use `curl.exe` in PowerShell. Expected JSON includes `"values":{"total":"250.0"}`. Values are decimal strings; end dates are exclusive. Errors include code, message, hint, request_id and compatibility detail. Authentication: 401; forbidden: 403; invalid operation: 400; invalid request shape: 422; stale publication: 409; rate limit: 429. Report X-Request-ID when requesting support.
 
-## Development
+## 11. Security and governance
+
+Policies are additive allow grants; no match means deny. Row policies compare properties with server-trusted actor attributes. PII needs an explicit grant. Rows/properties are filtered before calculation, traversal, lineage or model access. Missing and unauthorized records deliberately receive indistinguishable responses.
+
+Editing requires a trusted `admin` role. Operators see events in their namespace; other users see their own events. Events record identity/tool/outcome/version, not credentials or result bodies. Audit files need external retention/protection. See [policy guide](docs/policy.md) and [security policy](SECURITY.md).
+
+## 12. Configuration
+
+Application settings are CLI flags:
+
+| Flag | Default | Meaning |
+|---|---|---|
+| --ontology | Required | Initial definition/source directory |
+| --credentials | Required for serve | Server-owned token/actor configuration |
+| --host / --port | 127.0.0.1 / 8000 | Bind address |
+| --demo | Off | Public synthetic sign-in/comparison |
+| --production | Off | Reject demo credentials; require explicit hosts/audit |
+| --allowed-host | Local hosts in development | Repeat for allowed production Host headers |
+| --audit | .ontolayer/audit.jsonl | Persistent event sink |
+| --workspace-directory | .ontolayer/workspace | Durable drafts/certified snapshots |
+
+| Environment variable | Default | Meaning |
+|---|---|---|
+| ONTOLAYER_LLM_API_KEY | Empty | Optional compatible-planner key |
+| PYTHONPATH | Interpreter default | Windows helper sets this temporarily |
+| ONTOLAYER_EXTERNAL_SERVER | Unset | Browser tests reuse localhost when set |
+| APP_HOST | Required for production Compose | Public domain |
+| ONTOLOGY_DATA_DIR | Required for production Compose | Absolute reviewed source directory |
+| ONTOLOGY_CREDENTIALS | Required for production Compose | Absolute private credential file |
+
+## 13. Deployment and operations
+
+See [production guide](docs/production.md) and [Compose template](deploy/compose.production.yaml). The container runs without root; the production template adds a read-only root filesystem, private mounts, durable state and Caddy HTTPS. This is an operator template, not an already-provisioned deployment.
+
+Supply private credentials, domain/TLS, backup/restore, source validation, ingress limits, monitoring, retention and an appropriate security review. Use **one worker per workspace directory**. Runtime graph/audit history are in memory; certified source snapshots and the active pointer are durable. Do not share a state directory between independent writers. Back up its entire tree plus external credentials/audit files.
+
+No OIDC, HTTP MCP, distributed graph, HA orchestration or document extraction is included. Rate limit: 240 requests per client IP/minute/process. Benchmark real datasets; pagination does not make ingestion streaming. Draft/release retention is an operator responsibility.
+
+## 14. Tests and quality gates
 
 ```sh
+uv run pytest --cov-fail-under=85
 uv run ruff check src tests scripts
 uv run ruff format --check src tests scripts
 uv run mypy src
-uv run pytest --cov-fail-under=85
-uv build
 npm ci
 npx playwright install chromium
 npm run test:e2e
+npm run test:performance
 ```
 
-CI tests Python 3.12 and 3.13, browser journeys and automated accessibility, runs real MCP evaluation,
-builds distributions, and creates a dependency
-audit/SBOM. Docker is optional: `docker compose up --build` exposes the synthetic REST demo on
-localhost port 8000. Docker and live model inference need their respective runtimes.
+On restricted Windows launchers replace `uv run` with `.\scripts\dev.ps1 -m` for Python modules. Set `$env:ONTOLAYER_EXTERNAL_SERVER='1'` after starting the local preview. Tests cover values, policies, sign-in/out, lineage, exports, publication, offline retry, axe and responsive layouts. Visual baselines at 375/768/1280 are platform-specific; regenerate only after reviewing changes. Lighthouse enforces performance/accessibility/best practices >=90 and an 80 KB gzip static-asset budget. CI checks Python 3.12/3.13, dependencies/SBOM, package builds and Docker startup/query behavior.
 
-For private data, omit `--demo`, issue random tokens and enable `--production` with explicit
-allowed hosts. Production mode disables public developer docs and refuses demo credentials.
-The server enforces strict request contracts, 64 KiB body limits, security headers and per-process
-rate limits. Use the [production deployment guide](docs/production.md) for HTTPS, backups and operations.
+[Baseline audit](docs/audit-v0.3.md) · [Release verification](docs/release-v0.3.md)
+
+## 15. Project structure
 
 ```text
-src/ontolayer/   models, validation, adapters, graph, policies, MCP, API, agent, CLI
-spec/           generated JSON Schema
-examples/       retail and agriculture fixtures, actors, policies, questions
-tests/          semantic, security, source, transport and agent checks
-docs/           architecture, specification, policies, MCP and decisions
-scripts/        fixture generation and Windows development runner
+src/ontolayer/     Contract, adapters, policies, service, API, MCP, agent, workbench
+  static/         Browser UI and locale scaffolding
+examples/         Retail/agriculture data, definitions, actors and evaluations
+spec/             Generated ontology JSON Schema
+tests/            Backend, transport, precision, governance and publication tests
+e2e/              Browser, axe, responsive and screenshot regression tests
+scripts/          Windows Python wrapper; Lighthouse and bundle gate
+docs/             Architecture, spec, policies, deployment, audit and screenshots
+deploy/           Production Compose/Caddy templates
+.github/          CI workflows
+.ontolayer/       Ignored local audit/drafts/certified state
 ```
 
-## References and license
+## 16. Roadmap and limitations
 
-Inspired by [NVIDIA Auto Ontology](https://github.com/NVIDIA/auto-ontology),
-[ModernRelay Omnigraph](https://github.com/ModernRelay/omnigraph),
-[TrustGraph](https://github.com/trustgraph-ai/trustgraph), and
-[Palantir modeling guidance](https://www.palantir.com/docs/foundry/ontology/ontology-best-practices).
-These are architecture references, not bundled backend integrations. See [NOTICE](NOTICE).
+Future work includes remote graph adapters, OIDC, remote MCP authentication, document extraction and visual schema authoring. Graph controls provide button zoom, drag pan, touch taps and browser pinch zoom, not a custom two-finger graph gesture. Authoring is a JSON/YAML document editor. The UI caches permitted definitions in page memory and pages entities, but does not cache arbitrary query responses. Audit browsing covers the current process ring, not historical file ingestion. CSV upload is intentionally bounded.
 
-Apache-2.0. [Contributing](CONTRIBUTING.md) · [Governance](GOVERNANCE.md) ·
-[Code of conduct](CODE_OF_CONDUCT.md) · [Security](SECURITY.md)
+## 17. FAQ and troubleshooting
+
+- **Why not only an LLM?** Definitions, policies and calculations must remain reproducible independently of a model.
+- **Port occupied?** Stop the preview you started or use --port 8001. Do not stop unrelated processes.
+- **Token rejected?** Check namespace, credential file and exact token. Production rejects demo tokens.
+- **Empty graph?** Check mappings, validation and identity grants. Guest sees no concepts or metrics by design.
+- **Draft rejected?** Increase version, fix references/headers/types, then preview. New paths need uploads; stale revisions need reload.
+- **Changes absent after restart?** Use the same persistent workspace directory. MCP processes using the original file do not follow browser releases.
+- **“Last month” unanswered?** Supply explicit dates; the parser refuses to invent boundaries and suggests permitted metrics.
+- **Financial values differ?** Check grain, dates, filters and identity. SQLite REAL has already passed through binary floating point; prefer text/Decimal sources.
+- **429 during testing?** Wait for Retry-After; the same-origin API has a shared per-IP minute quota.
+
+## 18. Contributing, license and acknowledgements
+
+Read [Contributing](CONTRIBUTING.md), [Governance](GOVERNANCE.md), [Code of conduct](CODE_OF_CONDUCT.md), [Security](SECURITY.md) and [Apache-2.0](LICENSE). All included data is synthetic. Never contribute private credentials or records.
+
+References: [NVIDIA auto-ontology](https://github.com/NVIDIA/auto-ontology), [ModernRelay Omnigraph](https://github.com/ModernRelay/omnigraph), [TrustGraph](https://github.com/trustgraph-ai/trustgraph), [Palantir ontology practices](https://www.palantir.com/docs/foundry/ontology/ontology-best-practices). These are references, not bundled adapters or affiliation claims.

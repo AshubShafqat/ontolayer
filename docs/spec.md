@@ -1,5 +1,11 @@
 # Ontology specification
 
+The v0.3 workbench uses this unchanged document format. JSON and YAML input are equivalent.
+Raw export and editing require an administrator. Preview needs a greater semantic version and a
+matching active revision; certification explicitly marks all candidate types and metrics certified.
+New browser sources must be uploaded CSV mappings, not arbitrary filesystem paths. OWL/Turtle
+export is structural and is not accepted as a lossless full-definition import.
+
 The normative machine-readable structure is [`spec/ontology.schema.json`](../spec/ontology.schema.json).
 Unknown keys are rejected. The loader also checks cross-references and numeric metric operands.
 See the complete [retail example](../examples/retail/ontology.yaml).

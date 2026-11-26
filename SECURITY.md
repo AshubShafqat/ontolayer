@@ -4,7 +4,7 @@ Report vulnerabilities privately through this repository's GitHub Security Advis
 or contact the repository owner privately. Do not include sensitive data in public issues.
 
 This is a working reference implementation, not a certified enterprise security product.
-Version 0.2 provides a web workspace and an explicit production configuration profile; deployment
+Version 0.3 provides a web workspace, governed administrator publication and a production profile; deployment
 responsibilities and remaining limits are described in [the production guide](docs/production.md).
 The deployment owner controls ontology documents, mapping paths, actor files, credentials,
 the source directory, and the local process account. These are trusted configuration.
@@ -25,9 +25,15 @@ Untrusted users receive semantic tools, not filesystem access or the maintainer 
   per client IP per process. Ingress-level limits are required when scaling or sharing proxies.
 
 For deployment, use TLS at a reverse proxy, private source storage, random tokens, OS access control,
-rate/request-size limits, and audit-log retention/access controls. One immutable service instance
+rate/request-size limits, and audit-log retention/access controls. One single-writer service instance
 serves one namespace. Tenant isolation is not a substitute for separately isolating data stores.
 Token rotation means replacing/removing the digest entry; authentication reloads the file per request.
-There is no OIDC/JWT federation, distributed rate limiting, or external security audit in v0.1.
+There is no OIDC/JWT federation, distributed rate limiting, or external security audit in v0.3.
 Source-file hashes are provenance, not access-controlled exports of source contents.
 Do not host this demo with public credentials or expose a maintainer actor to an untrusted agent.
+
+Administrators can read raw definitions, upload bounded CSV sources, preview drafts and explicitly
+certify a replacement snapshot. These are trusted capabilities. New browser source paths require
+uploaded bytes; existing paths must match trusted mappings. Preview cannot publish; certification
+requires a matching active revision and graph validation. Protect and back up the entire workspace
+directory. Use one writer process and manage disk retention outside the application.

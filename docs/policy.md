@@ -1,5 +1,16 @@
 # Policies and identities
 
+## Administrator publication in v0.3
+
+The trusted credential role `admin` additionally enables raw definition export, draft validation,
+CSV upload previews and explicit certification. This is a management capability, not a semantic
+tool argument. Treat administrators as trusted ontology/policy owners. All candidate definitions
+remain drafts until certification; stale revisions and invalid graphs cannot replace active state.
+The operator role permits namespace-wide audit metadata; ordinary callers see their own events.
+The browser comparison uses separate public synthetic credentials and is unavailable outside demo mode.
+
+## Semantic grants
+
 Each policy explicitly grants a role access to types, properties and metric IDs. An absent grant
 denies access. Row constraints bind business properties to trusted actor attributes.
 
