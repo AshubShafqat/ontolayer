@@ -320,3 +320,15 @@ Future work includes remote graph adapters, OIDC, remote MCP authentication, doc
 Read [Contributing](CONTRIBUTING.md), [Governance](GOVERNANCE.md), [Code of conduct](CODE_OF_CONDUCT.md), [Security](SECURITY.md) and [Apache-2.0](LICENSE). All included data is synthetic. Never contribute private credentials or records.
 
 References: [NVIDIA auto-ontology](https://github.com/NVIDIA/auto-ontology), [ModernRelay Omnigraph](https://github.com/ModernRelay/omnigraph), [TrustGraph](https://github.com/trustgraph-ai/trustgraph), [Palantir ontology practices](https://www.palantir.com/docs/foundry/ontology/ontology-best-practices). These are references, not bundled adapters or affiliation claims.
+
+## Live demo
+
+Public deployment is pending Render account setup and a successful live smoke
+test. No live URL or public tokens have been published yet. Follow
+[the deployment guide](docs/deploy.md) to deploy one same-origin container and
+issue fresh read-only demo tokens. The sign-in screen can display the explicitly
+configured north, south and analyst tokens; the admin credential remains private.
+
+The free tier may sleep and loses local state on restart. OntoLayer runs one
+process with an in-memory graph. Use a paid persistent disk for durable workspace
+snapshots and audit files. The About page is at `/#about` on the deployed origin.

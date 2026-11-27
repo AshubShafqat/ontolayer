@@ -1,6 +1,7 @@
 """Authenticated REST transport over the same semantic service."""
 
 import hashlib
+import json
 from pathlib import Path
 from typing import Annotated, Any
 
@@ -53,6 +54,7 @@ def create_app(
     allowed_hosts: list[str] | None = None,
     requests_per_minute: int = 240,
     workspace_directory: Path | None = None,
+    public_demo_tokens: Path | None = None,
 ) -> FastAPI:
     credentials = load_credentials(credentials_file)
     if production:
@@ -68,6 +70,26 @@ def create_app(
         }
         if any(c.token_sha256 in demo_hashes for c in credentials.credentials):
             raise ValueError("Public demo credentials cannot be used in production")
+    published: dict[str, str] = {}
+    if public_demo_tokens is not None:
+        raw = json.loads(public_demo_tokens.read_text(encoding="utf-8"))
+        if not isinstance(raw, dict) or set(raw) != {"north", "south", "analyst"}:
+            raise ValueError("Public demo manifest requires exactly three read-only roles")
+        for role, token in raw.items():
+            if not isinstance(token, str):
+                raise ValueError("Invalid public demo token")
+            actor = authenticate(token, credentials_file)
+            expected_roles = ["analyst"] if role == "analyst" else ["regional"]
+            expected_attributes = {} if role == "analyst" else {"region": role}
+            if (
+                actor.namespace != "retail"
+                or actor.roles != expected_roles
+                or actor.attributes != expected_attributes
+            ):
+                raise ValueError("Only synthetic retail read-only credentials may be published")
+        if service.ontology.namespace != "retail":
+            raise ValueError("Public demo credentials require the synthetic retail ontology")
+        published = raw
     workbench = Workbench(service, workspace_directory) if workspace_directory else None
     app = FastAPI(
         title="OntoLayer",
@@ -146,6 +168,7 @@ def create_app(
             "version": __version__,
             "docs": not production,
             "editing": workbench is not None,
+            "public_demo_tokens": published,
         }
 
     @app.get("/v1/workspace", tags=["Application"])

@@ -93,3 +93,24 @@ jobs:
       - name: Container logs
         if: always()
         run: docker logs ontolayer-ci || true
+  windows-snapshots:
+    if: github.event_name == 'workflow_dispatch' && inputs.update_snapshots
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: uv sync --locked
+      - run: npm ci
+      - run: npx playwright install chromium
+      - run: npm run test:e2e -- e2e/visual.spec.cjs --update-snapshots
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: windows-snapshots
+          path: e2e/*-snapshots/
