@@ -90,6 +90,22 @@ jobs:
             -H 'Authorization: Bearer demo-north-token' -H 'Content-Type: application/json' \
             -d '{"arguments":{"metric_id":"revenue","start_date":"2026-10-01","end_date":"2026-11-01"}}' \
             | jq -e '.values.total == "250.0"'
+      - name: Verify production container with fresh credentials
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/ontolayer-secrets"
+          sudo chown 1000:1000 "$RUNNER_TEMP/ontolayer-secrets"
+          docker run --rm -i --entrypoint python \
+            -v "$RUNNER_TEMP/ontolayer-secrets:/app/.ontolayer" \
+            ontolayer:ci - < scripts/prepare_deploy.py
+          docker run -d --name ontolayer-production-ci -p 127.0.0.1:8011:8000 \
+            -e ONTOLAYER_HOSTED=1 -e RENDER_EXTERNAL_HOSTNAME=127.0.0.1 \
+            -v "$RUNNER_TEMP/ontolayer-secrets/deploy:/etc/secrets:ro" ontolayer:ci
+          for attempt in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:8011/health; then break; fi
+            sleep 2
+          done
+          bash scripts/smoke.sh http://127.0.0.1:8011
       - name: Container logs
         if: always()
         run: docker logs ontolayer-ci || true
