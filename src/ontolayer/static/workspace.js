@@ -343,25 +343,6 @@ async function renderExtras(view, epoch) {
   if (epoch !== state.epoch || !state.data) return;
   if (view === "overview") {
     $("#view .page-heading").classList.add("dashboard-heading");
-    const [health, validation, audit] = await Promise.all([
-      api("/health"),
-      api("/v1/validation"),
-      api("/v1/audit"),
-    ]);
-    if (epoch !== state.epoch) return;
-    $("#view").insertAdjacentHTML(
-      "beforeend",
-      `<section class="card">${cardHead("Workspace health", "Current process and permitted definitions")}<div class="card-body"><p>API: ${esc(health.status)} · Design score: ${validation.score}/100 · ${validation.findings.length} warnings</p><p>${state.data.concepts.filter((c) => c.status === "certified").length} certified concepts · ${state.data.concepts.filter((c) => c.status === "draft").length} drafts</p><h3>Recent queries</h3>${historyHTML()}<h3>Recent policy denials</h3>${
-        audit.items
-          .filter((e) => e.outcome !== "allowed")
-          .slice(0, 5)
-          .map(
-            (e) =>
-              `<p>${esc(e.timestamp)} · ${esc(e.operation)} · ${esc(e.outcome)}</p>`,
-          )
-          .join("") || "<p>No denials in the available process history.</p>"
-      }</div></section>`,
-    );
     if (typeof dashboardVisuals === "function") await dashboardVisuals(epoch);
   }
   if (view === "explorer" && state.data.concepts.length) {
@@ -467,10 +448,10 @@ async function renderExtras(view, epoch) {
     $("#view").innerHTML =
       heading(
         "DEPLOYMENT",
-        "Settings & about",
-        "Version, preferences and operating boundaries",
+        "Workspace settings",
+        "Application details and preferences",
       ) +
-      `<section class="card"><div class="card-body"><dl><dt>Application</dt><dd>${esc(state.config.version)}</dd><dt>Ontology</dt><dd>${esc(state.data.namespace)} ${esc(state.data.version)}</dd><dt>Environment</dt><dd>${state.config.demo ? "Synthetic demo" : "Authenticated deployment"}</dd><dt>Identity</dt><dd>${esc(state.data.actor.id)} · ${esc(state.data.actor.roles.join(", "))}</dd></dl><p>Theme preferences are stored per identity in this browser. Credentials and query results remain in memory.</p><p>English is the available language. Locale dictionaries and RTL direction handling are prepared for future translations.</p><a class="btn" href="https://github.com/AshubShafqat/ontolayer#readme" target="_blank" rel="noopener">Project documentation</a><button class="btn" data-action="help">Keyboard help</button></div></section>`;
+      `<section class="card"><div class="card-body"><dl><dt>Application</dt><dd>${esc(state.config.version)}</dd><dt>Ontology</dt><dd>${esc(state.data.namespace)} ${esc(state.data.version)}</dd><dt>Environment</dt><dd>${state.config.demo ? "Synthetic demo" : "Authenticated deployment"}</dd><dt>Identity</dt><dd>${esc(state.data.actor.id)} · ${esc(state.data.actor.roles.join(", "))}</dd></dl><p>Theme preferences are stored per identity in this browser. Credentials and query results remain in memory.</p><p>The About page is available in English and Urdu.</p><a class="btn" href="https://github.com/AshubShafqat/ontolayer#readme" target="_blank" rel="noopener">Project documentation</a><button class="btn" data-action="help">Keyboard help</button></div></section>`;
   if (view === "editor") await renderEditor(epoch);
 }
 function renderAudit(query) {

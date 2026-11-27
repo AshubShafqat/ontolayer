@@ -8,7 +8,7 @@ test("workspace loads live values and switches identity without stale data", asy
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/");
   await expect(
-    page.getByRole("heading", { name: "Business knowledge, connected." }),
+    page.getByRole("heading", { name: "Workspace overview" }),
   ).toBeVisible();
   await expect(page.locator(".insight-number")).toContainText("330");
   await page.getByLabel("Demo identity").selectOption("admin");
