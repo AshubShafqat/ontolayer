@@ -4,6 +4,8 @@ import asyncio
 import hashlib
 import json
 import secrets
+from collections.abc import Callable
+from functools import wraps
 from pathlib import Path
 from typing import Annotated, Literal
 
@@ -19,7 +21,7 @@ from ontolayer.evaluation import evaluate
 from ontolayer.proposals import certify as certify_proposal
 from ontolayer.proposals import draft_csv, propose
 from ontolayer.server import create_mcp
-from ontolayer.service import AuditLog, Service
+from ontolayer.service import AuditLog, Denied, Service
 from ontolayer.spec import export_graph, load, write_schema
 from ontolayer.spec import lint as lint_spec
 
@@ -27,7 +29,22 @@ app = typer.Typer(help="OntoLayer: business ontology, knowledge graphs, and gove
 FileOption = Annotated[Path, typer.Option(exists=True, dir_okay=False)]
 
 
+def clean_denial[**P, R](command: Callable[P, R]) -> Callable[P, R]:
+    """Keep service denials concise without leaking resource existence."""
+
+    @wraps(command)
+    def wrapped(*args: P.args, **kwargs: P.kwargs) -> R:
+        try:
+            return command(*args, **kwargs)
+        except Denied:
+            typer.echo("Error: Not available to this caller", err=True)
+            raise typer.Exit(1) from None
+
+    return wrapped
+
+
 @app.command("evaluate")
+@clean_denial
 def evaluate_command(ontology: FileOption, questions: FileOption) -> None:
     """Evaluate fixture questions through the reference agent and real MCP transport."""
     result = asyncio.run(evaluate(ontology, questions))
@@ -41,12 +58,14 @@ def emit(value: object) -> None:
 
 
 @app.command()
+@clean_denial
 def version() -> None:
     """Show package version."""
     typer.echo(__version__)
 
 
 @app.command()
+@clean_denial
 def validate(ontology: FileOption) -> None:
     """Validate syntax, typed references, policies, mappings, and metric definitions."""
     document = load(ontology)
@@ -54,18 +73,21 @@ def validate(ontology: FileOption) -> None:
 
 
 @app.command()
+@clean_denial
 def lint(ontology: FileOption) -> None:
     """Report advisory business modeling warnings."""
     emit(lint_spec(load(ontology)))
 
 
 @app.command()
+@clean_denial
 def schema(output: Path = Path("spec/ontology.schema.json")) -> None:
     """Write the JSON Schema for editor and CI integrations."""
     write_schema(output)
 
 
 @app.command()
+@clean_denial
 def export(ontology: FileOption, output: Path = Path("ontology.ttl"), data: bool = False) -> None:
     """Export schema/SHACL or data as Turtle. Trusted local maintainer command."""
     content = (
@@ -78,6 +100,7 @@ def export(ontology: FileOption, output: Path = Path("ontology.ttl"), data: bool
 
 
 @app.command()
+@clean_denial
 def build(ontology: FileOption) -> None:
     """Ingest and validate all sources atomically."""
     service = Service.from_file(ontology)
@@ -91,6 +114,7 @@ def build(ontology: FileOption) -> None:
 
 
 @app.command()
+@clean_denial
 def mcp(
     ontology: FileOption, actor: FileOption, audit: Path = Path(".ontolayer/audit.jsonl")
 ) -> None:
@@ -100,6 +124,7 @@ def mcp(
 
 
 @app.command()
+@clean_denial
 def serve(
     ontology: FileOption,
     credentials: FileOption,
@@ -110,6 +135,7 @@ def serve(
     production: bool = False,
     allowed_host: list[str] | None = None,
     workspace_directory: Path = Path(".ontolayer/workspace"),
+    public_demo_tokens: FileOption | None = None,
 ) -> None:
     """Run the web application and authenticated API. --demo enables synthetic demo sign-in."""
     service = Service.from_file(ontology, AuditLog(audit))
@@ -121,6 +147,7 @@ def serve(
             production=production,
             allowed_hosts=allowed_host,
             workspace_directory=workspace_directory,
+            public_demo_tokens=public_demo_tokens,
         ),
         host=host,
         port=port,
@@ -131,6 +158,7 @@ def serve(
 
 
 @app.command()
+@clean_denial
 def ask(
     question: str,
     ontology: FileOption,
@@ -144,6 +172,7 @@ def ask(
 
 
 @app.command()
+@clean_denial
 def query(
     ontology: FileOption,
     actor: FileOption,
@@ -154,25 +183,28 @@ def query(
 ) -> None:
     """Execute a metric directly, using exactly the same service as MCP."""
     service = Service.from_file(ontology)
-    emit(
-        service.call(
-            actor_from_file(actor),
-            "query_metric",
-            metric_id=metric,
-            group_by=group_by,
-            start_date=start_date,
-            end_date=end_date,
-        )
+    result = service.call(
+        actor_from_file(actor),
+        "query_metric",
+        metric_id=metric,
+        group_by=group_by,
+        start_date=start_date,
+        end_date=end_date,
     )
+    if start_date is None and end_date is None:
+        typer.echo("Date range: All dates", err=True)
+    emit(result)
 
 
 @app.command("propose")
+@clean_denial
 def propose_command(candidate: FileOption, directory: Path = Path(".ontolayer/proposals")) -> None:
     """Validate a candidate and save a separate draft for review."""
     emit({"proposal": str(propose(candidate, directory))})
 
 
 @app.command()
+@clean_denial
 def certify(
     proposal: FileOption,
     output: Annotated[Path, typer.Option()],
@@ -184,6 +216,7 @@ def certify(
 
 
 @app.command("draft-csv")
+@clean_denial
 def draft_csv_command(
     source: FileOption,
     output: Annotated[Path, typer.Option()],
@@ -197,6 +230,7 @@ def draft_csv_command(
 
 
 @app.command("issue-token")
+@clean_denial
 def issue_token(actor: FileOption, output: Annotated[Path, typer.Option()]) -> None:
     """Create a credential file and print its random token once. Do not commit this file."""
     token = secrets.token_urlsafe(32)
