@@ -3,7 +3,84 @@
     "direction": "ltr",
     "search": "Search",
     "retry": "Retry page",
-    "loading": "Loading your permitted data…"
+    "loading": "Loading your permitted data…",
+    "about": {
+      "title": "About OntoLayer",
+      "eyebrow": "MEANING WITH BOUNDARIES",
+      "description": "OntoLayer is an open-source business semantic layer: a shared dictionary, relationship map and access rulebook. It turns mapped data into a validated knowledge graph so people and agents can query certified metrics with source evidence. Access rules filter records before calculation or disclosure.",
+      "demo": "Same question, three authorized views",
+      "example": "October 2026 revenue: North $250 · South $350 · Analyst $600. Start: October 1 inclusive; end: November 1 exclusive.",
+      "flow": [
+        "Connect data",
+        "Define concepts",
+        "Validate graph",
+        "Certify definitions",
+        "Apply access rules",
+        "Ask and trace"
+      ],
+      "resources": "Explore the project",
+      "limitsTitle": "Current limits",
+      "limits": [
+        "Single process and one writer per workspace",
+        "In-memory graph",
+        "No OIDC authentication",
+        "No HTTP MCP transport; MCP uses stdio",
+        "No document extraction"
+      ],
+      "links": [
+        "Live app",
+        "Health",
+        "Source code",
+        "MCP documentation",
+        "API specification",
+        "Architecture and limits",
+        "Security policy",
+        "License: Apache-2.0",
+        "Author on GitHub",
+        "Author portfolio"
+      ],
+      "language": "About page language"
+    }
   },
-  "ur": { "direction": "rtl", "available": false }
+  "ur": {
+    "direction": "rtl",
+    "available": false,
+    "about": {
+      "title": "اونٹو لیئر کے بارے میں",
+      "eyebrow": "رسائی کے اصولوں کے ساتھ کاروباری معنی",
+      "description": "اونٹو لیئر کاروباری معلومات کی ایک اوپن سورس معنوی تہہ ہے: مشترکہ لغت، تعلقات کا نقشہ اور رسائی کے اصول۔ یہ ڈیٹا کو تصدیق شدہ نالج گراف میں بدلتی ہے تاکہ لوگ اور ایجنٹس ماخذ کے ثبوت کے ساتھ منظور شدہ پیمانوں پر سوال کر سکیں۔ حساب اور معلومات کی فراہمی سے پہلے رسائی کے اصول نافذ ہوتے ہیں۔",
+      "demo": "ایک سوال، رسائی کے مطابق تین نتائج",
+      "example": "اکتوبر ۲۰۲۶ کی آمدنی: شمال ۲۵۰ ڈالر، جنوب ۳۵۰ ڈالر، تجزیہ کار ۶۰۰ ڈالر۔ یکم اکتوبر شامل اور یکم نومبر خارج ہے۔",
+      "flow": [
+        "ڈیٹا جوڑیں",
+        "تصورات بیان کریں",
+        "گراف کی جانچ کریں",
+        "تعریفیں منظور کریں",
+        "رسائی کے اصول لگائیں",
+        "سوال اور ماخذ دیکھیں"
+      ],
+      "resources": "منصوبے کی تفصیل",
+      "limitsTitle": "موجودہ حدود",
+      "limits": [
+        "ہر ورک اسپیس میں ایک پراسیس اور ایک لکھنے والا",
+        "گراف میموری میں رہتا ہے",
+        "OIDC توثیق موجود نہیں",
+        "HTTP MCP موجود نہیں؛ MCP کے لیے stdio استعمال ہوتا ہے",
+        "دستاویزات سے معلومات اخذ نہیں ہوتیں"
+      ],
+      "links": [
+        "لائیو ایپ",
+        "صحت کی جانچ",
+        "سورس کوڈ",
+        "MCP دستاویزات",
+        "API کی تفصیل",
+        "ساخت اور حدود",
+        "سیکیورٹی پالیسی",
+        "لائسنس: Apache-2.0",
+        "مصنف کا GitHub",
+        "مصنف کا پورٹ فولیو"
+      ],
+      "language": "اس صفحے کی زبان"
+    }
+  }
 }

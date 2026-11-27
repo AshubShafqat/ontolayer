@@ -68,7 +68,8 @@ const navigation = [
   ["mcp", "MCP connect", "link"],
   ["audit", "Audit log", "shield"],
   ["editor", "Draft & import", "cube"],
-  ["settings", "Settings & about", "data"],
+  ["settings", "Settings", "data"],
+  ["about", "About", "link"],
 ];
 
 async function api(path, body) {
@@ -134,9 +135,21 @@ function empty(title, description) {
   return `<div class="empty">${icon("graph")}<h3>${esc(title)}</h3><p>${esc(description)}</p></div>`;
 }
 
+function publicDemoCredentials() {
+  const tokens = state.config?.public_demo_tokens || {};
+  if (!Object.keys(tokens).length) return "";
+  return `<details class="public-demo-credentials"><summary>Public synthetic demo tokens</summary><p>Read-only access to sample retail data. Copy a token into the field above.</p>${Object.entries(
+    tokens,
+  )
+    .map(
+      ([role, token]) =>
+        `<p><strong>${esc(pretty(role))}</strong><code>${esc(token)}</code></p>`,
+    )
+    .join("")}</details>`;
+}
 function login(message = "") {
   $("#app").innerHTML =
-    `<div class="login-wrap"><section class="login-story"><a href="/" class="brand"><img src="/static/mark.svg" alt="">OntoLayer</a><div class="eyebrow">THE BUSINESS KNOWLEDGE WORKSPACE</div><h1>Connect your data.<br>Give it meaning.</h1><p>Explore business concepts, ask governed questions, and follow every answer back to its source.</p><div class="status"><span class="dot"></span>Local workspace ready</div></section><main id="main" class="login-form-wrap"><form id="login-form" class="login-form"><div class="eyebrow">WELCOME TO ONTOLAYER</div><h2>Open your workspace</h2><p>Use a credential issued by your workspace administrator. It stays in memory for this session.</p><div id="login-error" class="error-banner" ${message ? "" : "hidden"}>${esc(message)}</div><label for="token">Access token</label><input id="token" name="token" type="password" autocomplete="off" required placeholder="Enter your access token"><button class="btn primary" type="submit">Connect to workspace ${icon("arrow")}</button>${state.config?.demo ? `<div class="divider">or explore synthetic data</div><button class="btn" type="button" data-action="demo-login">Open retail demo ${icon("arrow")}</button><p class="note">Demo roles let you see how access policies change the results.</p>` : ""}</form></main></div>`;
+    `<div class="login-wrap"><section class="login-story"><a href="/" class="brand"><img src="/static/mark.svg" alt="">OntoLayer</a><div class="eyebrow">THE BUSINESS KNOWLEDGE WORKSPACE</div><h1>Connect your data.<br>Give it meaning.</h1><p>Explore business concepts, ask governed questions, and follow every answer back to its source.</p><div class="status"><span class="dot"></span>Local workspace ready</div></section><main id="main" class="login-form-wrap"><form id="login-form" class="login-form"><div class="eyebrow">WELCOME TO ONTOLAYER</div><h2>Open your workspace</h2><p>Use a credential issued by your workspace administrator. It stays in memory for this session.</p><div id="login-error" class="error-banner" ${message ? "" : "hidden"}>${esc(message)}</div><label for="token">Access token</label><input id="token" name="token" type="password" autocomplete="off" required placeholder="Enter your access token"><button class="btn primary" type="submit">Connect to workspace ${icon("arrow")}</button>${publicDemoCredentials()}${state.config?.demo ? `<div class="divider">or explore synthetic data</div><button class="btn" type="button" data-action="demo-login">Open retail demo ${icon("arrow")}</button><p class="note">Demo roles let you see how access policies change the results.</p>` : ""}</form></main></div>`;
 }
 function resetIdentity() {
   state.controller.abort();
@@ -263,6 +276,7 @@ async function renderView() {
     if (view === "explorer") await explorer(epoch);
     if (view === "studio") studio();
     if (view === "access") access();
+    if (view === "about") await renderAbout();
     if (typeof renderExtras === "function") await renderExtras(view, epoch);
     announce(`${navigation.find((n) => n[0] === view)[1]} loaded`);
   } catch (error) {
@@ -432,7 +446,7 @@ function resultHTML(r) {
     max = Math.max(...values.map(([, v]) => Number(v)), 1);
   return (
     cardHead("Query result", esc(pretty(r.metric)), badge(r.status)) +
-    `<div class="card-body">${values.length === 1 ? `<div class="result-number">${esc(number(values[0][1]))}<small>${esc(r.unit)}</small></div>${values[0][0] !== "total" ? `<p>${esc(values[0][0])}</p>` : ""}` : values.length ? `<div class="bars">${values.map(([k, v]) => `<div class="bar-row"><span>${esc(k)}</span><meter min="0" max="${max}" value="${esc(v)}" aria-label="${esc(k)}"></meter><strong>${esc(number(v))} ${esc(r.unit)}</strong></div>`).join("")}</div>` : empty("No matching groups", "Change the filters or date interval.")}<div class="result-scope">${icon("shield")} ${esc(r.scope)}</div><dl class="result-grid"><div><dt>Date range</dt><dd>${esc(r.start_date || "Beginning")} → ${esc(r.end_date_exclusive || "Latest")}<small> (end exclusive)</small></dd></div><div><dt>Ontology version</dt><dd>${esc(r.ontology_version)}</dd></div><div><dt>Grain</dt><dd>${esc(r.grain)}</dd></div><div><dt>Filters</dt><dd>${
+    `<div class="card-body">${values.length === 1 ? `<div class="result-number">${esc(number(values[0][1]))}<small>${esc(r.unit)}</small></div>${values[0][0] !== "total" ? `<p>${esc(values[0][0])}</p>` : ""}` : values.length ? `<div class="bars">${values.map(([k, v]) => `<div class="bar-row"><span>${esc(k)}</span><meter min="0" max="${max}" value="${esc(v)}" aria-label="${esc(k)}"></meter><strong>${esc(number(v))} ${esc(r.unit)}</strong></div>`).join("")}</div>` : empty("No matching groups", "Change the filters or date interval.")}<div class="result-scope">${icon("shield")} ${esc(r.scope)}</div><dl class="result-grid"><div><dt>Date range</dt><dd>${!r.start_date && !r.end_date_exclusive ? "All dates" : `${esc(r.start_date || "Beginning")} → ${esc(r.end_date_exclusive || "Latest")}<small> (end exclusive)</small>`}</dd></div><div><dt>Ontology version</dt><dd>${esc(r.ontology_version)}</dd></div><div><dt>Grain</dt><dd>${esc(r.grain)}</dd></div><div><dt>Filters</dt><dd>${
       Object.entries(r.filters)
         .map(([k, v]) => `${esc(k)} = ${esc(v)}`)
         .join(", ") || "None"

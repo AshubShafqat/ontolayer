@@ -847,3 +847,40 @@ document.addEventListener("click", async (event) => {
     showError(error);
   }
 });
+
+async function renderAbout(language = "en") {
+  const epoch = state.epoch;
+  const catalog = await fetch("/static/locales.json").then((r) => r.json());
+  if (state.view !== "about" || epoch !== state.epoch) return;
+  const locale = catalog[language] || catalog.en;
+  const copy = locale.about;
+  const repo = "https://github.com/AshubShafqat/ontolayer";
+  const urls = [
+    window.location.origin,
+    `${window.location.origin}/health`,
+    repo,
+    `${repo}/blob/main/docs/mcp.md`,
+    `${repo}/blob/main/docs/spec.md`,
+    `${repo}/blob/main/docs/architecture.md`,
+    `${repo}/blob/main/SECURITY.md`,
+    `${repo}/blob/main/LICENSE`,
+    "https://github.com/AshubShafqat",
+    "https://ashub-portfolio.vercel.app",
+  ];
+  $("#view").innerHTML =
+    `<section class="about-page" lang="${esc(language)}" dir="${esc(locale.direction)}">
+    ${heading(esc(copy.eyebrow), esc(copy.title), esc(copy.description))}
+    <label for="about-language">${esc(copy.language)}</label>
+    <select id="about-language">${Object.keys(catalog)
+      .map(
+        (key) =>
+          `<option value="${esc(key)}" ${key === language ? "selected" : ""}>${key === "ur" ? "اردو" : "English"}</option>`,
+      )
+      .join("")}</select>
+    <section class="card about-demo"><div class="card-body"><h2>${esc(copy.demo)}</h2><p>${esc(copy.example)}</p><ol class="about-flow">${copy.flow.map((step) => `<li>${esc(step)}</li>`).join("")}</ol></div></section>
+    <div class="about-columns"><section class="card"><div class="card-body"><h2>${esc(copy.resources)}</h2><ul class="about-links">${urls.map((url, i) => `<li><a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(copy.links[i])}${icon("arrow")}</a></li>`).join("")}</ul></div></section>
+    <section class="card"><div class="card-body"><h2>${esc(copy.limitsTitle)}</h2><ul class="about-limits">${copy.limits.map((limit) => `<li>${esc(limit)}</li>`).join("")}</ul></div></section></div></section>`;
+  $("#about-language").addEventListener("change", (event) =>
+    renderAbout(event.target.value).catch(showError),
+  );
+}
