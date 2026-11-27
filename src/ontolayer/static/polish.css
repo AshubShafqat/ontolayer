@@ -187,9 +187,9 @@ body {
   font-size: 13px;
   font-weight: 600;
   padding: 11px 16px;
+  /* Switch foreground and background together to preserve theme-change contrast. */
   transition:
     box-shadow 180ms,
-    background 180ms,
     transform 180ms;
 }
 .btn.primary {
