@@ -6,6 +6,10 @@
 
 [CI](https://github.com/AshubShafqat/ontolayer/actions/workflows/ci.yml) · [Apache-2.0](LICENSE) · Python 3.12+ · Self-hosted
 
+**[Open the live student demo](https://ontolayer.vercel.app)** · [About the project](https://ontolayer.vercel.app/#about)
+
+Choose **North**, **South**, or **Analyst** to explore synthetic data with read-only access.
+
 ## 1. What is OntoLayer?
 
 An ontology defines business things such as Customer, Order and Product, their properties and their relationships. OntoLayer maps source data into those definitions, calculates reviewed metrics and enforces access policies before returning results.
@@ -52,7 +56,7 @@ It is for developers building semantic APIs, teams evaluating governed agents an
 | Light/dark/system appearance, mobile menu, shortcuts, offline retry | Workspace |
 | Eleven read-only MCP tools; LangGraph reference agent | MCP stdio; CLI ask/evaluate |
 
-Turtle export is structural schema/SHACL, not a lossless encoding of metrics and policies. Browser CSV uploads are limited to 48 KB and 1000 rows; complete requests are limited to 64 KiB. English is available; locale dictionaries and RTL direction scaffolding exist, but Urdu translation is not implemented.
+Turtle export is structural schema/SHACL, not a lossless encoding of metrics and policies. Browser CSV uploads are limited to 48 KB and 1000 rows; complete requests are limited to 64 KiB. The workspace is in English; the About page supports English and Urdu.
 
 ## 5. How it works
 
@@ -320,3 +324,27 @@ Future work includes remote graph adapters, OIDC, remote MCP authentication, doc
 Read [Contributing](CONTRIBUTING.md), [Governance](GOVERNANCE.md), [Code of conduct](CODE_OF_CONDUCT.md), [Security](SECURITY.md) and [Apache-2.0](LICENSE). All included data is synthetic. Never contribute private credentials or records.
 
 References: [NVIDIA auto-ontology](https://github.com/NVIDIA/auto-ontology), [ModernRelay Omnigraph](https://github.com/ModernRelay/omnigraph), [TrustGraph](https://github.com/trustgraph-ai/trustgraph), [Palantir ontology practices](https://www.palantir.com/docs/foundry/ontology/ontology-best-practices). These are references, not bundled adapters or affiliation claims.
+
+## Live demo
+
+**Live application:** https://ontolayer.vercel.app
+
+**About:** https://ontolayer.vercel.app/#about (choose a demo role first)
+
+Hosted on Vercel Hobby for a personal student demonstration. North, South and
+Analyst sign-in buttons use fresh read-only credentials for synthetic retail data.
+The sign-in screen's **View public demo tokens** disclosure exposes these same
+three credentials for API experiments. The administrator credential stays private.
+
+Live smoke verification passed on November 28, 2026: health, UI assets, production
+profile, October revenue totals (North 250.0, South 350.0, Analyst 600.0), and
+indistinguishable forbidden/nonexistent records across regional boundaries.
+
+The serverless demo supports graph exploration, queries and evidence. Ontology
+editing/certification is available in the local or persistent-container version;
+it is disabled on this host. Audit history and rate counters are per instance and
+ephemeral. This is not durable enterprise hosting. MCP uses the documented local
+stdio command, not a remote endpoint at the demo URL.
+
+See [Vercel student deployment](docs/deploy-vercel.md) or the
+[persistent-container deployment guide](docs/deploy.md).

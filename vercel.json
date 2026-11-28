@@ -1,0 +1,16 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "fastapi",
+  "git": {
+    "deploymentEnabled": {
+      "**": false,
+      "main": true
+    }
+  },
+  "functions": {
+    "app.py": {
+      "maxDuration": 60,
+      "excludeFiles": "{.ontolayer/**,.venv/**,.uv-cache/**,node_modules/**,e2e/**,tests/**,test-results/**,playwright-report/**,docs/**,.git/**}"
+    }
+  }
+}

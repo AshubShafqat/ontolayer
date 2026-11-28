@@ -343,25 +343,6 @@ async function renderExtras(view, epoch) {
   if (epoch !== state.epoch || !state.data) return;
   if (view === "overview") {
     $("#view .page-heading").classList.add("dashboard-heading");
-    const [health, validation, audit] = await Promise.all([
-      api("/health"),
-      api("/v1/validation"),
-      api("/v1/audit"),
-    ]);
-    if (epoch !== state.epoch) return;
-    $("#view").insertAdjacentHTML(
-      "beforeend",
-      `<section class="card">${cardHead("Workspace health", "Current process and permitted definitions")}<div class="card-body"><p>API: ${esc(health.status)} · Design score: ${validation.score}/100 · ${validation.findings.length} warnings</p><p>${state.data.concepts.filter((c) => c.status === "certified").length} certified concepts · ${state.data.concepts.filter((c) => c.status === "draft").length} drafts</p><h3>Recent queries</h3>${historyHTML()}<h3>Recent policy denials</h3>${
-        audit.items
-          .filter((e) => e.outcome !== "allowed")
-          .slice(0, 5)
-          .map(
-            (e) =>
-              `<p>${esc(e.timestamp)} · ${esc(e.operation)} · ${esc(e.outcome)}</p>`,
-          )
-          .join("") || "<p>No denials in the available process history.</p>"
-      }</div></section>`,
-    );
     if (typeof dashboardVisuals === "function") await dashboardVisuals(epoch);
   }
   if (view === "explorer" && state.data.concepts.length) {
@@ -467,10 +448,10 @@ async function renderExtras(view, epoch) {
     $("#view").innerHTML =
       heading(
         "DEPLOYMENT",
-        "Settings & about",
-        "Version, preferences and operating boundaries",
+        "Workspace settings",
+        "Application details and preferences",
       ) +
-      `<section class="card"><div class="card-body"><dl><dt>Application</dt><dd>${esc(state.config.version)}</dd><dt>Ontology</dt><dd>${esc(state.data.namespace)} ${esc(state.data.version)}</dd><dt>Environment</dt><dd>${state.config.demo ? "Synthetic demo" : "Authenticated deployment"}</dd><dt>Identity</dt><dd>${esc(state.data.actor.id)} · ${esc(state.data.actor.roles.join(", "))}</dd></dl><p>Theme preferences are stored per identity in this browser. Credentials and query results remain in memory.</p><p>English is the available language. Locale dictionaries and RTL direction handling are prepared for future translations.</p><a class="btn" href="https://github.com/AshubShafqat/ontolayer#readme" target="_blank" rel="noopener">Project documentation</a><button class="btn" data-action="help">Keyboard help</button></div></section>`;
+      `<section class="card"><div class="card-body"><dl><dt>Application</dt><dd>${esc(state.config.version)}</dd><dt>Ontology</dt><dd>${esc(state.data.namespace)} ${esc(state.data.version)}</dd><dt>Environment</dt><dd>${state.config.demo ? "Synthetic demo" : "Authenticated deployment"}</dd><dt>Identity</dt><dd>${esc(state.data.actor.id)} · ${esc(state.data.actor.roles.join(", "))}</dd></dl><p>Theme preferences are stored per identity in this browser. Credentials and query results remain in memory.</p><p>The About page is available in English and Urdu.</p><a class="btn" href="https://github.com/AshubShafqat/ontolayer#readme" target="_blank" rel="noopener">Project documentation</a><button class="btn" data-action="help">Keyboard help</button></div></section>`;
   if (view === "editor") await renderEditor(epoch);
 }
 function renderAudit(query) {
@@ -847,3 +828,40 @@ document.addEventListener("click", async (event) => {
     showError(error);
   }
 });
+
+async function renderAbout(language = "en") {
+  const epoch = state.epoch;
+  const catalog = await fetch("/static/locales.json").then((r) => r.json());
+  if (state.view !== "about" || epoch !== state.epoch) return;
+  const locale = catalog[language] || catalog.en;
+  const copy = locale.about;
+  const repo = "https://github.com/AshubShafqat/ontolayer";
+  const urls = [
+    window.location.origin,
+    `${window.location.origin}/health`,
+    repo,
+    `${repo}/blob/main/docs/mcp.md`,
+    `${repo}/blob/main/docs/spec.md`,
+    `${repo}/blob/main/docs/architecture.md`,
+    `${repo}/blob/main/SECURITY.md`,
+    `${repo}/blob/main/LICENSE`,
+    "https://github.com/AshubShafqat",
+    "https://ashub-portfolio.vercel.app",
+  ];
+  $("#view").innerHTML =
+    `<section class="about-page" lang="${esc(language)}" dir="${esc(locale.direction)}">
+    ${heading(esc(copy.eyebrow), esc(copy.title), esc(copy.description))}
+    <label for="about-language">${esc(copy.language)}</label>
+    <select id="about-language">${Object.keys(catalog)
+      .map(
+        (key) =>
+          `<option value="${esc(key)}" ${key === language ? "selected" : ""}>${key === "ur" ? "اردو" : "English"}</option>`,
+      )
+      .join("")}</select>
+    <section class="card about-demo"><div class="card-body"><h2>${esc(copy.demo)}</h2><p>${esc(copy.example)}</p><ol class="about-flow">${copy.flow.map((step) => `<li>${esc(step)}</li>`).join("")}</ol></div></section>
+    <div class="about-columns"><section class="card"><div class="card-body"><h2>${esc(copy.resources)}</h2><ul class="about-links">${urls.map((url, i) => `<li><a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(copy.links[i])}${icon("arrow")}</a></li>`).join("")}</ul></div></section>
+    <section class="card"><div class="card-body"><h2>${esc(copy.limitsTitle)}</h2><ul class="about-limits">${copy.limits.map((limit) => `<li>${esc(limit)}</li>`).join("")}</ul></div></section></div></section>`;
+  $("#about-language").addEventListener("change", (event) =>
+    renderAbout(event.target.value).catch(showError),
+  );
+}

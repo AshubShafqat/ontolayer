@@ -68,7 +68,8 @@ const navigation = [
   ["mcp", "MCP connect", "link"],
   ["audit", "Audit log", "shield"],
   ["editor", "Draft & import", "cube"],
-  ["settings", "Settings & about", "data"],
+  ["settings", "Settings", "data"],
+  ["about", "About", "link"],
 ];
 
 async function api(path, body) {
@@ -134,9 +135,30 @@ function empty(title, description) {
   return `<div class="empty">${icon("graph")}<h3>${esc(title)}</h3><p>${esc(description)}</p></div>`;
 }
 
+function publicDemoCredentials() {
+  const tokens = state.config?.public_demo_tokens || {};
+  if (!Object.keys(tokens).length) return "";
+  return `<section class="public-demo-credentials" aria-label="Try the retail demo"><div class="divider">Explore sample data</div><div class="demo-choices">${Object.keys(
+    tokens,
+  )
+    .map(
+      (role) =>
+        `<button type="button" class="demo-choice" data-public-role="${esc(role)}"><span>${icon(role === "analyst" ? "graph" : "data")}</span><strong>${esc(pretty(role))}</strong><small>${role === "analyst" ? "Both regions" : "Regional access"}</small>${icon("arrow")}</button>`,
+    )
+    .join(
+      "",
+    )}</div><p class="note">Synthetic retail data · Read-only access</p><details><summary>View public demo tokens</summary>${Object.entries(
+    tokens,
+  )
+    .map(
+      ([role, token]) =>
+        `<p><strong>${esc(pretty(role))}</strong><code>${esc(token)}</code></p>`,
+    )
+    .join("")}</details></section>`;
+}
 function login(message = "") {
   $("#app").innerHTML =
-    `<div class="login-wrap"><section class="login-story"><a href="/" class="brand"><img src="/static/mark.svg" alt="">OntoLayer</a><div class="eyebrow">THE BUSINESS KNOWLEDGE WORKSPACE</div><h1>Connect your data.<br>Give it meaning.</h1><p>Explore business concepts, ask governed questions, and follow every answer back to its source.</p><div class="status"><span class="dot"></span>Local workspace ready</div></section><main id="main" class="login-form-wrap"><form id="login-form" class="login-form"><div class="eyebrow">WELCOME TO ONTOLAYER</div><h2>Open your workspace</h2><p>Use a credential issued by your workspace administrator. It stays in memory for this session.</p><div id="login-error" class="error-banner" ${message ? "" : "hidden"}>${esc(message)}</div><label for="token">Access token</label><input id="token" name="token" type="password" autocomplete="off" required placeholder="Enter your access token"><button class="btn primary" type="submit">Connect to workspace ${icon("arrow")}</button>${state.config?.demo ? `<div class="divider">or explore synthetic data</div><button class="btn" type="button" data-action="demo-login">Open retail demo ${icon("arrow")}</button><p class="note">Demo roles let you see how access policies change the results.</p>` : ""}</form></main></div>`;
+    `<div class="login-wrap"><section class="login-story"><a href="/" class="brand"><img src="/static/mark.svg" alt="">OntoLayer</a><div class="eyebrow">BUSINESS KNOWLEDGE, CONNECTED</div><h1>Your business.<br>One shared language.</h1><p>Explore connected data. Ask a question. Trace every answer.</p><div class="status"><span class="dot"></span>Semantic workspace</div></section><main id="main" class="login-form-wrap"><form id="login-form" class="login-form"><div class="eyebrow">WELCOME TO ONTOLAYER</div><h2>Open your workspace</h2><p>Sign in with your workspace token or explore the sample data below.</p><div id="login-error" class="error-banner" ${message ? "" : "hidden"}>${esc(message)}</div><label for="token">Access token</label><input id="token" name="token" type="password" autocomplete="off" required placeholder="Enter your access token"><button class="btn primary" type="submit">Connect to workspace ${icon("arrow")}</button>${publicDemoCredentials()}${state.config?.demo ? `<div class="divider">or explore synthetic data</div><button class="btn" type="button" data-action="demo-login">Open retail demo ${icon("arrow")}</button><p class="note">Demo roles let you see how access policies change the results.</p>` : ""}</form></main></div>`;
 }
 function resetIdentity() {
   state.controller.abort();
@@ -176,7 +198,7 @@ async function connect(token, role = "custom") {
 function shell() {
   const d = state.data;
   $("#app").innerHTML =
-    `<div class="layout"><aside class="sidebar"><a class="brand" href="#overview"><img src="/static/mark.svg" alt="">OntoLayer</a><div class="workspace-label">WORKSPACE</div><nav class="nav" aria-label="Workspace navigation">${navigation.map(([id, label, symbol]) => `<a href="#${id}" data-nav="${id}">${icon(symbol)}${label}</a>`).join("")}</nav><div class="side-bottom"><div class="side-note">${icon("shield")}<strong>Meaning with boundaries</strong>Every query follows your workspace’s access policies.</div><div class="side-footer"><span>v${esc(state.config.version)}</span>${state.config.docs ? '<a href="/docs" target="_blank" rel="noopener">API docs ↗</a>' : "<span>Protected workspace</span>"}</div></div></aside><div class="main-wrap"><header class="topbar"><div class="breadcrumb">${icon("cube")}<strong>${esc(pretty(d.namespace))} workspace</strong><span class="separator">/</span><span class="location" id="location">Overview</span><span class="tag neutral">v${esc(d.version)}</span></div><div class="top-actions"><span class="status"><span class="dot"></span>Connected</span><div class="identity"><span class="avatar">${esc(d.actor.id.slice(0, 2).toUpperCase())}</span><div>${
+    `<div class="layout"><aside class="sidebar"><a class="brand" href="#overview"><img src="/static/mark.svg" alt="">OntoLayer</a><div class="workspace-label">WORKSPACE</div><nav class="nav" aria-label="Workspace navigation">${navigation.map(([id, label, symbol]) => `<a href="#${id}" data-nav="${id}">${icon(symbol)}${label}</a>`).join("")}</nav><div class="side-bottom"><div class="side-footer"><span>v${esc(state.config.version)}</span>${state.config.docs ? '<a href="/docs" target="_blank" rel="noopener">API docs ↗</a>' : "<span>Protected workspace</span>"}</div></div></aside><div class="main-wrap"><header class="topbar"><div class="breadcrumb">${icon("cube")}<strong>${esc(pretty(d.namespace))} workspace</strong><span class="separator">/</span><span class="location" id="location">Overview</span><span class="tag neutral">v${esc(d.version)}</span></div><div class="top-actions"><span class="status"><span class="dot"></span>Connected</span><div class="identity"><span class="avatar">${esc(d.actor.id.slice(0, 2).toUpperCase())}</span><div>${
       state.config.demo && state.role !== "custom"
         ? `<label class="sr-only" for="identity-role">Demo identity</label><select id="identity-role">${[
             ["north", "North region"],
@@ -263,6 +285,7 @@ async function renderView() {
     if (view === "explorer") await explorer(epoch);
     if (view === "studio") studio();
     if (view === "access") access();
+    if (view === "about") await renderAbout();
     if (typeof renderExtras === "function") await renderExtras(view, epoch);
     announce(`${navigation.find((n) => n[0] === view)[1]} loaded`);
   } catch (error) {
@@ -274,8 +297,8 @@ async function overview(epoch) {
   $("#view").innerHTML =
     heading(
       "YOUR SEMANTIC WORKSPACE",
-      "Business knowledge, connected.",
-      "A shared view of your concepts, relationships, and trusted metrics.",
+      "Workspace overview",
+      "Your data, definitions and certified metrics.",
       `<a class="btn primary" href="#studio">${icon("spark")} Ask your data</a>`,
     ) + loading();
   const results = await Promise.all(
@@ -293,26 +316,21 @@ async function overview(epoch) {
   const successful = results.filter((r) => r && !r.error);
   const first = successful[0];
   const stats = [
-    [
-      d.concepts.length,
-      "Business concepts",
-      "Definitions you can explore",
-      "cube",
-    ],
-    [d.links.length, "Relationships", "Connections across concepts", "graph"],
+    [d.concepts.length, "Business concepts", "Available to you", "cube"],
+    [d.links.length, "Relationships", "Across your concepts", "graph"],
     [
       d.metrics.filter((m) => m.status === "certified").length,
       "Certified metrics",
-      "Reviewed business calculations",
+      "Ready to query",
       "shield",
     ],
-    [d.version, "Ontology version", "Active workspace definition", "data"],
+    [d.version, "Ontology version", "Active definition", "data"],
   ];
   $("#view").innerHTML =
     heading(
       "YOUR SEMANTIC WORKSPACE",
-      "Business knowledge, connected.",
-      "A shared view of your concepts, relationships, and trusted metrics.",
+      "Workspace overview",
+      "Your data, definitions and certified metrics.",
       `<a class="btn primary" href="#studio">${icon("spark")} Ask your data</a>`,
     ) +
     `<div class="stats">${stats.map(([value, label, note, symbol]) => `<article class="stat"><div class="stat-title">${label}${icon(symbol)}</div><div class="stat-value">${esc(value)}</div><div class="stat-note">${note}</div></article>`).join("")}</div><div class="split"><section class="card">${cardHead("Your business, mapped", "Concept relationships in the current ontology", '<span class="tag purple">Live schema</span>')}${graph()}<div class="card-foot"><div class="legend"><span><i></i>Concept</span><span><i class="line"></i>Relationship</span></div><a href="#explorer">Explore ontology →</a></div></section><section class="card">${cardHead("At a glance", "Calculated from your permitted records")}<div class="card-body">${
@@ -323,14 +341,12 @@ async function overview(epoch) {
               (r) =>
                 `<div class="metric-row"><span>${esc(pretty(r.metric))}</span><strong>${esc(number(r.values.total))} ${esc(r.unit)}</strong></div>`,
             )
-            .join(
-              "",
-            )}<p class="note">${icon("shield")} These figures reflect your identity’s access scope. Change identity to compare permissions.</p>`
+            .join("")}`
         : empty(
             "No executable metrics",
             "An administrator must grant access to certified metric definitions.",
           )
-    }</div><div class="card-foot"><span>Actual values · No generated estimates</span><a href="#studio">Run a query →</a></div></section></div><section class="card">${cardHead("Metric catalog", "One reviewed definition for every business question", `<span class="tag neutral">${d.metrics.length} available</span>`)}${d.metrics.length ? `<div class="table-wrap"><table><thead><tr><th>Metric</th><th>Business grain</th><th>Owner</th><th>Status</th><th></th></tr></thead><tbody>${d.metrics.map((m) => `<tr><td><div class="cell-title"><span class="mini-icon">${icon("data")}</span><div><strong>${esc(pretty(m.id))}</strong><small>${esc(m.unit)} · ${esc(m.aggregation.replaceAll("_", " "))}</small></div></div></td><td>${esc(m.grain)}</td><td>${esc(m.owner)}</td><td>${badge(m.status)}</td><td><button class="table-button" data-metric="${esc(m.id)}">Query ${icon("arrow")}</button></td></tr>`).join("")}</tbody></table></div>` : empty("No metrics available", "Your current identity has no metric grants.")}</section>`;
+    }</div><div class="card-foot"><span>Authorized records · All dates</span><a href="#studio">Run a query →</a></div></section></div><details class="card metric-catalog"><summary>Browse metric definitions</summary>${cardHead("Metric catalog", "", `<span class="tag neutral">${d.metrics.length} available</span>`)}${d.metrics.length ? `<div class="table-wrap"><table><thead><tr><th>Metric</th><th>Business grain</th><th>Owner</th><th>Status</th><th></th></tr></thead><tbody>${d.metrics.map((m) => `<tr><td><div class="cell-title"><span class="mini-icon">${icon("data")}</span><div><strong>${esc(pretty(m.id))}</strong><small>${esc(m.unit)} · ${esc(m.aggregation.replaceAll("_", " "))}</small></div></div></td><td>${esc(m.grain)}</td><td>${esc(m.owner)}</td><td>${badge(m.status)}</td><td><button class="table-button" data-metric="${esc(m.id)}">Query ${icon("arrow")}</button></td></tr>`).join("")}</tbody></table></div>` : empty("No metrics available", "Your current identity has no metric grants.")}</details>`;
 }
 async function explorer(epoch) {
   const d = state.data;
@@ -338,7 +354,7 @@ async function explorer(epoch) {
     $("#view").innerHTML =
       heading(
         "ONTOLOGY EXPLORER",
-        "Understand the business.",
+        "Ontology explorer",
         "Definitions and records available to your identity.",
       ) +
       `<section class="card">${empty("No concept access", "Switch to an authorized demo identity or request access from your administrator.")}</section>`;
@@ -352,8 +368,8 @@ async function explorer(epoch) {
   $("#view").innerHTML =
     heading(
       "ONTOLOGY EXPLORER",
-      "Understand the business.",
-      "Explore the definitions behind your data, then inspect the connected records.",
+      "Ontology explorer",
+      "Browse concepts, records and their relationships.",
     ) +
     `<div class="explorer"><aside class="card">${cardHead("Concepts", `${d.concepts.length} available to you`)}<div class="concept-menu">${d.concepts.map((c) => `<button class="concept-button ${c.id === state.concept ? "active" : ""}" data-concept="${esc(c.id)}">${icon("cube")}<span>${esc(c.id)}<small>${Object.keys(c.properties).length} properties</small></span></button>`).join("")}</div></aside><div><section class="card">${cardHead(esc(c.id), `Owner: ${esc(c.owner)}`, badge(c.status))}<div class="concept-description"><p>${esc(c.description)}</p><div class="property-chips">${Object.entries(
       c.properties,
@@ -432,7 +448,7 @@ function resultHTML(r) {
     max = Math.max(...values.map(([, v]) => Number(v)), 1);
   return (
     cardHead("Query result", esc(pretty(r.metric)), badge(r.status)) +
-    `<div class="card-body">${values.length === 1 ? `<div class="result-number">${esc(number(values[0][1]))}<small>${esc(r.unit)}</small></div>${values[0][0] !== "total" ? `<p>${esc(values[0][0])}</p>` : ""}` : values.length ? `<div class="bars">${values.map(([k, v]) => `<div class="bar-row"><span>${esc(k)}</span><meter min="0" max="${max}" value="${esc(v)}" aria-label="${esc(k)}"></meter><strong>${esc(number(v))} ${esc(r.unit)}</strong></div>`).join("")}</div>` : empty("No matching groups", "Change the filters or date interval.")}<div class="result-scope">${icon("shield")} ${esc(r.scope)}</div><dl class="result-grid"><div><dt>Date range</dt><dd>${esc(r.start_date || "Beginning")} → ${esc(r.end_date_exclusive || "Latest")}<small> (end exclusive)</small></dd></div><div><dt>Ontology version</dt><dd>${esc(r.ontology_version)}</dd></div><div><dt>Grain</dt><dd>${esc(r.grain)}</dd></div><div><dt>Filters</dt><dd>${
+    `<div class="card-body">${values.length === 1 ? `<div class="result-number">${esc(number(values[0][1]))}<small>${esc(r.unit)}</small></div>${values[0][0] !== "total" ? `<p>${esc(values[0][0])}</p>` : ""}` : values.length ? `<div class="bars">${values.map(([k, v]) => `<div class="bar-row"><span>${esc(k)}</span><meter min="0" max="${max}" value="${esc(v)}" aria-label="${esc(k)}"></meter><strong>${esc(number(v))} ${esc(r.unit)}</strong></div>`).join("")}</div>` : empty("No matching groups", "Change the filters or date interval.")}<div class="result-scope">${icon("shield")} ${esc(r.scope)}</div><dl class="result-grid"><div><dt>Date range</dt><dd>${!r.start_date && !r.end_date_exclusive ? "All dates" : `${esc(r.start_date || "Beginning")} → ${esc(r.end_date_exclusive || "Latest")}<small> (end exclusive)</small>`}</dd></div><div><dt>Ontology version</dt><dd>${esc(r.ontology_version)}</dd></div><div><dt>Grain</dt><dd>${esc(r.grain)}</dd></div><div><dt>Filters</dt><dd>${
       Object.entries(r.filters)
         .map(([k, v]) => `${esc(k)} = ${esc(v)}`)
         .join(", ") || "None"
@@ -475,7 +491,7 @@ function access() {
   $("#view").innerHTML =
     heading(
       "ACCESS & LINEAGE",
-      "Trust is part of the query.",
+      "Access & lineage",
       "Inspect your effective scope and trace visible records back to their source.",
     ) +
     `<div class="split"><section class="card">${cardHead("Current identity", "Resolved by the server", '<span class="tag">Authenticated</span>')}<div class="card-body detail"><dl><dt>Actor</dt><dd>${esc(d.actor.id)}</dd><dt>Namespace</dt><dd>${esc(d.actor.namespace)}</dd><dt>Roles</dt><dd>${esc(d.actor.roles.join(", ") || "No grants")}</dd><dt>Attributes</dt><dd>${esc(JSON.stringify(d.actor.attributes))}</dd><dt>Visible concepts</dt><dd>${d.concepts.length}</dd><dt>Available metrics</dt><dd>${d.metrics.length}</dd></dl><p class="note">These are the current identity’s grants. A hidden record and a nonexistent record return the same public denial.</p></div></section><section class="card">${cardHead("Policy enforcement", "Controls applied inside the semantic service")}<div class="card-body">${[
@@ -518,6 +534,11 @@ document.addEventListener("click", async (event) => {
   if (!el) return;
   try {
     if (el.dataset.action === "logout") logout();
+    if (
+      el.dataset.publicRole &&
+      state.config?.public_demo_tokens?.[el.dataset.publicRole]
+    )
+      await connect(state.config.public_demo_tokens[el.dataset.publicRole]);
     if (el.dataset.action === "retry") await renderView();
     if (el.dataset.action === "demo-login")
       await connect("demo-north-token", "north");

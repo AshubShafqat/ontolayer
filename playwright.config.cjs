@@ -10,7 +10,7 @@ module.exports = defineConfig({
     ? undefined
     : {
         command:
-          "uv run ontolayer serve --ontology examples/retail/ontology.yaml --credentials examples/retail/credentials.yaml --demo",
+          "uv run python -m ontolayer serve --ontology examples/retail/ontology.yaml --credentials examples/retail/credentials.yaml --demo",
         url: "http://127.0.0.1:8000/health",
         reuseExistingServer: !process.env.CI,
         timeout: 60000,

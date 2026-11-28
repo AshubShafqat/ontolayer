@@ -1,45 +1,19 @@
 "use strict";
 
 function meaningFlow() {
-  const steps = [
-    [
-      "data",
-      "01 · Connect",
-      "CSV and SQLite become real business records.",
-      "explorer",
-    ],
-    [
-      "graph",
-      "02 · Define",
-      "Concepts and links give each record meaning.",
-      "explorer",
-    ],
-    [
-      "shield",
-      "03 · Govern",
-      "Policies limit what each identity can see.",
-      "access",
-    ],
-    [
-      "spark",
-      "04 · Ask",
-      "Reviewed metrics return answers with evidence.",
-      "studio",
-    ],
-  ];
-  return `<section class="understanding"><div class="section-intro"><div><h2>From raw data to a trusted answer.</h2><p>Your shared business dictionary, brought to life.</p></div><button class="btn" data-action="explain-project">How it works ${icon("arrow")}</button></div><div class="meaning-flow">${steps.map(([symbol, title, description, route]) => `<a class="meaning-step" href="#${route}"><span class="step-icon">${icon(symbol)}</span><strong>${title}</strong><small>${description}</small></a>`).join("")}</div></section>`;
+  return `<div class="understanding"><span>${icon("shield")} Scoped to your access</span><button class="btn" data-action="explain-project">How it works ${icon("arrow")}</button></div>`;
 }
 function certificationVisual() {
   const definitions = [...state.data.concepts, ...state.data.metrics];
   const certified = definitions.filter((d) => d.status === "certified").length;
   const total = definitions.length,
     percent = total ? Math.round((certified / total) * 100) : 0;
-  return `<section class="card">${cardHead("Definition readiness", "Concepts and metrics visible to you")}<div class="certification-visual"><svg class="ring-chart" viewBox="0 0 160 160" role="img" aria-label="${certified} of ${total} visible definitions are certified"><circle class="ring-base" cx="80" cy="80" r="62"/><circle class="ring-value" cx="80" cy="80" r="62" pathLength="100" stroke-dasharray="${percent} 100"/><text class="ring-number" x="80" y="80">${percent}%</text><text class="ring-caption" x="80" y="100">CERTIFIED</text></svg><div class="legend-list"><span><b>${certified}</b> certified definitions</span><span><b>${total - certified}</b> drafts awaiting review</span><span><b>${state.data.links.length}</b> relationship types</span></div></div><div class="visual-explanation">Certification means an explicit reviewer approved a definition. It is not a guarantee of source-data quality.</div></section>`;
+  return `<section class="card">${cardHead("Definition readiness", "Concepts and metrics visible to you")}<div class="certification-visual"><svg class="ring-chart" viewBox="0 0 160 160" role="img" aria-label="${certified} of ${total} visible definitions are certified"><circle class="ring-base" cx="80" cy="80" r="62"/><circle class="ring-value" cx="80" cy="80" r="62" pathLength="100" stroke-dasharray="${percent} 100"/><text class="ring-number" x="80" y="80">${percent}%</text><text class="ring-caption" x="80" y="100">CERTIFIED</text></svg><div class="legend-list"><span><b>${certified}</b> certified definitions</span><span><b>${total - certified}</b> drafts awaiting review</span><span><b>${state.data.links.length}</b> relationship types</span></div></div></section>`;
 }
 async function dashboardVisuals(epoch) {
   if (epoch !== state.epoch || !state.data) return;
   if (!$(".understanding"))
-    $("#view .stats").insertAdjacentHTML("afterend", meaningFlow());
+    $("#view .page-heading").insertAdjacentHTML("afterend", meaningFlow());
   const metric = state.data.metrics.find(
     (m) => m.status === "certified" && m.dimensions.length,
   );
@@ -52,8 +26,8 @@ async function dashboardVisuals(epoch) {
   if (epoch !== state.epoch || !state.data) return;
   const rows = result ? Object.entries(result.values) : [];
   const max = Math.max(1, ...rows.map(([, value]) => Number(value)));
-  const chart = `<section class="card">${cardHead(result ? `${esc(pretty(result.metric))} by ${esc(pretty(metric.dimensions[0]))}` : "Your authorized data", "Live calculation · all available dates")}<div class="card-body">${rows.length ? rows.map(([group, value]) => `<div class="chart-row"><span>${esc(pretty(group))}</span><div class="chart-track"><svg width="100%" height="12" aria-hidden="true"><rect class="chart-fill" x="0" y="0" width="${(Math.max(0, Number(value)) / max) * 100}%" height="12" rx="6" fill="#7463d7"/></svg></div><strong>${esc(number(value))} ${esc(result.unit)}</strong></div>`).join("") : empty("No visible groups", "Your current identity has no grouped metric results.")}</div><div class="visual-explanation">Only permitted records contribute. Switch identity to see how the same definition produces a different authorized view.</div></section>`;
-  $("#view .understanding").insertAdjacentHTML(
+  const chart = `<section class="card">${cardHead(result ? `${esc(pretty(result.metric))} by ${esc(pretty(metric.dimensions[0]))}` : "Your authorized data", "Live calculation · all available dates")}<div class="card-body">${rows.length ? rows.map(([group, value]) => `<div class="chart-row"><span>${esc(pretty(group))}</span><div class="chart-track"><svg width="100%" height="12" aria-hidden="true"><rect class="chart-fill" x="0" y="0" width="${(Math.max(0, Number(value)) / max) * 100}%" height="12" rx="6" fill="#7463d7"/></svg></div><strong>${esc(number(value))} ${esc(result.unit)}</strong></div>`).join("") : empty("No visible groups", "Your current identity has no grouped metric results.")}</div></section>`;
+  $("#view .split").insertAdjacentHTML(
     "afterend",
     `<div class="visual-grid">${chart}${certificationVisual()}</div>`,
   );

@@ -21,3 +21,21 @@ for (const width of [375, 768, 1280]) {
     });
   });
 }
+
+for (const theme of ["light", "dark"]) {
+  test(`About visual baseline ${theme}`, async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 1100 });
+    await page.goto("/#about");
+    await expect(
+      page.getByRole("heading", { name: "About OntoLayer" }),
+    ).toBeVisible();
+    await page.getByLabel("Appearance").selectOption(theme);
+    await expect(page.locator(".about-page")).toHaveScreenshot(
+      `about-${theme}.png`,
+      {
+        animations: "disabled",
+        maxDiffPixelRatio: 0.01,
+      },
+    );
+  });
+}

@@ -1,0 +1,20 @@
+# One same-origin container. Free-tier state is ephemeral; see docs/deploy.md.
+services:
+  - type: web
+    name: ontolayer
+    runtime: docker
+    plan: free
+    numInstances: 1
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /health
+    autoDeployTrigger: off
+    envVars:
+      - key: ONTOLAYER_HOSTED
+        value: "1"
+      - key: PORT
+        value: "8000"
+      - key: ONTOLAYER_STATE_DIRECTORY
+        value: /state
+    # Add credentials.yaml and public-demo.json as secret files in the dashboard.
+    # On a paid plan, add a disk mounted at /state (at least 1 GB).
