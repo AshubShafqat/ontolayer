@@ -1,0 +1,11 @@
+.ontolayer
+.venv
+.uv-cache
+.env
+.env.*
+node_modules
+e2e
+tests
+test-results
+playwright-report
+.git
