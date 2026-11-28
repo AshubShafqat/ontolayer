@@ -1,5 +1,6 @@
 """Generate deployment credentials through issue-token without printing any secrets."""
 
+import base64
 import json
 import os
 import subprocess
@@ -43,6 +44,21 @@ def main() -> None:
     )
     (destination / "public-demo.json").write_text(
         json.dumps(public, indent=2) + "\n", encoding="utf-8"
+    )
+    environment = {
+        "ONTOLAYER_HOSTED": "1",
+        "PORT": "8000",
+        "ONTOLAYER_STATE_DIRECTORY": "/state",
+        "ONTOLAYER_CREDENTIALS_B64": base64.b64encode(
+            (destination / "credentials.yaml").read_bytes()
+        ).decode(),
+        "ONTOLAYER_PUBLIC_DEMO_B64": base64.b64encode(
+            (destination / "public-demo.json").read_bytes()
+        ).decode(),
+        "ONTOLAYER_ADMIN_TOKEN": (destination / "admin-token.txt").read_text().strip(),
+    }
+    (destination / "render.env").write_text(
+        "".join(f"{key}={value}\n" for key, value in environment.items()), encoding="utf-8"
     )
     print(
         "Created .ontolayer/deploy (gitignored). "

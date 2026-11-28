@@ -110,3 +110,16 @@ as an HTTP endpoint by this deployment.
 References: [Render Docker](https://render.com/docs/docker),
 [Blueprint schema](https://render.com/docs/blueprint-spec),
 [persistent disks](https://render.com/docs/disks).
+
+## Import credentials without copying their contents
+
+As an alternative to Render Secret Files, `scripts/prepare_deploy.py` also creates
+`.ontolayer/deploy/render.env`. In Render choose **Add from .env → Choose a file**
+and select that file, then **Add variables**. This imports the hosted-mode flags,
+encoded credential files and a private administrator token into Render's environment
+secret store. The container writes the two decoded files under `/state` with
+private permissions before starting the same production server. Never commit or
+publish `render.env`; base64 is encoding, not encryption. The administrator token
+is for the operator and is never included in the public `/v1/config` response.
+The existing `/etc/secrets` file configuration remains supported when the encoded
+variables are absent. Do not enable both configurations with different credentials.

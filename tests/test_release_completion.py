@@ -288,3 +288,26 @@ def test_hosted_container_command() -> None:
     for host in ["", "*", "https://example.com", "example.com/"]:
         with pytest.raises(ValueError, match="hostname"):
             command({"ONTOLAYER_HOSTED": "1", "RENDER_EXTERNAL_HOSTNAME": host}, [])
+
+
+def test_hosted_environment_file_import(tmp_path: Path) -> None:
+    import base64
+    import runpy
+
+    command = runpy.run_path("scripts/container_entrypoint.py")["command"]
+    environment = {
+        "ONTOLAYER_HOSTED": "1",
+        "RENDER_EXTERNAL_HOSTNAME": "example.onrender.com",
+        "ONTOLAYER_STATE_DIRECTORY": str(tmp_path),
+        "ONTOLAYER_CREDENTIALS_B64": base64.b64encode(b"private fixture").decode(),
+        "ONTOLAYER_PUBLIC_DEMO_B64": base64.b64encode(b"{}").decode(),
+    }
+    args = command(environment, [])
+    assert (tmp_path / "credentials.yaml").read_bytes() == b"private fixture"
+    assert args[args.index("--credentials") + 1] == str(tmp_path / "credentials.yaml")
+    assert args[args.index("--public-demo-tokens") + 1] == str(tmp_path / "public-demo.json")
+    assert "--production" in args and "--demo" not in args
+    with pytest.raises(ValueError, match="Both encoded"):
+        command({**environment, "ONTOLAYER_PUBLIC_DEMO_B64": ""}, [])
+    with pytest.raises(ValueError, match="Invalid encoded"):
+        command({**environment, "ONTOLAYER_CREDENTIALS_B64": "invalid!?"}, [])
