@@ -24,6 +24,11 @@ security headers and production validation. North, South and Analyst buttons
 use only the three read-only synthetic retail credentials. The private admin
 token is never published.
 
+The verified public demo is https://ontolayer.vercel.app. Automatic Git deployments
+are enabled only for `main`; branch previews are disabled because deployment
+credentials are configured only in Production. Manual production deployment uses
+`vercel deploy --prod` after checks pass.
+
 ## Limits of this deployment
 
 The public serverless demo deliberately disables the ontology editing workbench.
