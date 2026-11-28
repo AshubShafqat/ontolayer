@@ -327,7 +327,8 @@ References: [NVIDIA auto-ontology](https://github.com/NVIDIA/auto-ontology), [Mo
 
 ## Live demo
 
-**Live application:** https://ontolayer.vercel.app  
+**Live application:** https://ontolayer.vercel.app
+
 **About:** https://ontolayer.vercel.app/#about (choose a demo role first)
 
 Hosted on Vercel Hobby for a personal student demonstration. North, South and
